@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://nekoraynode.github.io/news/article-18725.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>编程中常用的加密算法</title>
+        <meta name="description" content="概述 编程中常见的加密算法有以下几种，它们在不同场景中分别有应用。除信息摘要算法外，其它加密方式都会需要密钥。  信息摘要算法 对称加密算法 非对称加密算法  密钥 密钥（key，又常称金钥）是指某个" />
+        <link rel="icon" href="__ADDON__/img/nekoraynode/favicon.ico" type="image/x-icon"/>
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <!-- Libraries Stylesheet -->
+    <link href="__ADDON__/js/frontend/nekoraynode/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6TD6QHWW6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6TD6QHWW6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid p-0">
+                <nav class="navbar navbar-expand-lg fixed-top navbar-light px-4 px-lg-5 py-3 py-lg-0">
+            <a href="/" class="navbar-brand p-0">
+                                <span class="display-6 text-primary m-0">
+                    <i class="fas fa-envelope me-3"></i>NekoRay Node
+                </span>
+                            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                                        <a href="/" class="nav-item nav-link">首页</a>
+                                        <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                        <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                        <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                        <a href="#" class="nav-item nav-link">关于</a>
+                    <a href="#" class="nav-item nav-link">联系</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar & Hero End -->
+    <!-- Header Start -->
+    <div class="container-fluid bg-breadcrumb">
+        <ul class="breadcrumb-animation">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="container text-center py-5" style="max-width: 900px;">
+            <h3 class="display-3 mb-4 wow fadeInDown" data-wow-delay="0.1s">编程中常用的加密算法</h1>
+                <ol class="breadcrumb justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+                    <li class="breadcrumb-item"><a href="/">首页</a></li>
+                    <li class="breadcrumb-item"><a href="/news/">新闻资讯</a></li>
+                    <li class="breadcrumb-item active text-primary">正文</li>
+                </ol>
+        </div>
+    </div>
+    <!-- Header End -->
+    <!-- About Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-9">
+                                      				  				  				<h2 id="概述">概述</h2> <p>编程中常见的加密算法有以下几种，它们在不同场景中分别有应用。除信息摘要算法外，其它加密方式都会需要密钥。</p> <ul> <li>信息摘要算法</li> <li>对称加密算法</li> <li>非对称加密算法</li> </ul> <h2 id="密钥">密钥</h2> <p><strong>密钥</strong>（key，又常称<strong>金钥</strong>）是指某个用来完成<strong>加密</strong>、<strong>解密</strong>、<strong>完整性验证</strong>等密码学应用的秘密信息。</p> <h3 id="密钥分类">密钥分类</h3> <ul> <li>加解密中的密钥：对称加密中共享相同的密钥，非对称加密中分<strong>公钥</strong>和<strong>私钥</strong>，公钥加密私钥解密。</li> <li>消息认证码和数字签名中的密钥：在消息认证码中，消息发送方和接收方使用共享密钥进行认证。在数字签名中，签名使用私钥，而验证使用公钥。</li> <li>会话密钥和主密钥：每次通信只使用一次的密钥称为会话密钥（session key）。相对于会话密钥，重复使用的密钥称为主密钥（master key）。</li> </ul> <h3 id="密钥和密码">密钥和密码</h3> <p>密码一般是由用户生成，具有可读性，可以记忆和存储，常用于软件管理，而密钥是供实现加密算法的软件使用，不需要具备可读性（不过在编程中为了方便阅读都进行Base64）。我们也可以通过密码来生成密钥。</p> <h3 id="密钥管理">密钥管理</h3> <ul> <li> <p>生成密钥：可以用随机数生成密钥，也可以用口令生成密钥。</p> </li> <li> <p>配送密钥：可采用事先共享密钥、使用密钥分配中心、使用公钥密码、使用Diffie-Hellman密钥交换。</p> </li> <li> <p>更新密钥</p> </li> <li> <p>保存密钥</p> </li> <li> <p>作废密钥</p> </li> </ul> <h3 id="密钥生成">密钥生成</h3> <p>jdk 中 jce (Java Cryptography Extension) 包含了加密相关的所有<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://docs.oracle.com/javase/8/docs/technotes/guides/security/crypto/CryptoSpec.html"  target="_blank" rel="nofollow">API</a>。</p> <p><strong>生成对称加密算法的密钥</strong></p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/593c5b465c451506595092aab8d8055b.jpg" alt="编程中常用的加密算法"></p> <pre><code class="language-java">    public static SecretKey generateKey(int keySize) {         KeyGenerator keyGenerator;         try {             keyGenerator = KeyGenerator.getInstance("AES");             keyGenerator.init(keySize);             return keyGenerator.generateKey();         } catch (NoSuchAlgorithmException e) {             // ignore             return null;         }     }</code></pre> <p><strong>生成对称非对称加密算法的密钥</strong></p> <pre><code class="language-java">    /**      * 生成非对称密钥对      *      * @param keySize 密钥大小      * @param random  指定随机来源，默认使用 JCAUtil.getSecureRandom()      * @return 非对称密钥对      * @throws NoSuchAlgorithmException NoSuchAlgorithm      */     public static PPKeys genKeysRSA(int keySize, SecureRandom random) throws NoSuchAlgorithmException {         KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA");         if (null != random) {             generator.initialize(keySize, random);         } else {             generator.initialize(keySize);         }         KeyPair pair = generator.generateKeyPair();         PPKeys keys = new PPKeys();         PublicKey publicKey = pair.getPublic();         PrivateKey privateKey = pair.getPrivate();         keys.setPublicKey(Base64.getEncoder().encodeToString(publicKey.getEncoded()));       keys.setPrivateKey(Base64.getEncoder().encodeToString(privateKey.getEncoded()));         return keys;     }</code></pre> <p><strong>密钥协商</strong>（<strong>Diffie-Hellman</strong>）</p> <p>密钥协商是一种协议，两方或多方在通过该协议建立相同的共享密钥，然后通讯内容进行对称加密传输，而不需要交换密钥。</p> <p>大致过程：每一方生成一个公私钥对并将公钥分发给其它方，当都获得其他方的公钥副本后就可以离线计算共享密钥。</p> <p>Java中提供了<code>KeyAgreement</code> 可以实现密钥协商。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/b7a6af874be717550b080861cf9dfce6.jpg" alt="编程中常用的加密算法"></p> <ul> <li>Alice 和 Bob 分别用他们的私钥初始化自己的密钥协商对象<code>KeyAgreement</code> ，调用<code>init()</code> 方法；</li> <li>然后将通信的每一方的公钥 传入执行<code>doPhase(Key key, boolean lastPhase)</code> ；</li> <li>各方生成共享密钥<code>generateSecret()</code>。</li> </ul> <pre><code class="language-java">    public static void diffieHellman() throws Exception {         AlgorithmParameterGenerator dhParams = AlgorithmParameterGenerator.getInstance("DH");         dhParams.init(1024);         KeyPairGenerator keyGen = KeyPairGenerator.getInstance("DH");         keyGen.initialize(dhParams.generateParameters().getParameterSpec(DHParameterSpec.class), new SecureRandom());          KeyAgreement aliceKeyAgree = KeyAgreement.getInstance("DH");         KeyPair alicePair = keyGen.generateKeyPair();         KeyAgreement bobKeyAgree = KeyAgreement.getInstance("DH");         KeyPair bobPair = keyGen.generateKeyPair();          aliceKeyAgree.init(alicePair.getPrivate());         bobKeyAgree.init(bobPair.getPrivate());          aliceKeyAgree.doPhase(bobPair.getPublic(), true);         bobKeyAgree.doPhase(alicePair.getPublic(), true);         boolean agree = Base64.getEncoder().encodeToString(aliceKeyAgree.generateSecret()).equals(           Base64.getEncoder().encodeToString(bobKeyAgree.generateSecret())         );         System.out.println(agree);     }</code></pre> <h2 id="信息摘要算法">信息摘要算法</h2> <p>信息摘要算法又叫<strong>加密散列算法</strong>，加密过程不需要密钥，常见的加密散列算法有<strong>MD系列</strong>和<strong>SHA系列</strong>。</p> <p>一个理想的加密散列函数应该具备以下特性：</p> <ul> <li>任何信息传入后，输出的总是长度固定；</li> <li>消息摘要看起来是“随机的”，这样根据原始信息就很难推测出值；</li> <li>好的散列函数碰撞概率应该极低，也就是不同信息传入后得到相同值的概率；</li> </ul> <h3 id="md系列">MD系列</h3> <p><strong>MD5信息摘要算法</strong>（MD5 Message-Digest Algorithm），一种被广泛使用的加密散列函数，输出出一个128位（16字节）的散列值（hash value），MD5最初设计为加密散列函数，而目前发现它存在大量漏洞，所以不建议直接用作加密，不过在非加密场景下如：数据完整性校验，文件完整性校验它仍然有广泛的应用。</p> <pre><code class="language-java">    public static String md5(String content) {         try {             MessageDigest digest = MessageDigest.getInstance("MD5");             byte[] bytes = digest.digest(content.getBytes(StandardCharsets.UTF_8));             return Hex.encodeHexString(bytes);         } catch (final NoSuchAlgorithmException e) {             throw new IllegalArgumentException(e);         }     }</code></pre> <h3 id="sha系列">SHA系列</h3> <p><strong>安全散列算法</strong>（Secure Hash Algorithm，缩写为SHA）是一个加密散列函数家族，是FIPS(美国联邦信息处理标准)所认证的安全散列算法。能计算出一个数字消息所对应到的，长度固定的字符串（又称消息摘要）的算法。且若输入的消息不同，它们对应到不同字符串的机率很高。</p> <p>它们分别包含<code>SHA-0、SHA-1、SHA-2、SHA-3</code>，其中<code>SHA-0、SHA-1</code> 输出长度是160位，<code>SHA-2</code> 包含<code>SHA-224、SHA-256、SHA-384、SHA-512、SHA-512/224、SHA-512/256</code>，我们平时常用<code>SHA-256</code> 。</p> <pre><code class="language-java">    public static String sha256(String content) {         try {             MessageDigest digest = MessageDigest.getInstance("SHA-256);             byte[] bytes = digest.digest(content.getBytes(StandardCharsets.UTF_8));             return Hex.encodeHexString(bytes);         } catch (final NoSuchAlgorithmException e) {             throw new IllegalArgumentException(e);         }     }</code></pre> <h2 id="对称加密算法">对称加密算法</h2> <p>对称加密算法，双方持有相同密钥进行加解密，常见的对称加密算法：<code>DES</code><code>3DES</code><code>AES128</code><code>AES192</code><code>AES256</code>。理解对称加密需要先明白下面几个概念：</p> <ul> <li><strong>分组密码模式</strong>：将明文切割进行加密，再将密文拼接到一起。比如AES中会将明文数据切割为大小16字节的数据块，最后一块不够16字节时，使用Padding模式进行补充。</li> <li><strong>填充（Padding）</strong>：它有三种模式PKCS5、PKCS7和NOPADDING，PKCS5用缺少的字节数来填充，比如缺少5个字节就填充5个数字5，PKCS7缺少的字节数用0来填充。如果数据刚好是16的整数倍，PKCS5和PKCS7会再补充一个16字节数据来区分填充和有效数据，NOPADDING模式不需要填充。</li> <li><strong>初始化向量</strong>：初始向量IV的作用是使加密更加安全可靠，在分组密码模式下IV大小对应数据块长度。</li> <li><strong>加密模式</strong>：四种加密模式分别是：ECB(电子密码本模式)、CBC(密码分组链接模式)、CFB、OFB。ECB模式是仅仅使用明文和密钥来加密数据，所以该模式下不需要Padding，安全性也较弱，CBC模式数据分块并且使用传入IV依次进行异或操作，安全性也相对较高，所以目前一般都选择CBC模式。</li> <li><strong>加密密钥</strong>：不同加密算法密钥长度不同，比如：DES 默认长度56位，3DES默认长度168位，也支持128位，AES默认128位，也支持192位，256位。我们一般根据密码生成密钥，密码长度需要满足算法密钥长度。</li> </ul> <h3 id="des">DES</h3> <p><code>DES</code> 是对称加密算法领域中的典型算法，因为密钥默认长度为<code>56 bit</code>，所以密码长度需要大于<code>8 byte</code>，<code>DESKeySpec</code> 取前<code>8 byte</code> 进行密钥制作。</p> <pre><code class="language-java"> public static String encryptDES(byte[] content, String password) {         try {             SecureRandom random = new SecureRandom();             DESKeySpec desKeySpec = new DESKeySpec(password.getBytes());             SecretKeyFactory secretKeyFactory = SecretKeyFactory.getInstance("DES");             SecretKey secretKey = secretKeyFactory.generateSecret(desKeySpec);             Cipher cipher = Cipher.getInstance("DES");             cipher.init(Cipher.ENCRYPT_MODE, secretKey, random);             return Base64.getEncoder().encodeToString(cipher.doFinal(content));         } catch (Exception e) {             throw new RuntimeException(e);         }     }      public static String decryptDES(String content, String password) throws Exception {         SecureRandom random = new SecureRandom();         DESKeySpec desKeySpec = new DESKeySpec(password.getBytes());         SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");         SecretKey secretKey = keyFactory.generateSecret(desKeySpec);         Cipher cipher = Cipher.getInstance("DES");         cipher.init(Cipher.DECRYPT_MODE, secretKey, random);         return new String(cipher.doFinal(Base64.getDecoder().decode(content)));     }</code></pre> <h3 id="3des">3DES</h3> <p>3DES（即Triple DES）。是DES算法的加强，它使用3条56位的密钥对数据进行三次加密。它以DES为基本模块，通过组合分组方法设计出分组加密算法。比起最初的DES，3DES更为安全。密钥默认长度<code>168 bit</code>， 密码需要大于<code>24 byte</code>，IV 是<code>8 byte</code> 的随机数字和字母数组。</p> <pre><code class="language-java">     public static String encrypt3DESECB(String content, String key, String iv) {         try {             IvParameterSpec ivSpec = new IvParameterSpec(iv.getBytes(StandardCharsets.UTF_8));             DESedeKeySpec dks = new DESedeKeySpec(key.getBytes(StandardCharsets.UTF_8));             SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DESede");             SecretKey secretkey = keyFactory.generateSecret(dks);             Cipher cipher = Cipher.getInstance("DESede/CBC/PKCS5Padding");             cipher.init(Cipher.ENCRYPT_MODE, secretkey, ivSpec);             return Base64.getEncoder().encodeToString(cipher.doFinal(content.getBytes(StandardCharsets.UTF_8)));         } catch (Exception e) {             throw new RuntimeException(e);         }     }      public static String decrypt3DESECB(String content, String key, String iv) {         try {             IvParameterSpec ivSpec = new IvParameterSpec(iv.getBytes(StandardCharsets.UTF_8));             DESedeKeySpec dks = new DESedeKeySpec(key.getBytes(StandardCharsets.UTF_8));             SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DESede");             SecretKey secretkey = keyFactory.generateSecret(dks);             Cipher cipher = Cipher.getInstance("DESede/CBC/PKCS5Padding");             cipher.init(Cipher.DECRYPT_MODE, secretkey, ivSpec);             return new String(cipher.doFinal(Base64.getDecoder().decode(content)), StandardCharsets.UTF_8);         } catch (Exception e) {             throw new RuntimeException(e);         }     }</code></pre> <h3 id="aes">AES</h3> <p>AES 高级数据加密标准，能够有效抵御已知的针对DES算法的所有攻击，默认密钥长度为<code>128 bit</code>，还可以供选择<code>192 bit</code>，<code>256 bit</code>。<code>AES-128</code><code>AES-192</code><code>AES-256</code></p> <p>默认<code>AES-128</code> ，使用<code>PBEKeySpec</code> 生成固定大小的密钥。</p> <pre><code class="language-java">public static String encryptAES128(String plainText, String password, String salt) throws Exception {         SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");         byte[] saltBytes = salt.getBytes(StandardCharsets.UTF_8);         // AES-128 密钥长度为128bit         PBEKeySpec spec = new PBEKeySpec(           password.toCharArray(),           saltBytes,           1000,           128         );         SecretKey secretKey = factory.generateSecret(spec);         SecretKeySpec secret = new SecretKeySpec(secretKey.getEncoded(), "AES");         Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");         AlgorithmParameters params = cipher.getParameters();         IvParameterSpec iv = params.getParameterSpec(IvParameterSpec.class);          cipher.init(Cipher.ENCRYPT_MODE, secret, iv);         byte[] encryptedTextBytes = cipher.doFinal(plainText.getBytes(StandardCharsets.UTF_8));          String encodedText = Base64.getEncoder().encodeToString(encryptedTextBytes);         String encodedIV = Base64.getEncoder().encodeToString(iv.getIV());         String encodedSalt = Base64.getEncoder().encodeToString(saltBytes);         return encodedSalt + "." + encodedIV + "." + encodedText;     }       public static String decryptAES128(String encryptedText, String password) throws Exception {         String[] fields = encryptedText.split("\\.");         byte[] saltBytes = Base64.getDecoder().decode(fields[0]);         byte[] ivBytes = Base64.getDecoder().decode(fields[1]);         byte[] encryptedTextBytes = Base64.getDecoder().decode(fields[2]);          SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");         PBEKeySpec spec = new PBEKeySpec(           password.toCharArray(),           saltBytes,           1000,           128         );          SecretKey secretKey = factory.generateSecret(spec);         SecretKeySpec secret = new SecretKeySpec(secretKey.getEncoded(), "AES");         Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");         cipher.init(Cipher.DECRYPT_MODE, secret, new IvParameterSpec(ivBytes));         byte[] decryptedTextBytes;         try {             decryptedTextBytes = cipher.doFinal(encryptedTextBytes);             return new String(decryptedTextBytes);         } catch (IllegalBlockSizeException | BadPaddingException e) {             throw new RuntimeException(e);         }     }</code></pre> <p>使用<code>AES-256</code> 时可能会出现下面异常：</p> <pre><code class="language-java"> java.security.InvalidKeyException: Illegal key size</code></pre> <p>JDK 1.8.0_161 及以上版本默认已经启用无限强度加密：</p> <pre><code class="language-java">    static {         java.security.Security.setProperty("crypto.policy", "unlimited");     }</code></pre> <p>JDK 1.8.0_161以前版本需要手动安装 jce<strong>策略文件</strong>（<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.oracle.com/java/technologies/javase-jce8-downloads.html"  target="_blank" rel="nofollow">下载地址</a>）</p> <h2 id="非对称加密算法">非对称加密算法</h2> <p>非对称加密使用一对密钥，公钥用作加密，私钥则用作解密。关于密钥大小，截至2020年，公开已知的最大RSA密钥是破解的是829位的RSA-250，建议至少使用 2048 位密钥。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/114bbdc2f08e3607b26036717a13adf1.jpg" alt="编程中常用的加密算法"></p> <pre><code class="language-java">    public static String encrypt(byte[] publicKey, String plainText) {         X509EncodedKeySpec keySpec = new X509EncodedKeySpec(publicKey);         KeyFactory kf;         try {             kf = KeyFactory.getInstance("RSA");             PublicKey publicKeySecret = kf.generatePublic(keySpec);             Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");             cipher.init(Cipher.ENCRYPT_MODE, publicKeySecret);             byte[] encryptedBytes = cipher.doFinal(plainText.getBytes());             return new String(Base64.getEncoder().encode(encryptedBytes));         } catch (Exception e) {             log.error("Rsa encrypt error ", e);             throw new RuntimeException(e);         }     }  	public static String decrypt(byte[] privateKey, String encryptedText) {         PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(privateKey);         KeyFactory kf;         try {             kf = KeyFactory.getInstance("RSA");             PrivateKey privateKeySecret = kf.generatePrivate(keySpec);             Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");             cipher.init(Cipher.DECRYPT_MODE, privateKeySecret);             return new String(cipher.doFinal(Base64.getDecoder().decode(encryptedText)), StandardCharsets.UTF_8);         } catch (Exception e) {             log.error("Rsa decrypt error ", e);             throw new RuntimeException(e);         }     }</code></pre> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-18724.htm">asp+vb.net解决调接口返回中文乱码问题</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-10-25-shadowrocket-node.htm" title="「10月25日」最高速度19.3M/S，2024年NekoRay每天更新免费节点订阅链接">「10月25日」最高速度19.3M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-16-linux-nekoray.htm" title="「8月16日」最高速度21.7M/S，2024年NekoRay每天更新免费节点订阅链接">「8月16日」最高速度21.7M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-7-node-share-links.htm" title="「11月7日」最高速度21.1M/S，2024年NekoRay每天更新免费节点订阅链接">「11月7日」最高速度21.1M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-10-linux-nekoray.htm" title="「11月10日」最高速度21.9M/S，2024年NekoRay每天更新免费节点订阅链接">「11月10日」最高速度21.9M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-20-free-node-subscribe-links.htm" title="「9月20日」最高速度18.3M/S，2024年NekoRay每天更新免费节点订阅链接">「9月20日」最高速度18.3M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-3-linux-nekoray.htm" title="「11月3日」最高速度18.1M/S，2024年NekoRay每天更新免费节点订阅链接">「11月3日」最高速度18.1M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-27-free-nekoray-node.htm" title="「10月27日」最高速度22.9M/S，2024年NekoRay每天更新免费节点订阅链接">「10月27日」最高速度22.9M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-29-free-node-subscribe.htm" title="「9月29日」最高速度19.1M/S，2024年NekoRay每天更新免费节点订阅链接">「9月29日」最高速度19.1M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-16-linux-nekoray-node.htm" title="「10月16日」最高速度18.3M/S，2024年NekoRay每天更新免费节点订阅链接">「10月16日」最高速度18.3M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-7-25-free-nekoray.htm" title="「7月25日」最高速度20.3M/S，2024年NekoRay每天更新免费节点订阅链接">「7月25日」最高速度20.3M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-08/" title="2024-08 归档">2024-08</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">27</span> <a href="/date/2024-07/" title="2024-07 归档">2024-07</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">4</span> <a href="/date/2024-06/" title="2024-06 归档">2024-06</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+        <!-- Copyright Start -->
+    <div class="container-fluid copyright py-4">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-md-0">
+                    <span class="text-white">NekoRayNode节点订阅站 版权所有 Powered by WordPress</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright End -->
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary btn-lg-square back-to-top"><i class="fa fa-arrow-up"></i></a>
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/easing/easing.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/lightbox/js/lightbox.min.js"></script>
+    <!-- Template Javascript -->
+    <script src="/assets/website/js/frontend/nekoraynode/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
