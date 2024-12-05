@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://nekoraynode.github.io/news/article-21236.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Springboot 使用Maven实现多环境打包</title>
+        <meta name="description" content="序言 当项目有多个运行环境需要打包发布时，每次手动修改配置文件未免太过劳累,尤其是做了服务拆分的项目，比如博主这边的这个项目有4个服务需要配置三个环境：本地、测试、生产。每次本地修改完代码，还需要打包" />
+        <link rel="icon" href="__ADDON__/img/nekoraynode/favicon.ico" type="image/x-icon"/>
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <!-- Libraries Stylesheet -->
+    <link href="__ADDON__/js/frontend/nekoraynode/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6TD6QHWW6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6TD6QHWW6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid p-0">
+                <nav class="navbar navbar-expand-lg fixed-top navbar-light px-4 px-lg-5 py-3 py-lg-0">
+            <a href="/" class="navbar-brand p-0">
+                                <span class="display-6 text-primary m-0">
+                    <i class="fas fa-envelope me-3"></i>NekoRay Node
+                </span>
+                            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                                        <a href="/" class="nav-item nav-link">首页</a>
+                                        <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                        <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                        <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                        <a href="#" class="nav-item nav-link">关于</a>
+                    <a href="#" class="nav-item nav-link">联系</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar & Hero End -->
+    <!-- Header Start -->
+    <div class="container-fluid bg-breadcrumb">
+        <ul class="breadcrumb-animation">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="container text-center py-5" style="max-width: 900px;">
+            <h3 class="display-3 mb-4 wow fadeInDown" data-wow-delay="0.1s">Springboot 使用Maven实现多环境打包</h1>
+                <ol class="breadcrumb justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+                    <li class="breadcrumb-item"><a href="/">首页</a></li>
+                    <li class="breadcrumb-item"><a href="/news/">新闻资讯</a></li>
+                    <li class="breadcrumb-item active text-primary">正文</li>
+                </ol>
+        </div>
+    </div>
+    <!-- Header End -->
+    <!-- About Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-9">
+                                      				  				  				<div id="content_views" class="htmledit_views"> <h2>序言</h2> <p>当项目有多个运行环境需要打包发布时，每次手动修改配置文件未免太过劳累,尤其是做了服务拆分的项目，比如博主这边的这个项目有4个服务需要配置三个环境：本地、测试、生产。每次本地修改完代码，还需要打包测试环境，生产环境，修改配置文件操作过余繁琐，一般思路都是多个配置文件，打包时使用maven根据需要来进行对应环境的打包，下面贴下具体操作。</p> <h2>一、Maven实现多环境jar打包</h2> <p><img fetchpriority="high" decoding="async" alt="" height="618" src="http://img.555519.xyz/uploads/20230110/909dd8efedb654f82b8ed27c53b36efa.jpg"></p> <p>这是我们的示例工程，一个project里面有三个子模块。&nbsp;</p> <p>然后加上一些相关的配置，springboot jar依赖和resources里的配置文件，这里为了演示我们准备三个配置文件。resources文件夹下有两个prod、test分别放置生产环境和测试环境的同名配置文件，resources目录下默认的配置文件则为开发环境。</p> <p><img decoding="async" alt="" height="593" src="http://img.555519.xyz/uploads/20230110/46cca65a462e04c3cf64cda4966142e2.jpg"></p> <p>&nbsp;接下来统一在父级工程的pom下配置打包插件，来进行自定义的配置文件重写。</p> <pre><code class="language-XML">&lt;profiles&gt;         &lt;!-- 这里是你定义的环境可选项，下面罗列了有两种 生产环境选项、测试环境选项 --&gt;         &lt;profile&gt;             &lt;id&gt;prod&lt;/id&gt;             &lt;properties&gt;                 &lt;package.environment&gt;prod&lt;/package.environment&gt;             &lt;/properties&gt;         &lt;/profile&gt;         &lt;profile&gt;             &lt;id&gt;test&lt;/id&gt;             &lt;properties&gt;                 &lt;package.environment&gt;test&lt;/package.environment&gt;             &lt;/properties&gt;         &lt;/profile&gt; &lt;/profiles&gt;     &lt;build&gt;         &lt;plugins&gt;             &lt;plugin&gt;                 &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;                 &lt;artifactId&gt;maven-resources-plugin&lt;/artifactId&gt;                 &lt;version&gt;2.6&lt;/version&gt;                 &lt;executions&gt;                     &lt;execution&gt;                         &lt;id&gt;copy-resources&lt;/id&gt;                         &lt;phase&gt;compile&lt;/phase&gt;                         &lt;goals&gt;                             &lt;goal&gt;copy-resources&lt;/goal&gt;                         &lt;/goals&gt;                         &lt;configuration&gt;                             &lt;!-- 重写属性为true 表示相关的配置文件会被重写 --&gt;                             &lt;overwrite&gt;true&lt;/overwrite&gt;                             &lt;outputDirectory&gt;${project.build.outputDirectory}                &lt;/outputDirectory&gt;                             &lt;resources&gt;                                 &lt;resource&gt;                          &lt;!-- 指明需要重写文件所在的目录，这里读取的就是上面定义的可选项 --&gt;                                     &lt;directory&gt;src/main/resources/${package.environment}&lt;/directory&gt;                                     &lt;filtering&gt;false&lt;/filtering&gt;                                 &lt;/resource&gt;                             &lt;/resources&gt;                         &lt;/configuration&gt;                     &lt;/execution&gt;                 &lt;/executions&gt;             &lt;/plugin&gt;</code></pre> <p>在父级pom文件中的project标签中加入以上配置，如果maven提示错误，则删掉注释文字。</p> <p>上面的 maven-resources-plugin 插件可以帮助我们在maven打包的编译期根据我们指定的环境选项来替换掉相应的文件，现在还有一个问题就是我们上述为了实现环境选项的可选，在resources文件目录下新增了两个原本没必要的文件夹，所以我们需要剔除这两个文件夹。</p> <p>剔除用到的maven插件为 maven -jar -plugin</p> <p>额外在父级工程下再引入该插件，剔除我们不需要打包进去的两个配置文件夹</p> <pre><code class="language-XML">&lt;plugin&gt;                 &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;                 &lt;artifactId&gt;maven-jar-plugin&lt;/artifactId&gt;                 &lt;version&gt;3.0.2&lt;/version&gt;                 &lt;configuration&gt;                     &lt;excludes&gt;                         &lt;!-- 这个路径是项目artifact 编译class后的路径开始算起的 --&gt;                         &lt;exclude&gt;/**/prod/**&lt;/exclude&gt;                         &lt;exclude&gt;/**/test/**&lt;/exclude&gt;                     &lt;/excludes&gt;                 &lt;/configuration&gt;             &lt;/plugin&gt;</code></pre> <p>同样，如果以上配置存在maven报错，删掉注释文字。</p> <p>这样我们就完成了整体配置，下面来打包测试一下。</p> <p><img decoding="async" alt="" height="747" src="http://img.555519.xyz/uploads/20230110/2c46953e849f9162174f737eb3053c6f.jpg">&nbsp;这样因为没有输入环境选项参数，就是普通的打包，也就是我们默认的开发环境打包。</p> <p><img loading="lazy" decoding="async" alt="" height="346" src="http://img.555519.xyz/uploads/20230110/46063acd33d9512ca46a291c1c188def.jpg"></p> <p>&nbsp;<img loading="lazy" decoding="async" alt="" height="339" src="http://img.555519.xyz/uploads/20230110/76123530133f870d06aa1f5552605f27.jpg"></p> <p><img loading="lazy" decoding="async" alt="" height="466" src="http://img.555519.xyz/uploads/20230110/33028463006bef981294f9b9c502469d.jpg">&nbsp;</p> <p>解压打包后的jar可以发现默认的环境为 dev 开发环境。</p> <p>使用环境选项参数打包，在原有的打包基础命令上添加 -P参数，参数后面跟的选项就是我们上面配置好的环境选项参数，这里以生产环境为示例。</p> <pre><code class="language-bash">mvn clean package -Pprod</code></pre> <p>&nbsp;<img loading="lazy" decoding="async" alt="" height="563" src="http://img.555519.xyz/uploads/20230110/4cdb340f0d79fb2dcc1192a62ec4d5af.jpg"></p> <p><img loading="lazy" decoding="async" alt="" height="505" src="http://img.555519.xyz/uploads/20230110/f08882743cb3b26fdd2d60d8421e4f45.jpg">&nbsp;</p> <p>&nbsp;打包后的配置文件即为生产环境下的配置文件了。</p> <h2>二、Gitee示例工程</h2> <p>&nbsp;以上示例工程代码，已上传gitee，有需要的话可自行尝试。</p> <p>&nbsp;<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://gitee.com/firedarksouls/maven-demo/tree/master"  title="SuperVBird/MavenDemo - 码云 - 开源中国 (gitee.com)" rel="nofollow">SuperVBird/MavenDemo - 码云 - 开源中国 (gitee.com)</a></p> <p>&nbsp;</p> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-20776.htm">宠物领养网站app名字怎么取（宠物领养app有哪些）</a></p>
+                                        <p>下一个：<a href="/news/article-21237.htm">南京免费领养宠物的平台有哪些（南京免费领养猫）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-7-17-clash-node.htm" title="「7月17日」最高速度20.9M/S，2024年NekoRay每天更新免费节点订阅链接">「7月17日」最高速度20.9M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-13-linux-nekoray-node.htm" title="「8月13日」最高速度20M/S，2024年NekoRay每天更新免费节点订阅链接">「8月13日」最高速度20M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-11-shadowrocket-node.htm" title="「9月11日」最高速度21.6M/S，2024年NekoRay每天更新免费节点订阅链接">「9月11日」最高速度21.6M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-18-node-share.htm" title="「11月18日」最高速度18.4M/S，2024年NekoRay每天更新免费节点订阅链接">「11月18日」最高速度18.4M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-29-free-node-subscribe.htm" title="「11月29日」最高速度20.5M/S，2024年NekoRay每天更新免费节点订阅链接">「11月29日」最高速度20.5M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-3-free-nekoray.htm" title="「8月3日」最高速度20.2M/S，2024年NekoRay每天更新免费节点订阅链接">「8月3日」最高速度20.2M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-10-free-node-subscribe-links.htm" title="「9月10日」最高速度21.7M/S，2024年NekoRay每天更新免费节点订阅链接">「9月10日」最高速度21.7M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-23-linux-nekoray.htm" title="「11月23日」最高速度22.5M/S，2024年NekoRay每天更新免费节点订阅链接">「11月23日」最高速度22.5M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-26-shadowrocket-node.htm" title="「8月26日」最高速度22.4M/S，2024年NekoRay每天更新免费节点订阅链接">「8月26日」最高速度22.4M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-7-25-free-nekoray.htm" title="「7月25日」最高速度20.3M/S，2024年NekoRay每天更新免费节点订阅链接">「7月25日」最高速度20.3M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">15</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-08/" title="2024-08 归档">2024-08</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">27</span> <a href="/date/2024-07/" title="2024-07 归档">2024-07</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">4</span> <a href="/date/2024-06/" title="2024-06 归档">2024-06</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+        <!-- Copyright Start -->
+    <div class="container-fluid copyright py-4">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-md-0">
+                    <span class="text-white">NekoRayNode节点订阅站 版权所有 Powered by WordPress</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright End -->
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary btn-lg-square back-to-top"><i class="fa fa-arrow-up"></i></a>
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/easing/easing.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/lightbox/js/lightbox.min.js"></script>
+    <!-- Template Javascript -->
+    <script src="/assets/website/js/frontend/nekoraynode/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
