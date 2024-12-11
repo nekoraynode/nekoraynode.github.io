@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://nekoraynode.github.io/news/article-24203.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Java集合类型遍历和排序</title>
+        <meta name="description" content="1.Java集合Set、List、Map的遍历方法 List的遍历   //List的第一种遍历方式:因为list有顺序，利用size()和get()方法获取     for (int i = 0; " />
+        <link rel="icon" href="/assets/website/img/nekoraynode/favicon.ico" type="image/x-icon"/>
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <!-- Libraries Stylesheet -->
+    <link href="__ADDON__/js/frontend/nekoraynode/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6TD6QHWW6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6TD6QHWW6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid p-0">
+                <nav class="navbar navbar-expand-lg fixed-top navbar-light px-4 px-lg-5 py-3 py-lg-0">
+            <a href="/" class="navbar-brand p-0">
+                                <span class="display-6 text-primary m-0">
+                    <i class="fas fa-envelope me-3"></i>NekoRay Node
+                </span>
+                            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                                        <a href="/" class="nav-item nav-link">首页</a>
+                                        <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                        <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                        <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                        <a href="#" class="nav-item nav-link">关于</a>
+                    <a href="#" class="nav-item nav-link">联系</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar & Hero End -->
+    <!-- Header Start -->
+    <div class="container-fluid bg-breadcrumb">
+        <ul class="breadcrumb-animation">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="container text-center py-5" style="max-width: 900px;">
+            <h3 class="display-3 mb-4 wow fadeInDown" data-wow-delay="0.1s">Java集合类型遍历和排序</h1>
+                <ol class="breadcrumb justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+                    <li class="breadcrumb-item"><a href="/">首页</a></li>
+                    <li class="breadcrumb-item"><a href="/news/">新闻资讯</a></li>
+                    <li class="breadcrumb-item active text-primary">正文</li>
+                </ol>
+        </div>
+    </div>
+    <!-- Header End -->
+    <!-- About Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-9">
+                                      				  				  				<div id="content_views" class="htmledit_views"> <h2>1.Java集合Set、List、Map的遍历方法</h2> <h3>List的遍历</h3> <div> <pre><code class="language-java"> //List的第一种遍历方式:因为list有顺序，利用size()和get()方法获取     for (int i = 0; i &lt; list.size(); i++) {       System.out.println(list.get(i));     }     //List的第二种遍历方式：利用Iterator     Iterator&lt;String&gt; it = list.iterator();     while (it.hasNext()) {       System.out.println(it.next());     }     //List的第三种遍历方式:利用foreach     for (String s2 : list) {       System.out.println(s2);     }</code></pre> <h3>Map映射的遍历</h3> <div> <pre><code class="language-java">1、通过获取所有的key按照key来遍历 //Set&lt;Integer&gt; set = map.keySet(); //得到所有key的集合 for (Integer in : map.keySet()) {     String str = map.get(in);//得到每个key多对用value的值 }   2、通过Map.entrySet使用iterator遍历key和value Iterator&lt;Map.Entry&lt;Integer, String&gt;&gt; it = map.entrySet().iterator(); while (it.hasNext()) {      Map.Entry&lt;Integer, String&gt; entry = it.next();        System.out.println("key= " + entry.getKey() + " and value= " + entry.getValue()); }   3、通过Map.entrySet遍历key和value，推荐，尤其是容量大时 for (Map.Entry&lt;Integer, String&gt; entry : map.entrySet()) {     //Map.entry&lt;Integer,String&gt; 映射项（键-值对）  有几个方法：用上面的名字entry     //entry.getKey() ;entry.getValue(); entry.setValue();     //map.entrySet()  返回此映射中包含的映射关系的 Set视图。     System.out.println("key= " + entry.getKey() + " and value= " + entry.getValue()); }   4、通过Map.values()遍历所有的value，但不能遍历key for (String v : map.values()) {     System.out.println("value= " + v); }</code></pre> <h3> Set集合的遍历</h3> </div> <div> <pre><code class="language-java">   //set集合遍历方法1:使用iterator      Iterator&lt;string&gt; it = set.iterator();      while (it.hasNext()) {        String value = it.next();        System.out.println(value);      }        //set集合遍历方法2:使用增强for循环。      for(String s: set){        System.out.println(s);      }</code></pre> <p></p> <h2>2.ConcurrentModificationException原因和解决方法</h2> </div> <div><a target="_blank" href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://bbs.csdn.net/topics/370149418"  rel="nofollow">抛ConcurrentModificationException原因的深究以及解决方案</a></div> <div> <h2>3.集合元素的排序</h2> <div>    如果是集合中存放的是String或者Integer对象，由于它们默认都实现了comparable接口，因此对于List仅需要使用Collections.sort方法就可以实现对List集合元素的排序，默认是升序排序；而对于Set集合来说，TreeSet底层是基于二叉树的，因而它本身就是排好序的，默认升序排序；对于Map集合来说，TreeMap底层也是基于二叉树的，默认根据键进行升序排序。</div> <div>    而对于其他的自定义对象，如果想要实现排序，则需要实现comparable接口或者comparator接口。</div> <p></div> <p></div> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-23982.htm">四川兽药疫苗公司销售招聘（四川兽药厂家招聘业务员）</a></p>
+                                        <p>下一个：<a href="/news/article-24205.htm">动物防疫站打疫苗需要什么手续和证件（动物防疫站在哪）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-21666.htm" title="送养一个孩子怎样写协议书呢视频（送养一个孩子怎样写协议书呢视频教程）">送养一个孩子怎样写协议书呢视频（送养一个孩子怎样写协议书呢视频教程）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-26-node-share.htm" title="「10月26日」最高速度18.4M/S，2024年NekoRay每天更新免费节点订阅链接">「10月26日」最高速度18.4M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-6-26-free-clash.htm" title="「6月26日」最高速度19.3M/S，2024年V2ray/SSR/Shadowrocket/Clash每天更新免费节点订阅链接">「6月26日」最高速度19.3M/S，2024年V2ray/SSR/Shadowrocket/Clash每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-23-windows-nekoray.htm" title="「10月23日」最高速度20.4M/S，2024年NekoRay每天更新免费节点订阅链接">「10月23日」最高速度20.4M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-30-free-node-subscribe-links.htm" title="「10月30日」最高速度21M/S，2024年NekoRay每天更新免费节点订阅链接">「10月30日」最高速度21M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-9-free-high-speed-nodes.htm" title="「10月9日」最高速度18.2M/S，2024年NekoRay每天更新免费节点订阅链接">「10月9日」最高速度18.2M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-3-linux-nekoray.htm" title="「11月3日」最高速度18.1M/S，2024年NekoRay每天更新免费节点订阅链接">「11月3日」最高速度18.1M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-7-10-free-ssr-subscribe.htm" title="「7月10日」最高速度19.2M/S，2024年NekoRay每天更新免费节点订阅链接">「7月10日」最高速度19.2M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-6-node-share-links.htm" title="「8月6日」最高速度18.2M/S，2024年NekoRay每天更新免费节点订阅链接">「8月6日」最高速度18.2M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-7-15-clash-v2ray-ss-ssr.htm" title="「7月15日」最高速度18.5M/S，2024年NekoRay每天更新免费节点订阅链接">「7月15日」最高速度18.5M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">33</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-08/" title="2024-08 归档">2024-08</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">27</span> <a href="/date/2024-07/" title="2024-07 归档">2024-07</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">4</span> <a href="/date/2024-06/" title="2024-06 归档">2024-06</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+        <!-- Copyright Start -->
+    <div class="container-fluid copyright py-4">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-md-0">
+                    <span class="text-white">NekoRayNode节点订阅站 版权所有 Powered by WordPress</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright End -->
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary btn-lg-square back-to-top"><i class="fa fa-arrow-up"></i></a>
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/easing/easing.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/lightbox/js/lightbox.min.js"></script>
+    <!-- Template Javascript -->
+    <script src="/assets/website/js/frontend/nekoraynode/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
