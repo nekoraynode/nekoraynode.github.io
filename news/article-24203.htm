@@ -94,7 +94,8 @@
         <div class="container py-5">
             <div class="row">
                 <div class="col-md-9">
-                                      				  				  				<div id="content_views" class="htmledit_views"> <h2>1.Java集合Set、List、Map的遍历方法</h2> <h3>List的遍历</h3> <div> <pre><code class="language-java"> //List的第一种遍历方式:因为list有顺序，利用size()和get()方法获取     for (int i = 0; i &lt; list.size(); i++) {       System.out.println(list.get(i));     }     //List的第二种遍历方式：利用Iterator     Iterator&lt;String&gt; it = list.iterator();     while (it.hasNext()) {       System.out.println(it.next());     }     //List的第三种遍历方式:利用foreach     for (String s2 : list) {       System.out.println(s2);     }</code></pre> <h3>Map映射的遍历</h3> <div> <pre><code class="language-java">1、通过获取所有的key按照key来遍历 //Set&lt;Integer&gt; set = map.keySet(); //得到所有key的集合 for (Integer in : map.keySet()) {     String str = map.get(in);//得到每个key多对用value的值 }   2、通过Map.entrySet使用iterator遍历key和value Iterator&lt;Map.Entry&lt;Integer, String&gt;&gt; it = map.entrySet().iterator(); while (it.hasNext()) {      Map.Entry&lt;Integer, String&gt; entry = it.next();        System.out.println("key= " + entry.getKey() + " and value= " + entry.getValue()); }   3、通过Map.entrySet遍历key和value，推荐，尤其是容量大时 for (Map.Entry&lt;Integer, String&gt; entry : map.entrySet()) {     //Map.entry&lt;Integer,String&gt; 映射项（键-值对）  有几个方法：用上面的名字entry     //entry.getKey() ;entry.getValue(); entry.setValue();     //map.entrySet()  返回此映射中包含的映射关系的 Set视图。     System.out.println("key= " + entry.getKey() + " and value= " + entry.getValue()); }   4、通过Map.values()遍历所有的value，但不能遍历key for (String v : map.values()) {     System.out.println("value= " + v); }</code></pre> <h3> Set集合的遍历</h3> </div> <div> <pre><code class="language-java">   //set集合遍历方法1:使用iterator      Iterator&lt;string&gt; it = set.iterator();      while (it.hasNext()) {        String value = it.next();        System.out.println(value);      }        //set集合遍历方法2:使用增强for循环。      for(String s: set){        System.out.println(s);      }</code></pre> <p></p> <h2>2.ConcurrentModificationException原因和解决方法</h2> </div> <div><a target="_blank" href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://bbs.csdn.net/topics/370149418"  rel="nofollow">抛ConcurrentModificationException原因的深究以及解决方案</a></div> <div> <h2>3.集合元素的排序</h2> <div>    如果是集合中存放的是String或者Integer对象，由于它们默认都实现了comparable接口，因此对于List仅需要使用Collections.sort方法就可以实现对List集合元素的排序，默认是升序排序；而对于Set集合来说，TreeSet底层是基于二叉树的，因而它本身就是排好序的，默认升序排序；对于Map集合来说，TreeMap底层也是基于二叉树的，默认根据键进行升序排序。</div> <div>    而对于其他的自定义对象，如果想要实现排序，则需要实现comparable接口或者comparator接口。</div> <p></div> <p></div> </div> 			                <div class="clearfix"></div>
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="htmledit_views"> <h2>1.Java集合Set、List、Map的遍历方法</h2> <h3>List的遍历</h3> <div> <pre><code class="language-java"> //List的第一种遍历方式:因为list有顺序，利用size()和get()方法获取     for (int i = 0; i &lt; list.size(); i++) {       System.out.println(list.get(i));     }     //List的第二种遍历方式：利用Iterator     Iterator&lt;String&gt; it = list.iterator();     while (it.hasNext()) {       System.out.println(it.next());     }     //List的第三种遍历方式:利用foreach     for (String s2 : list) {       System.out.println(s2);     }</code></pre> <h3>Map映射的遍历</h3> <div> <pre><code class="language-java">1、通过获取所有的key按照key来遍历 //Set&lt;Integer&gt; set = map.keySet(); //得到所有key的集合 for (Integer in : map.keySet()) {     String str = map.get(in);//得到每个key多对用value的值 }   2、通过Map.entrySet使用iterator遍历key和value Iterator&lt;Map.Entry&lt;Integer, String&gt;&gt; it = map.entrySet().iterator(); while (it.hasNext()) {      Map.Entry&lt;Integer, String&gt; entry = it.next();        System.out.println("key= " + entry.getKey() + " and value= " + entry.getValue()); }   3、通过Map.entrySet遍历key和value，推荐，尤其是容量大时 for (Map.Entry&lt;Integer, String&gt; entry : map.entrySet()) {     //Map.entry&lt;Integer,String&gt; 映射项（键-值对）  有几个方法：用上面的名字entry     //entry.getKey() ;entry.getValue(); entry.setValue();     //map.entrySet()  返回此映射中包含的映射关系的 Set视图。     System.out.println("key= " + entry.getKey() + " and value= " + entry.getValue()); }   4、通过Map.values()遍历所有的value，但不能遍历key for (String v : map.values()) {     System.out.println("value= " + v); }</code></pre> <h3> Set集合的遍历</h3> </div> <div> <pre><code class="language-java">   //set集合遍历方法1:使用iterator      Iterator&lt;string&gt; it = set.iterator();      while (it.hasNext()) {        String value = it.next();        System.out.println(value);      }        //set集合遍历方法2:使用增强for循环。      for(String s: set){        System.out.println(s);      }</code></pre> <p></p> <h2>2.ConcurrentModificationException原因和解决方法</h2> </div> <div><a target="_blank" href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://bbs.csdn.net/topics/370149418"  rel="nofollow">抛ConcurrentModificationException原因的深究以及解决方案</a></div> <div> <h2>3.集合元素的排序</h2> <div>    如果是集合中存放的是String或者Integer对象，由于它们默认都实现了comparable接口，因此对于List仅需要使用Collections.sort方法就可以实现对List集合元素的排序，默认是升序排序；而对于Set集合来说，TreeSet底层是基于二叉树的，因而它本身就是排好序的，默认升序排序；对于Map集合来说，TreeMap底层也是基于二叉树的，默认根据键进行升序排序。</div> <div>    而对于其他的自定义对象，如果想要实现排序，则需要实现comparable接口或者comparator接口。</div> <p></div> <p></div> </div> 			                <div class="clearfix"></div>
                 <div class="col-md-12 mt-5">
                                         <p>上一个：<a href="/news/article-23982.htm">四川兽药疫苗公司销售招聘（四川兽药厂家招聘业务员）</a></p>
                                         <p>下一个：<a href="/news/article-24205.htm">动物防疫站打疫苗需要什么手续和证件（动物防疫站在哪）</a></p>
@@ -107,16 +108,16 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2024-12-4-shadowrocket-node.htm" title="「12月4日」最高速度22.6M/S，2024年NekoRay每天更新免费节点订阅链接">「12月4日」最高速度22.6M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-26-node-share.htm" title="「10月26日」最高速度18.4M/S，2024年NekoRay每天更新免费节点订阅链接">「10月26日」最高速度18.4M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-30-free-subscribe-node.htm" title="「11月30日」最高速度19.7M/S，2024年NekoRay每天更新免费节点订阅链接">「11月30日」最高速度19.7M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/news/article-22154.htm" title="springboot整合Dubbo与Feign的实现 (无注册中心)_java">springboot整合Dubbo与Feign的实现 (无注册中心)_java</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-8-4-free-nekoray.htm" title="「8月4日」最高速度22.1M/S，2024年NekoRay每天更新免费节点订阅链接">「8月4日」最高速度22.1M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/news/article-25384.htm" title="动物疫苗属于什么行业类别的（动物疫苗概念的上市公司）">动物疫苗属于什么行业类别的（动物疫苗概念的上市公司）</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-9-27-node-share-links.htm" title="「9月27日」最高速度19.7M/S，2024年NekoRay每天更新免费节点订阅链接">「9月27日」最高速度19.7M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-16-linux-nekoray-node.htm" title="「10月16日」最高速度18.3M/S，2024年NekoRay每天更新免费节点订阅链接">「10月16日」最高速度18.3M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-3-share-windows-nekoray.htm" title="「10月3日」最高速度18.2M/S，2024年NekoRay每天更新免费节点订阅链接">「10月3日」最高速度18.2M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-6-windows-nekoray.htm" title="「12月6日」最高速度22.4M/S，2024年NekoRay每天更新免费节点订阅链接">「12月6日」最高速度22.4M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-22610.htm" title="太原市免费领养狗狗（太原哪里可以免费领养狗狗）">太原市免费领养狗狗（太原哪里可以免费领养狗狗）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-7-7-clash-node-daily-updates.htm" title="「7月7日」最高速度21.8M/S，2024年NekoRay每天更新免费节点订阅链接">「7月7日」最高速度21.8M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-2-free-node-subscribe.htm" title="「8月2日」最高速度18.1M/S，2024年NekoRay每天更新免费节点订阅链接">「8月2日」最高速度18.1M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-22607.htm" title="成都宠物领养平台交流微信群号是什么名字（成都宠物犬领养）">成都宠物领养平台交流微信群号是什么名字（成都宠物犬领养）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-16-linux-nekoray.htm" title="「8月16日」最高速度21.7M/S，2024年NekoRay每天更新免费节点订阅链接">「8月16日」最高速度21.7M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-7-linux-nekoray-node.htm" title="「12月7日」最高速度22.9M/S，2024年NekoRay每天更新免费节点订阅链接">「12月7日」最高速度22.9M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-7-24-share-windows-nekoray.htm" title="「7月24日」最高速度20.6M/S，2024年NekoRay每天更新免费节点订阅链接">「7月24日」最高速度20.6M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-10-shadowrocket-node.htm" title="「8月10日」最高速度18.4M/S，2024年NekoRay每天更新免费节点订阅链接">「8月10日」最高速度18.4M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-16-nekoray-node.htm" title="「11月16日」最高速度18.3M/S，2024年NekoRay每天更新免费节点订阅链接">「11月16日」最高速度18.3M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-7-9-free-clash.htm" title="「7月9日」最高速度19.8M/S，2024年NekoRay每天更新免费节点订阅链接">「7月9日」最高速度19.8M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
                     </ul>
     </div>
 </div>
@@ -128,7 +129,7 @@
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">39</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+                <h4><span class="badge" style="float: right;">57</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
@@ -162,6 +163,15 @@
         <div class="container">
             <div class="row g-4 align-items-center">
                 <div class="col-md-6 text-center text-md-start mb-md-0">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
                     <span class="text-white">NekoRayNode节点订阅站 版权所有 Powered by WordPress</span>
                 </div>
             </div>

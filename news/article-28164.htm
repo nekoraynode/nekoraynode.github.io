@@ -98,6 +98,7 @@
                   				  				  				<div id="content_views" class="markdown_views prism-atom-one-light"> <p>根据官方文档安装<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://minikube.sigs.k8s.io/docs/start/"  rel="nofollow">https://minikube.sigs.k8s.io/docs/start/</a></p> <h4><a id="1minikube_2" rel="nofollow"></a>1.安装minikube</h4> <p>brew install minikube<br /> 如果没有安装brew需要安装Homebrew</p> <h5><a id="11Homebrew_5" rel="nofollow"></a>1.1安装Homebrew</h5> <p>由于国内的各种墙官方推荐的方法无法安装<br /> 打开控制台<br /> cd ~<br /> curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh &gt;&gt; brew_install</p> <p>这里如果出现<br /> curl: (7) Failed to connect to raw.githubusercontent.com port 443: Connection refused<br /> 需要添加ip映射<br /> sudo vi /etc/hosts<br /> 199.232.28.133 raw.githubusercontent.com</p> <p>修改brew_install<br /> vi brew_install 把BREW_REPO替换成https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git<br /> #BREW_REPO = “https://github.com/Homebrew/brew”.freeze<br /> BREW_REPO = “https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git”.freeze</p> <p>开始安装<br /> ruby ./brew_install</p> <p>此时可能还会惊奇的发现ruby没有安装或者报错<br /> Mac ruby: no Ruby script found in input (LoadError)<br /> 此时就要重新安装ruby</p> <h5><a id="12ruby_28" rel="nofollow"></a>1.2安装ruby</h5> <p>/usr/bin/ruby -e “$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)”</p> <p>安装完成之后再进行<br /> ruby ./brew_install</p> <p>你以为这样就可以了？<br /> 不一定哈哈哈，有可能会出现卡住在<br /> Cloning into ‘/usr/local/Homebrew/Library/Taps/homebrew/homebrew-core’…<br /> 解决方案为</p> <h5><a id="13homebrew_38" rel="nofollow"></a>1.3重新克隆homebrew</h5> <p>cd /usr/local/Homebrew/Library/Taps/<br /> mkdir homebrew<br /> cd homebrew<br /> git clone https://mirrors.ustc.edu.cn/homebrew-core.git<br /> brew update<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220819/037602d929104eb0995c6131f9e158e1.jpg" alt="Mac安装Kubernetes-minikube专治各种坑"><br /> 再次 ruby ./brew_install 应该就能正常了</p> <h5><a id="2_47" rel="nofollow"></a>2.开始启动</h5> <p>brew cask remove minikube<br /> brew link minikube<br /> minikube start<br /> 这里可能需要等的时间会比较长</p> <h5><a id="3_dashboard_54" rel="nofollow"></a>3.打开 dashboard</h5> <p>kubectl get po -A<br /> minikube kubectl – get po -A<br /> minikube dashboard<br /> 出现这个即已经安装成功了<img decoding="async" src="http://img.555519.xyz/uploads3/20220819/d5f9e9edf8097d2af713d2a631e5273c.jpg" alt="Mac安装Kubernetes-minikube专治各种坑"><br /> ps: 停止要使用minikube stop 如果使用minikube delete 下次启动又要重新下载会很久</p> </div> 			                <div class="clearfix"></div>
                 <div class="col-md-12 mt-5">
                                         <p>上一个：<a href="/news/article-28163.htm">vue中组件之间调用方法</a></p>
+                                        <p>下一个：<a href="/news/article-28639.htm">动物疫苗价格一览表图片高清大全集下载（动物 疫苗）</a></p>
                                     </div>
                                 </div>
                 <div class="col-md-3">
@@ -107,16 +108,16 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2024-8-15-node-share.htm" title="「8月15日」最高速度22.2M/S，2024年NekoRay每天更新免费节点订阅链接">「8月15日」最高速度22.2M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/news/article-28164.htm" title="Mac安装Kubernetes-minikube专治各种坑">Mac安装Kubernetes-minikube专治各种坑</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-28-free-node-subscribe-links.htm" title="「10月28日」最高速度18.7M/S，2024年NekoRay每天更新免费节点订阅链接">「10月28日」最高速度18.7M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-8-11-linux-nekoray-node.htm" title="「8月11日」最高速度21.5M/S，2024年NekoRay每天更新免费节点订阅链接">「8月11日」最高速度21.5M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-2-nekoray-node.htm" title="「11月2日」最高速度20.9M/S，2024年NekoRay每天更新免费节点订阅链接">「11月2日」最高速度20.9M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-8-nekoray-node.htm" title="「10月8日」最高速度19M/S，2024年NekoRay每天更新免费节点订阅链接">「10月8日」最高速度19M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-25-shadowrocket-node.htm" title="「10月25日」最高速度19.3M/S，2024年NekoRay每天更新免费节点订阅链接">「10月25日」最高速度19.3M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-9-free-subscribe-node.htm" title="「12月9日」最高速度22.1M/S，2024年NekoRay每天更新免费节点订阅链接">「12月9日」最高速度22.1M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-8-6-node-share-links.htm" title="「8月6日」最高速度18.2M/S，2024年NekoRay每天更新免费节点订阅链接">「8月6日」最高速度18.2M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-31-free-nekoray.htm" title="「10月31日」最高速度18M/S，2024年NekoRay每天更新免费节点订阅链接">「10月31日」最高速度18M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-25384.htm" title="动物疫苗属于什么行业类别的（动物疫苗概念的上市公司）">动物疫苗属于什么行业类别的（动物疫苗概念的上市公司）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-16-nekoray-node.htm" title="「11月16日」最高速度18.3M/S，2024年NekoRay每天更新免费节点订阅链接">「11月16日」最高速度18.3M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-7-18-linux-nekoray.htm" title="「7月18日」最高速度21M/S，2024年NekoRay每天更新免费节点订阅链接">「7月18日」最高速度21M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-16-free-node-subscribe-links.htm" title="「9月16日」最高速度21.6M/S，2024年NekoRay每天更新免费节点订阅链接">「9月16日」最高速度21.6M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-8-free-nekoray-node.htm" title="「11月8日」最高速度21.1M/S，2024年NekoRay每天更新免费节点订阅链接">「11月8日」最高速度21.1M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-7-linux-nekoray-node.htm" title="「12月7日」最高速度22.9M/S，2024年NekoRay每天更新免费节点订阅链接">「12月7日」最高速度22.9M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-20775.htm" title="长沙猫咪领养中心在哪里有（长沙领养猫贴吧）">长沙猫咪领养中心在哪里有（长沙领养猫贴吧）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-21-free-v2ray-subscribe.htm" title="「8月21日」最高速度22.5M/S，2024年NekoRay每天更新免费节点订阅链接">「8月21日」最高速度22.5M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-7-15-clash-v2ray-ss-ssr.htm" title="「7月15日」最高速度18.5M/S，2024年NekoRay每天更新免费节点订阅链接">「7月15日」最高速度18.5M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-23-windows-nekoray.htm" title="「10月23日」最高速度20.4M/S，2024年NekoRay每天更新免费节点订阅链接">「10月23日」最高速度20.4M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
                     </ul>
     </div>
 </div>
@@ -128,7 +129,7 @@
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">57</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+                <h4><span class="badge" style="float: right;">60</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>

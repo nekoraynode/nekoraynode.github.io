@@ -7,7 +7,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Java 垃圾回收超详细讲解记忆集和卡表_java</title>
         <meta name="description" content="目录  跨代引用 解决跨代引用 记忆集 卡表    跨代引用 在说记忆集和卡表之前，先给大家介绍一下跨代引用的问题。  假如要现在进行一次只局限于新生代区域内的收集(Minor GC)，但新生代的实例" />
-        <link rel="icon" href="__ADDON__/img/nekoraynode/favicon.ico" type="image/x-icon"/>
+        <link rel="icon" href="/assets/website/img/nekoraynode/favicon.ico" type="image/x-icon"/>
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -94,7 +94,8 @@
         <div class="container py-5">
             <div class="row">
                 <div class="col-md-9">
-                                      				  				  				<div id="navCategory"> <h5 class="catalogue">目录</h5> <ul class="first_class_ul"> <li><a href="#_label0" rel="nofollow">跨代引用</a></li> <li><a href="#_label1" rel="nofollow">解决跨代引用</a></li> <li><a href="#_label2" rel="nofollow">记忆集</a></li> <li><a href="#_label3" rel="nofollow">卡表</a></li> </ul> </div> <p class="maodian"><a name="_label0" rel="nofollow"></a></p> <h2>跨代引用</h2> <p>在说记忆集和卡表之前，先给大家介绍一下跨代引用的问题。</p> <p style="text-align:center"><img fetchpriority="high" decoding="async" alt="" height="345" src="http://img.555519.xyz/uploads3/20220427/54ea0d237356ebd06966ecf2347d4db4.jpg"></p> <p>假如要现在进行一次只局限于新生代区域内的收集(Minor GC)，但新生代的实例对象1在老年代中被引用，为了找出该区域(新生代)中所有的存活对象，不得不在固定的GC Roots之外，再额外遍历整个老年代中所有对象来确保可达性分析结果的正确性，反过来也是一样。遍历整个老年代所有对象的方案虽然理论上可行，但无疑会为内存回收带来很大的性能负担。</p> <p>事实上并不只是新生代、老年代之间才有跨代引用的问题，所有涉及部分区域收集（Partial GC)行为的垃圾收集器，典型的如G1、ZGC和Shenandoah收集器，都会面临相同的问题。</p> <p class="maodian"><a name="_label1" rel="nofollow"></a></p> <h2>解决跨代引用</h2> <p>首先，跨代引用相对于同代引用来说仅占极少数。原因是跨代引用的对象应该倾向于同时生存或者同时死亡的（举个：如果某个新生代对象存在跨代引用，由于老年代对象难以消亡，该引用会使得新生代对象在收集时同样得以存活，进而在年龄增长之后晋升到老年代中，这时跨代引用也随即被消除了）。</p> <p>依据上面说所，就不应再为了少量的跨代引用去扫描整个老年代，也不必浪费空间专门记录每一个对象是否存在及存在哪些跨代引用，只需在新生代上建立一个全局的数据结构（该结构被称为“记忆集”，Remembered Set)，这个结构把老年代划分成若干小块，标识出老年代的哪一块内存会存在跨代引用。此后当发生Minor GC时，只有包含了跨代引用的小块内存里的对象才会被加入到GCRoots进行扫描。虽然这种方法需要在对象改变引用关系(如将自己或者某个属性赋值)时维护记录数据的正确性，会增加一些运行时的开销，但比起收集时扫描整个老年代来说仍然是划算的。</p> <p>下面就来介绍一下这个全局的数据结构记忆集。</p> <p class="maodian"><a name="_label2" rel="nofollow"></a></p> <h2>记忆集</h2> <p>记忆集是一种用于记录从非收集区域指向收集区域的指针集合的抽象数据结构。如果我们不考虑效率和成本的话，最简单的实现可以用非收集区域中所有含跨代引用的对象数组来实现这个数据结构，如下面代码所示:</p> <div class="ay1code"> <pre class="brush:java;">  //以对象指针来实现记忆集的伪代码  Class RememberedSet {  	Object[] set[OBJECT_INTERGENERATIONAL_REFERENCE_SIZE];   }</pre> </div> <p>这种记录全部含跨代引用对象的实现方案，无论是空间占用还是维护成本都相当高昂。而在垃圾收集的场景中，收集器只需要通过记忆集判断出某一块非收集区域是否存在有指向了收集区域的指针就可以了，并不需要了解这些跨代指针的全部细节。那设计者在实现记忆集的时候，便可以选择更为粗犷的记录粒度来节省记忆集的存储和维护成本。下面列举了一些可供选择（当然也可以选择这个范围以外的）的记录精度：</p> <ul> <li>字长精度：每个记录精确到一个机器字长（就是处理器的寻址位数，如常见的32位或64位，这个 精度决定了机器访问物理内存地址的指针长度），该字包含跨代指针。</li> <li>对象精度：每个记录精确到一个对象，该对象里有字段含有跨代指针。</li> <li>卡精度：每个记录精确到一块内存区域，该区域内有对象含有跨代指针。</li> </ul> <p>上面的，第三种“卡精度”所指的是用一种称为“卡表”(Card Table)的方式去实现记忆集，这也是目前最常用的记忆集的实现形式。</p> <p>卡表和记忆集又有什么关系呢？</p> <p>前面介绍记忆集的时候提到 记忆集其实是一种"抽象”的数据结构，抽象的意思是只定义了记忆集的行为意图，并没有定义其行为的具体实现。卡表就是记忆集的一种具体实现，它定义了记忆集的记录精度、与堆内存的映射关系等。关于记忆集与卡表的关系，可以按照Java中Map与HashMap的关系来类比理解（即接口和实现类来的关系）。</p> <p>下面来详细说一下记忆集的具体实现卡表</p> <p class="maodian"><a name="_label3" rel="nofollow"></a></p> <h2>卡表</h2> <p>卡表是使用一个字节数组CARD_TABLE[] 实现，每个元素对应其标识的内存区域一块特定大小的内存块，每个内存块称为卡页，hotspot使用的卡页是2^9大小 即512字节。如下图所示</p> <p style="text-align:center"><img decoding="async" alt="" height="531" src="http://img.555519.xyz/uploads3/20220427/d1ce84ff02c556c7f9b1ca721e9d3710.jpg"></p> <p>这样我们就可以把某个区域按照卡页进行划分，假如我们现在要对新生代区域进行垃圾回收，那么就可以把老年代区域看成是一个卡页一个卡页划分好的，如下图所示。</p> <p style="text-align:center"><img decoding="async" alt="" height="501" src="http://img.555519.xyz/uploads3/20220427/98b2b88023977dcf33f2df47f0d959b5.jpg"></p> <p>如图所示，因为cardpage1中存在指向新生代的跨代引用，所以对应卡表的第一个位置为1，表明该page区域存在跨代应用的对象。</p> <ul> <li>卡表角度：因为page1中存在跨代饮用的对象，所以卡表对应的第一个位置记为1，表明page1这个元素变脏。</li> <li>内存回收角度：因为卡表的第一个位置为1，表明该page区域存在跨代应用的对象，垃圾回收的时候需要扫描该区域。</li> </ul> <p>一个卡页的内存中通常包含不止一个对象，只要卡页内有一个(或更多）对象的字段存在着跨代指针，那就将对应卡表的数组元素的值标识为1，称为这个元素变脏（Dirty)，没有则标识为0。在垃圾收集发生时，只要筛选出卡表中变脏的元素，就能轻易得出哪些卡页内存块中包含跨代指针，把它们加入GC Roots中一并扫描。这样就不需要扫描整个老年代大大减少GC Roots的扫描范围。 </p> 			                <div class="clearfix"></div>
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="navCategory"> <h5 class="catalogue">目录</h5> <ul class="first_class_ul"> <li><a href="#_label0" rel="nofollow">跨代引用</a></li> <li><a href="#_label1" rel="nofollow">解决跨代引用</a></li> <li><a href="#_label2" rel="nofollow">记忆集</a></li> <li><a href="#_label3" rel="nofollow">卡表</a></li> </ul> </div> <p class="maodian"><a name="_label0" rel="nofollow"></a></p> <h2>跨代引用</h2> <p>在说记忆集和卡表之前，先给大家介绍一下跨代引用的问题。</p> <p style="text-align:center"><img fetchpriority="high" decoding="async" alt="" height="345" src="http://img.555519.xyz/uploads3/20220427/54ea0d237356ebd06966ecf2347d4db4.jpg"></p> <p>假如要现在进行一次只局限于新生代区域内的收集(Minor GC)，但新生代的实例对象1在老年代中被引用，为了找出该区域(新生代)中所有的存活对象，不得不在固定的GC Roots之外，再额外遍历整个老年代中所有对象来确保可达性分析结果的正确性，反过来也是一样。遍历整个老年代所有对象的方案虽然理论上可行，但无疑会为内存回收带来很大的性能负担。</p> <p>事实上并不只是新生代、老年代之间才有跨代引用的问题，所有涉及部分区域收集（Partial GC)行为的垃圾收集器，典型的如G1、ZGC和Shenandoah收集器，都会面临相同的问题。</p> <p class="maodian"><a name="_label1" rel="nofollow"></a></p> <h2>解决跨代引用</h2> <p>首先，跨代引用相对于同代引用来说仅占极少数。原因是跨代引用的对象应该倾向于同时生存或者同时死亡的（举个：如果某个新生代对象存在跨代引用，由于老年代对象难以消亡，该引用会使得新生代对象在收集时同样得以存活，进而在年龄增长之后晋升到老年代中，这时跨代引用也随即被消除了）。</p> <p>依据上面说所，就不应再为了少量的跨代引用去扫描整个老年代，也不必浪费空间专门记录每一个对象是否存在及存在哪些跨代引用，只需在新生代上建立一个全局的数据结构（该结构被称为“记忆集”，Remembered Set)，这个结构把老年代划分成若干小块，标识出老年代的哪一块内存会存在跨代引用。此后当发生Minor GC时，只有包含了跨代引用的小块内存里的对象才会被加入到GCRoots进行扫描。虽然这种方法需要在对象改变引用关系(如将自己或者某个属性赋值)时维护记录数据的正确性，会增加一些运行时的开销，但比起收集时扫描整个老年代来说仍然是划算的。</p> <p>下面就来介绍一下这个全局的数据结构记忆集。</p> <p class="maodian"><a name="_label2" rel="nofollow"></a></p> <h2>记忆集</h2> <p>记忆集是一种用于记录从非收集区域指向收集区域的指针集合的抽象数据结构。如果我们不考虑效率和成本的话，最简单的实现可以用非收集区域中所有含跨代引用的对象数组来实现这个数据结构，如下面代码所示:</p> <div class="ay1code"> <pre class="brush:java;">  //以对象指针来实现记忆集的伪代码  Class RememberedSet {  	Object[] set[OBJECT_INTERGENERATIONAL_REFERENCE_SIZE];   }</pre> </div> <p>这种记录全部含跨代引用对象的实现方案，无论是空间占用还是维护成本都相当高昂。而在垃圾收集的场景中，收集器只需要通过记忆集判断出某一块非收集区域是否存在有指向了收集区域的指针就可以了，并不需要了解这些跨代指针的全部细节。那设计者在实现记忆集的时候，便可以选择更为粗犷的记录粒度来节省记忆集的存储和维护成本。下面列举了一些可供选择（当然也可以选择这个范围以外的）的记录精度：</p> <ul> <li>字长精度：每个记录精确到一个机器字长（就是处理器的寻址位数，如常见的32位或64位，这个 精度决定了机器访问物理内存地址的指针长度），该字包含跨代指针。</li> <li>对象精度：每个记录精确到一个对象，该对象里有字段含有跨代指针。</li> <li>卡精度：每个记录精确到一块内存区域，该区域内有对象含有跨代指针。</li> </ul> <p>上面的，第三种“卡精度”所指的是用一种称为“卡表”(Card Table)的方式去实现记忆集，这也是目前最常用的记忆集的实现形式。</p> <p>卡表和记忆集又有什么关系呢？</p> <p>前面介绍记忆集的时候提到 记忆集其实是一种"抽象”的数据结构，抽象的意思是只定义了记忆集的行为意图，并没有定义其行为的具体实现。卡表就是记忆集的一种具体实现，它定义了记忆集的记录精度、与堆内存的映射关系等。关于记忆集与卡表的关系，可以按照Java中Map与HashMap的关系来类比理解（即接口和实现类来的关系）。</p> <p>下面来详细说一下记忆集的具体实现卡表</p> <p class="maodian"><a name="_label3" rel="nofollow"></a></p> <h2>卡表</h2> <p>卡表是使用一个字节数组CARD_TABLE[] 实现，每个元素对应其标识的内存区域一块特定大小的内存块，每个内存块称为卡页，hotspot使用的卡页是2^9大小 即512字节。如下图所示</p> <p style="text-align:center"><img decoding="async" alt="" height="531" src="http://img.555519.xyz/uploads3/20220427/d1ce84ff02c556c7f9b1ca721e9d3710.jpg"></p> <p>这样我们就可以把某个区域按照卡页进行划分，假如我们现在要对新生代区域进行垃圾回收，那么就可以把老年代区域看成是一个卡页一个卡页划分好的，如下图所示。</p> <p style="text-align:center"><img decoding="async" alt="" height="501" src="http://img.555519.xyz/uploads3/20220427/98b2b88023977dcf33f2df47f0d959b5.jpg"></p> <p>如图所示，因为cardpage1中存在指向新生代的跨代引用，所以对应卡表的第一个位置为1，表明该page区域存在跨代应用的对象。</p> <ul> <li>卡表角度：因为page1中存在跨代饮用的对象，所以卡表对应的第一个位置记为1，表明page1这个元素变脏。</li> <li>内存回收角度：因为卡表的第一个位置为1，表明该page区域存在跨代应用的对象，垃圾回收的时候需要扫描该区域。</li> </ul> <p>一个卡页的内存中通常包含不止一个对象，只要卡页内有一个(或更多）对象的字段存在着跨代指针，那就将对应卡表的数组元素的值标识为1，称为这个元素变脏（Dirty)，没有则标识为0。在垃圾收集发生时，只要筛选出卡表中变脏的元素，就能轻易得出哪些卡页内存块中包含跨代指针，把它们加入GC Roots中一并扫描。这样就不需要扫描整个老年代大大减少GC Roots的扫描范围。 </p> 			                <div class="clearfix"></div>
                 <div class="col-md-12 mt-5">
                                         <p>上一个：<a href="/news/article-22610.htm">太原市免费领养狗狗（太原哪里可以免费领养狗狗）</a></p>
                                         <p>下一个：<a href="/news/article-23069.htm">农大动物医院哪个医生好点（农大动物医院电话号码）</a></p>
@@ -107,16 +108,16 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2024-7-22-free-subscribe-node.htm" title="「7月22日」最高速度18.4M/S，2024年NekoRay每天更新免费节点订阅链接">「7月22日」最高速度18.4M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-12-shadowrocket-node.htm" title="「10月12日」最高速度18.4M/S，2024年NekoRay每天更新免费节点订阅链接">「10月12日」最高速度18.4M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-8-node-share.htm" title="「12月8日」最高速度22.9M/S，2024年NekoRay每天更新免费节点订阅链接">「12月8日」最高速度22.9M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
                         <li class="py-2"><a href="/free-nodes/2024-10-19-free-subscribe-node.htm" title="「10月19日」最高速度21.8M/S，2024年NekoRay每天更新免费节点订阅链接">「10月19日」最高速度21.8M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-16-nekoray-node.htm" title="「11月16日」最高速度18.3M/S，2024年NekoRay每天更新免费节点订阅链接">「11月16日」最高速度18.3M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-7-28-nekoray-node.htm" title="「7月28日」最高速度19M/S，2024年NekoRay每天更新免费节点订阅链接">「7月28日」最高速度19M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-9-4-node-share-links.htm" title="「9月4日」最高速度19M/S，2024年NekoRay每天更新免费节点订阅链接">「9月4日」最高速度19M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-8-19-windows-nekoray.htm" title="「8月19日」最高速度19.6M/S，2024年NekoRay每天更新免费节点订阅链接">「8月19日」最高速度19.6M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-8-31-free-high-speed-nodes.htm" title="「8月31日」最高速度22.2M/S，2024年NekoRay每天更新免费节点订阅链接">「8月31日」最高速度22.2M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-9-19-free-node-subscribe.htm" title="「9月19日」最高速度20.3M/S，2024年NekoRay每天更新免费节点订阅链接">「9月19日」最高速度20.3M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-7-23-node-share.htm" title="「7月23日」最高速度22.3M/S，2024年NekoRay每天更新免费节点订阅链接">「7月23日」最高速度22.3M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-21667.htm" title="延吉市动物园在哪 延吉市动物园在哪个位置">延吉市动物园在哪 延吉市动物园在哪个位置</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-31-free-nekoray.htm" title="「10月31日」最高速度18M/S，2024年NekoRay每天更新免费节点订阅链接">「10月31日」最高速度18M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-19402.htm" title="宠物店一年盈利多少合适（正常宠物店一年利润有多少）">宠物店一年盈利多少合适（正常宠物店一年利润有多少）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-23-free-nekoray.htm" title="「9月23日」最高速度20.3M/S，2024年NekoRay每天更新免费节点订阅链接">「9月23日」最高速度20.3M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-27705.htm" title="基于vue-seamless-scroll实现无缝滚动效果_vue.js">基于vue-seamless-scroll实现无缝滚动效果_vue.js</a></li>
+                        <li class="py-2"><a href="/news/article-26785.htm" title="猫咪打疫苗要多少钱大概打几针（猫咪打疫苗要多少钱大概打几针呢）">猫咪打疫苗要多少钱大概打几针（猫咪打疫苗要多少钱大概打几针呢）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-6-27-clash-node.htm" title="「6月27日」最高速度18.7M/S，2024年NekoRay每天更新免费节点订阅链接">「6月27日」最高速度18.7M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-13-share-windows-nekoray.htm" title="「12月13日」最高速度20.1M/S，2024年NekoRay每天更新免费节点订阅链接">「12月13日」最高速度20.1M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
                     </ul>
     </div>
 </div>
@@ -128,7 +129,7 @@
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+                <h4><span class="badge" style="float: right;">57</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
@@ -162,6 +163,15 @@
         <div class="container">
             <div class="row g-4 align-items-center">
                 <div class="col-md-6 text-center text-md-start mb-md-0">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
                     <span class="text-white">NekoRayNode节点订阅站 版权所有 Powered by WordPress</span>
                 </div>
             </div>
