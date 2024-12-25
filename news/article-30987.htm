@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://nekoraynode.github.io/news/article-30987.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>JVM将初始和最大内存大小设置为相同值的好处</title>
+        <meta name="description" content="操作系统的内存分配和解除分配 目录  			  微信公众号：Java大家族  JVM将初始和最大内存大小设置为相同值的好处 &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;启" />
+        <link rel="icon" href="/assets/website/img/nekoraynode/favicon.ico" type="image/x-icon"/>
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <!-- Libraries Stylesheet -->
+    <link href="__ADDON__/js/frontend/nekoraynode/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6TD6QHWW6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6TD6QHWW6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid p-0">
+                <nav class="navbar navbar-expand-lg fixed-top navbar-light px-4 px-lg-5 py-3 py-lg-0">
+            <a href="/" class="navbar-brand p-0">
+                                <span class="display-6 text-primary m-0">
+                    <i class="fas fa-envelope me-3"></i>NekoRay Node
+                </span>
+                            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                                        <a href="/" class="nav-item nav-link">首页</a>
+                                        <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                        <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                        <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                        <a href="#" class="nav-item nav-link">关于</a>
+                    <a href="#" class="nav-item nav-link">联系</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar & Hero End -->
+    <!-- Header Start -->
+    <div class="container-fluid bg-breadcrumb">
+        <ul class="breadcrumb-animation">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="container text-center py-5" style="max-width: 900px;">
+            <h3 class="display-3 mb-4 wow fadeInDown" data-wow-delay="0.1s">JVM将初始和最大内存大小设置为相同值的好处</h1>
+                <ol class="breadcrumb justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+                    <li class="breadcrumb-item"><a href="/">首页</a></li>
+                    <li class="breadcrumb-item"><a href="/news/">新闻资讯</a></li>
+                    <li class="breadcrumb-item active text-primary">正文</li>
+                </ol>
+        </div>
+    </div>
+    <!-- Header End -->
+    <!-- About Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				  			 <div id="log-box">  				<div id="catalog"><ul id="catalog-ul"> <li><i class="be be-arrowright"></i> <a href="#title-0" title="操作系统的内存分配和解除分配">操作系统的内存分配和解除分配</a></li> </ul><span class="log-zd"><span class="log-close"><a title="隐藏目录"><i class="be be-cross"></i><strong>目录</strong></a></span></span></div>  			</div> <blockquote> <p>微信公众号：<strong>Java大家族</strong></p> </blockquote> <h3>JVM将初始和最大内存大小设置为相同值的好处</h3> <p>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;启动应用程序时，我们指定初始内存大小和最大内存大小。对于在 JVM（Java 虚拟机）上运行的应用程序，初始和最大内存大小通过 “-Xms” 和 “-Xmx” 参数指定。如果 Java 应用程序在容器上运行，则通过“-XX：InitialRAMPercentage”和“-XX：MaxRAMPercentage”参数指定它。大多数企业将初始内存大小设置为低于最大内存大小的值。与这种普遍接受的做法相反，将初始内存大小设置为与最大内存大小相同具有如下优势。让我们在这篇文章中讨论它们。</p> <h3>1. 可用性</h3> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;假设您正在启动应用程序，初始堆大小为 2GB，最大堆大小为 24GB。这意味着当应用程序启动时，操作系统将为您的应用程序分配 2GB 的内存。从那时起，当应用程序开始处理新请求时，将分配额外的内存，直到达到最大 24GB。</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;假设当您的应用程序的内存消耗正在从2GB增长到24GB的过程中，此时，服务器启动了其他一些进程，并且这些进程开始消耗内存。这种情况在生产/云环境中非常常见，尤其是在应用程序与其他进程（如自定义脚本、cron 作业、监视代理等）一起运行时。</p> <p>发生这种情况时，您的应用程序将遇到以下情况：</p> <p>“java.lang.OutOfMemoryError：Java heap space”<br />操作系统将终止您的应用程序，并显示“内存不足：杀死进程。<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这意味着您的应用程序将在事务过程中崩溃。如果应用程序在启动期间以最大内存启动，则应用程序将是安全的。操作系统将仅终止内存消耗正在增长的新启动的脚本/cron 作业，而不会终止在启动期间内存已完全分配的应用程序。</p> <h3>2. 性能</h3> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们还观察到，以相同的初始堆大小和最大堆大小启动的应用程序往往比以较低的初始堆大小启动的应用程序的性能相对较好。</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这是一个真实的案例研究：我们使用记忆密集型应用程序进行测试。此应用程序处理非常大的二进制堆转储文件并生成分析报告。在这个应用程序中，我们反复分析一个11GB大小的二进制文件，这样它就会给操作系统带来内存压力。</p> <p>我们进行了两个测试场景：</p> <p>方案 1：我们将初始堆大小设置为 2GB，最大堆大小设置为 24GB。<br />方案 2：我们将初始堆大小和最大堆大小都设置为 24GB。<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在场景 1 中，我们观察到平均响应时间为 385.32 秒，而在场景 2 中，我们观察到平均响应时间为 366.55 秒。响应时间缩短了 5.11%。响应时间的这种改善是由于以下两个原因：</p> <span class="directory"></span><h4 id="title-0">操作系统的内存分配和解除分配</h4> <p>GC 暂停时间影响<br />让我们在这里讨论它们：</p> <p>从操作系统分配和解除分配内存<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当您为初始堆大小和最大堆大小设置了不同的大小时，JVM 将不得不与操作系统协商，以便在需要时分配内存。同样，当应用程序对内存的需求在运行时出现故障时，操作系统将占用分配的内存。这种持续的分配和解除分配将增加应用程序的开销。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/3fcb5a6294a52473838f2dbe0e1f511c.jpg" alt="JVM将初始和最大内存大小设置为相同值的好处"></p> <p>&nbsp;场景 1：内存分配波动（按 GCeasy 绘制的图表）</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上图显示了场景 1 JVM 的已分配和已解除分配的内存。从图表中，您可以注意到内存在不断波动（在 2GB 到 24GB 之间波动）。当应用程序处理堆转储时，内存最多可达 24GB。处理后，内存将回落到 2GB。当它再次处理新的堆转储时，内存会回弹到 24GB。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/0fe4cc5fbfd9cc1a6a7c8644fcdaba95.jpg" alt="JVM将初始和最大内存大小设置为相同值的好处"></p> <h5>场景 2：内存分配常量（由 GCeasy 绘制）</h5> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上图显示了场景 2 JVM 在其生命周期内分配的内存。你可以看到没有波动。内存是在启动期间从操作系统保留的，从那时起，没有波动。无论应用程序中的活动如何，它始终保持在24GB。此行为有可能在一定程度上提高应用程序的性能。</p> <h5>GC 暂停时间影响</h5> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当垃圾回收运行时，它会暂停应用程序，这将对客户产生负面影响。我们使用 GCeasy 工具研究了两种方案的垃圾回收性能。结果如下：</p> <h5>垃圾回收性能结果</h5> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们注意到 GC 吞吐量和 GC 暂停时间略有下降。在方案 1 中，GC 吞吐量为 96.59%，而在方案 2 中，GC 吞吐量略好 （97.83%）。同样，在场景 1 中，Max GC 的暂停时间为 5.23 秒，而在场景 2 中仅为 1.65 秒。。</p> <p><strong>应用程序启动时间</strong><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果将初始堆大小设置为与最大堆大小相同，则应用程序的启动时间也会更好。以下是 Oracle 文档的摘录：</p> <p><strong>“</strong><strong>如果初始堆太小，Java 应用程序的启动速度会变慢，因为 JVM 被迫频繁地执行垃圾回收，直到堆增长到更合理的大小。为获得最佳启动性能，请将初始堆大小设置为与最大堆大小相同。</strong><strong>"</strong></p> <h3>4. 成本</h3> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;无论您将初始堆大小 （-Xms） 和最大堆大小 （-Xmx） 设置为相同值还是其他值，您支付给云托管提供商的计算成本都不会更改。假设您正在使用阿里云、腾讯云等云厂商的实例，那么无论设置初始堆大小和最大堆大小的值如何，您最终都将支付固定小时的费用。云提供商不会根据您在该计算机中使用的内存量向您收费。它们仅根据您使用实例的时间收费。因此，将初始堆大小设置为低于最大堆大小不会节省成本。</p> <h3>结论</h3> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在配置线程池或连接池时，将初始堆大小配置为小于最大堆大小是有意义的。在这些资源中，过度分配会产生不必要的影响，但是，内存并非如此。因此，如果要构建企业应用程序，强烈建议将初始堆大小和最大堆大小设置为相同的值。</p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-30524.htm">上海地区宠物领养微信群号查询平台（上海宠物领养救助基地是真的吗）</a></p>
+                                        <p>下一个：<a href="/news/article-30988.htm">动物疫苗空瓶回收处理制度（疫苗空瓶回收登记表怎么填写）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-10-13-share-windows-nekoray.htm" title="「10月13日」最高速度22.5M/S，2024年NekoRay每天更新免费节点订阅链接">「10月13日」最高速度22.5M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-23521.htm" title="新疆养狗基地（新疆大型犬基地）">新疆养狗基地（新疆大型犬基地）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-27-shadowrocket-node.htm" title="「8月27日」最高速度22.2M/S，2024年NekoRay每天更新免费节点订阅链接">「8月27日」最高速度22.2M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-30-free-node-subscribe-links.htm" title="「10月30日」最高速度21M/S，2024年NekoRay每天更新免费节点订阅链接">「10月30日」最高速度21M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-3-free-nekoray.htm" title="「9月3日」最高速度22.1M/S，2024年NekoRay每天更新免费节点订阅链接">「9月3日」最高速度22.1M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-27245.htm" title="java springMVC之@RequestMapping注解">java springMVC之@RequestMapping注解</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-19-windows-nekoray.htm" title="「8月19日」最高速度19.6M/S，2024年NekoRay每天更新免费节点订阅链接">「8月19日」最高速度19.6M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-11-windows-nekoray.htm" title="「11月11日」最高速度19.8M/S，2024年NekoRay每天更新免费节点订阅链接">「11月11日」最高速度19.8M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-7-26-free-nekoray-node.htm" title="「7月26日」最高速度19.7M/S，2024年NekoRay每天更新免费节点订阅链接">「7月26日」最高速度19.7M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-15-linux-nekoray.htm" title="「11月15日」最高速度21M/S，2024年NekoRay每天更新免费节点订阅链接">「11月15日」最高速度21M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">75</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-08/" title="2024-08 归档">2024-08</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">27</span> <a href="/date/2024-07/" title="2024-07 归档">2024-07</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">4</span> <a href="/date/2024-06/" title="2024-06 归档">2024-06</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+        <!-- Copyright Start -->
+    <div class="container-fluid copyright py-4">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-md-0">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                    <span class="text-white">NekoRayNode节点订阅站 版权所有 Powered by WordPress</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright End -->
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary btn-lg-square back-to-top"><i class="fa fa-arrow-up"></i></a>
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/easing/easing.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/lightbox/js/lightbox.min.js"></script>
+    <!-- Template Javascript -->
+    <script src="/assets/website/js/frontend/nekoraynode/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

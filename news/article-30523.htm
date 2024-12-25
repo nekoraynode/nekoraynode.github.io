@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://nekoraynode.github.io/news/article-30523.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Hadoop核心架构与安装_在线工具</title>
+        <meta name="description" content="Hadoop是什么 大白话，Hadoop是个存储数据，计算数据的分布式框架。核心组件是HDFS、MapReduce、Yarn。 HDFS：分布式存储 MapReduce：分布式计算 Yarn：调度Ma" />
+        <link rel="icon" href="/assets/website/img/nekoraynode/favicon.ico" type="image/x-icon"/>
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <!-- Libraries Stylesheet -->
+    <link href="__ADDON__/js/frontend/nekoraynode/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6TD6QHWW6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6TD6QHWW6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid p-0">
+                <nav class="navbar navbar-expand-lg fixed-top navbar-light px-4 px-lg-5 py-3 py-lg-0">
+            <a href="/" class="navbar-brand p-0">
+                                <span class="display-6 text-primary m-0">
+                    <i class="fas fa-envelope me-3"></i>NekoRay Node
+                </span>
+                            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                                        <a href="/" class="nav-item nav-link">首页</a>
+                                        <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                        <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                        <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                        <a href="#" class="nav-item nav-link">关于</a>
+                    <a href="#" class="nav-item nav-link">联系</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar & Hero End -->
+    <!-- Header Start -->
+    <div class="container-fluid bg-breadcrumb">
+        <ul class="breadcrumb-animation">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="container text-center py-5" style="max-width: 900px;">
+            <h3 class="display-3 mb-4 wow fadeInDown" data-wow-delay="0.1s">Hadoop核心架构与安装_在线工具</h1>
+                <ol class="breadcrumb justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+                    <li class="breadcrumb-item"><a href="/">首页</a></li>
+                    <li class="breadcrumb-item"><a href="/news/">新闻资讯</a></li>
+                    <li class="breadcrumb-item active text-primary">正文</li>
+                </ol>
+        </div>
+    </div>
+    <!-- Header End -->
+    <!-- About Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<h2>Hadoop是什么</h2> <p>大白话，Hadoop是个存储数据，计算数据的分布式框架。核心组件是HDFS、MapReduce、Yarn。</p> <p><em><strong>HDFS</strong></em>：分布式存储</p> <p><em><strong>MapReduce</strong></em>：分布式计算</p> <p><em><strong>Yarn</strong></em>：调度MapReduce</p> <p>现在为止我们知道了HDFS、MapReduce、Yarn是干啥的，下面通过一张图再来看看他的整体架构。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/043979a330fe58d57fa687055bef84f7.jpg" alt="Hadoop核心架构与安装_在线工具"></p> <h2>HDFS</h2> <p>HDFS是Hadoop的存储系统，将庞大的数据存储在多台机器上，并通过数据副本冗余实现容错。HDFS两大核心组件是NameNode与DataNode。</p> <p><em><strong>NameNode</strong></em>：管理文件命名空间元数据；实现文件命名、打开关闭操作</p> <p><em><strong>SecondaryNameNode</strong></em>：帮助NameNode实现log与数据快照的合并</p> <p><em><strong>DataNode</strong></em>：根据客户请求实现文件的读写</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/09801ce938bd92a7e50ec03206aa81ed.jpg" alt="Hadoop核心架构与安装_在线工具"></p> <h2>MapReduce</h2> <p>MapReduce是基于Java开发的分布式计算。包含重要的两部分，Map和Reduce。</p> <p><em><strong>Map</strong></em>：将数据转成键值对</p> <p><em><strong>Reduce</strong></em>：将Map的输出数据聚合减少</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/4763381642e6f02ca38bbb032e47ba58.jpg" alt="Hadoop核心架构与安装_在线工具"></p> <h2>Yarn</h2> <p>通过对集群资源的监控，调度MapReduce的任务。核心组件有ResourceManager、NodeManager、ApplicationMaster 和 Container。</p> <p><em><strong>ResourceManager</strong></em>：处理客户端请求；监控NodeManager与ApplicationMaster；调度资源。</p> <p><em><strong>NodeManager</strong></em>：管理节点资源；与ResourceManager ApplicationMaster交互。</p> <p><em><strong>ApplicationMaster</strong></em>：为程序申请资源并将资源分配给任务；任务监控。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/13ba2f4f4397b57709de74fef66ba192.jpg" alt="Hadoop核心架构与安装_在线工具"></p> <h2>安装Hadoop</h2> <h3>1.安装Jdk</h3> <p>下载<a title="https://www.oracle.com/java/technologies/downloads/" href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.oracle.com/java/technologies/downloads/"  target="_blank" rel="nofollow">https://www.oracle.com/java/technologies/downloads/</a></p> <p>解压</p> <div class="cnblogs_code"> <pre><span style="color: rgba(0, 0, 255, 1)">tar</span> -zxvf jdk-8u331-linux-x64.<span style="color: rgba(0, 0, 255, 1)">tar</span>.gz</pre> </div> <p>加入环境变量</p> <div class="cnblogs_code"> <pre><span style="color: rgba(0, 0, 255, 1)">vi</span> /etc/<span style="color: rgba(0, 0, 0, 1)">profile  #加入以下内容 JAVA_HOME</span>=/usr/local/java18/jdk1.<span style="color: rgba(128, 0, 128, 1)">8</span><span style="color: rgba(0, 0, 0, 1)">.0_331 JRE_HOME</span>=$JAVA_HOME/<span style="color: rgba(0, 0, 0, 1)">jre PATH</span>=$PATH:$JAVA_HOME/bin:$JRE_HOME/<span style="color: rgba(0, 0, 0, 1)">bin CLASSPATH</span>=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/<span style="color: rgba(0, 0, 0, 1)">lib export JAVA_HOME JRE_HOME PATH CLASSPATH</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">生效</span> source  /etc/profile</pre> </div> <p>验证java</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/bd0a09525bf87de32ec1872c67d6bfd0.jpg" alt="Hadoop核心架构与安装_在线工具"></p> <h3>2.安装伪分布式Hadoop</h3> <p>下载<a title="https://www.apache.org/dyn/closer.cgi/hadoop/common/hadoop-3.2.3/hadoop-3.2.3.tar.gz" href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.apache.org/dyn/closer.cgi/hadoop/common/hadoop-3.2.3/hadoop-3.2.3.tar.gz"  target="_blank" rel="nofollow">https://www.apache.org/dyn/closer.cgi/hadoop/common/hadoop-3.2.3/hadoop-3.2.3.tar.gz</a></p> <p>解压</p> <div class="cnblogs_code"> <pre><span style="color: rgba(0, 0, 255, 1)">tar</span> xzf hadoop-<span style="color: rgba(128, 0, 128, 1)">3.2</span>.<span style="color: rgba(128, 0, 128, 1)">3</span>.<span style="color: rgba(0, 0, 255, 1)">tar</span>.gz</pre> </div> <p>配置本机ssh</p> <div class="cnblogs_code"> <pre><span style="color: rgba(0, 0, 255, 1)">ssh-keygen</span> -t rsa -P<span style="color: rgba(128, 0, 0, 1)">''</span> -f ~/.<span style="color: rgba(0, 0, 255, 1)">ssh</span>/<span style="color: rgba(0, 0, 0, 1)">id_rsa</span><span style="color: rgba(0, 0, 255, 1)">cat</span> ~/.<span style="color: rgba(0, 0, 255, 1)">ssh</span>/id_rsa.pub &gt;&gt; ~/.<span style="color: rgba(0, 0, 255, 1)">ssh</span>/<span style="color: rgba(0, 0, 0, 1)">authorized_keys</span><span style="color: rgba(0, 0, 255, 1)">chmod</span><span style="color: rgba(128, 0, 128, 1)">0600</span> ~/.<span style="color: rgba(0, 0, 255, 1)">ssh</span>/authorized_keys</pre> </div> <p>配置Hadoop环境变量</p> <div class="cnblogs_code"> <pre><span style="color: rgba(0, 0, 255, 1)">cat</span> etc/hadoop/hadoop-<span style="color: rgba(0, 0, 255, 1)">env</span>.<span style="color: rgba(0, 0, 255, 1)">sh<br/><br/></span><span style="color: rgba(0, 0, 0, 1)"> export JAVA_HOME</span>=/usr/local/java/jdk1.<span style="color: rgba(128, 0, 128, 1)">8</span></pre> </div> <p>配置hdfs地址</p> <div class="cnblogs_code"> <pre><span style="color: rgba(0, 0, 255, 1)">cat</span> etc/hadoop/core-<span style="color: rgba(0, 0, 0, 1)">site.xml</span>&lt;property&gt;         &lt;name&gt;fs.defaultFS&lt;/name&gt;         &lt;value&gt;hdfs:<span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">localhost:9000&lt;/value&gt;</span>     &lt;/property&gt;</pre> </div> <p>配置hafs分片数</p> <div class="cnblogs_code"> <pre><span style="color: rgba(0, 0, 255, 1)">cat</span> etc/hadoop/hdfs-<span style="color: rgba(0, 0, 0, 1)">site.xml<br/></span>&lt;property&gt;         &lt;name&gt;dfs.replication&lt;/name&gt;         &lt;value&gt;<span style="color: rgba(128, 0, 128, 1)">1</span>&lt;/value&gt;     &lt;/property&gt;</pre> </div> <div class="okr-block-clipboard" data-okr="%7B%22okrDelta%22%3A%5B%7B%22lineType%22%3A%22text%22%2C%22lineOptions%22%3A%7B%7D%2C%22lineContent%22%3A%5B%7B%22opType%22%3A%22text%22%2C%22options%22%3A%7B%22text%22%3A%22%2Fetc%2Fprofile%22%7D%7D%5D%7D%5D%2C%22businessKey%22%3A%22lark-doc%22%7D"></div> <div data-zone-id="0" data-line-index="0">/etc/profile新增hadoop环境变量</div> <div data-zone-id="0" data-line-index="0"> <div class="cnblogs_code"> <pre>export HADOOP_HOME=/usr/local/hadoop/hadoop-<span style="color: rgba(128, 0, 128, 1)">3.2</span>.<span style="color: rgba(128, 0, 128, 1)">3</span><span style="color: rgba(0, 0, 0, 1)"> export HADOOP_MAPRED_HOME</span>=<span style="color: rgba(0, 0, 0, 1)">$HADOOP_HOME export HADOOP_COMMON_HOME</span>=<span style="color: rgba(0, 0, 0, 1)">$HADOOP_HOME export HADOOP_HDFS_HOME</span>=<span style="color: rgba(0, 0, 0, 1)">$HADOOP_HOME export YARN_HOME</span>=<span style="color: rgba(0, 0, 0, 1)">$HADOOP_HOME export HADOOP_COMMON_LIB_NATIVE_DIR</span>=$HADOOP_HOME/lib/<span style="color: rgba(0, 0, 0, 1)">native export PATH</span>=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/<span style="color: rgba(0, 0, 0, 1)">bin export HADOOP_INSTALL</span>=<span style="color: rgba(0, 0, 0, 1)">$HADOOP_HOME export HADOOP_CLASSPATH</span>=${JAVA_HOME}/lib/<span style="color: rgba(0, 0, 0, 1)">tools.jar</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">生效</span> source /etc/profile</pre> </div> <p>配置mapreduce</p> <div class="cnblogs_code"> <pre><span style="color: rgba(0, 0, 255, 1)">vi</span> etc/hadoop/mapred-<span style="color: rgba(0, 0, 0, 1)">site.xml</span>&lt;configuration&gt;     &lt;property&gt;         &lt;name&gt;mapreduce.framework.name&lt;/name&gt;         &lt;value&gt;yarn&lt;/value&gt;     &lt;/property&gt;     &lt;property&gt;         &lt;name&gt;mapreduce.application.classpath&lt;/name&gt;         &lt;value&gt;$HADOOP_MAPRED_HOME/share/hadoop/mapreduce<span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)">:$HADOOP_MAPRED_HOME/share/hadoop/mapreduce/lib/*&lt;/value&gt;     &lt;/property&gt; &lt;/configuration&gt;</span></pre> </div> <p>配置yarn</p> <div class="cnblogs_code"> <pre><span style="color: rgba(0, 0, 255, 1)">vi</span> etc/hadoop/yarn-<span style="color: rgba(0, 0, 0, 1)">site.xml</span>&lt;configuration&gt;     &lt;property&gt;         &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;         &lt;value&gt;mapreduce_shuffle&lt;/value&gt;     &lt;/property&gt;     &lt;property&gt;         &lt;name&gt;yarn.nodemanager.<span style="color: rgba(0, 0, 255, 1)">env</span>-whitelist&lt;/name&gt;         &lt;value&gt;JAVA_HOME,HADOOP_COMMON_HOME,HADOOP_HDFS_HOME,HADOOP_CONF_DIR,CLASSPATH_PREPEND_DISTCACHE,HADOOP_YARN_HOME,HADOOP_HOME,PATH,LANG,TZ,HADOOP_MAPRED_HOME&lt;/value&gt;     &lt;/property&gt; &lt;/configuration&gt;</pre> </div> <p>配置相关user</p> <div class="cnblogs_code"> <pre><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">将sbin/start-dfs.sh，sbin/stop-dfs.sh两个文件顶部添加以下参数</span><span style="color: rgba(0, 0, 0, 1)"> HDFS_DATANODE_USER</span>=<span style="color: rgba(0, 0, 0, 1)">root HADOOP_SECURE_DN_USER</span>=<span style="color: rgba(0, 0, 0, 1)">hdfs HDFS_NAMENODE_USER</span>=<span style="color: rgba(0, 0, 0, 1)">root HDFS_SECONDARYNAMENODE_USER</span>=<span style="color: rgba(0, 0, 0, 1)">root</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">将sbin/start-yarn.sh，sbin/stop-yarn.sh顶部也需添加以下</span><span style="color: rgba(0, 0, 0, 1)"> YARN_RESOURCEMANAGER_USER</span>=<span style="color: rgba(0, 0, 0, 1)">root HADOOP_SECURE_DN_USER</span>=<span style="color: rgba(0, 0, 0, 1)">yarn YARN_NODEMANAGER_USER</span>=root</pre> </div> <p>初始化hdfs</p> <div class="cnblogs_code"> <pre>bin/hdfs namenode -format</pre> </div> <p>启动yarn</p> <div class="cnblogs_code"> <pre>sbin/start-yarn.<span style="color: rgba(0, 0, 255, 1)">sh</span></pre> </div> <p>通过jps查看启动的进程</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/9c3a433e8ddd366356c2ebc546174c49.jpg" alt="Hadoop核心架构与安装_在线工具"></p> <p>&nbsp;启动hdfs</p> <div class="cnblogs_code"> <pre>sbin/start-dfs.<span style="color: rgba(0, 0, 255, 1)">sh</span></pre> </div> <p>通过jps查看进程</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/513f9b00c06372211310ceb8b0f3d5dc.jpg" alt="Hadoop核心架构与安装_在线工具"></p> <p>访问hadoopui验证安装是否成功</p> <p>http://192.168.43.50:9870/dfshealth.html#tab-overview</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/5fdd707b2bb7de8f93b92df498ff6f48.jpg" alt="Hadoop核心架构与安装_在线工具"></p> <p>访问集群ui</p> <p>http://192.168.43.50:8088/cluster/cluster</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/06be60bc4901fedcd4ae93a725ecbff5.jpg" alt="Hadoop核心架构与安装_在线工具"></p> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-29843.htm">兽药生产厂家排名（兽药生产企业排名）</a></p>
+                                        <p>下一个：<a href="/news/article-30524.htm">上海地区宠物领养微信群号查询平台（上海宠物领养救助基地是真的吗）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-6-27-clash-node.htm" title="「6月27日」最高速度18.7M/S，2024年NekoRay每天更新免费节点订阅链接">「6月27日」最高速度18.7M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-25384.htm" title="动物疫苗属于什么行业类别的（动物疫苗概念的上市公司）">动物疫苗属于什么行业类别的（动物疫苗概念的上市公司）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-1-node-share.htm" title="「8月1日」最高速度21.6M/S，2024年NekoRay每天更新免费节点订阅链接">「8月1日」最高速度21.6M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-7-node-share-links.htm" title="「9月7日」最高速度19.1M/S，2024年NekoRay每天更新免费节点订阅链接">「9月7日」最高速度19.1M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-20316.htm" title="瑞派宠物医院分布（瑞派宠物医院在哪）">瑞派宠物医院分布（瑞派宠物医院在哪）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-7-23-node-share.htm" title="「7月23日」最高速度22.3M/S，2024年NekoRay每天更新免费节点订阅链接">「7月23日」最高速度22.3M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-14-linux-nekoray-node.htm" title="「11月14日」最高速度18M/S，2024年NekoRay每天更新免费节点订阅链接">「11月14日」最高速度18M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-27705.htm" title="基于vue-seamless-scroll实现无缝滚动效果_vue.js">基于vue-seamless-scroll实现无缝滚动效果_vue.js</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-3-free-nekoray.htm" title="「8月3日」最高速度20.2M/S，2024年NekoRay每天更新免费节点订阅链接">「8月3日」最高速度20.2M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-24-shadowrocket-node.htm" title="「10月24日」最高速度19.3M/S，2024年NekoRay每天更新免费节点订阅链接">「10月24日」最高速度19.3M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">75</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-08/" title="2024-08 归档">2024-08</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">27</span> <a href="/date/2024-07/" title="2024-07 归档">2024-07</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">4</span> <a href="/date/2024-06/" title="2024-06 归档">2024-06</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+        <!-- Copyright Start -->
+    <div class="container-fluid copyright py-4">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-md-0">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                    <span class="text-white">NekoRayNode节点订阅站 版权所有 Powered by WordPress</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright End -->
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary btn-lg-square back-to-top"><i class="fa fa-arrow-up"></i></a>
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/easing/easing.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/lightbox/js/lightbox.min.js"></script>
+    <!-- Template Javascript -->
+    <script src="/assets/website/js/frontend/nekoraynode/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
