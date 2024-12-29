@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://nekoraynode.github.io/news/article-32895.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>SpringMVC+Log4j配置定时生成、删除日志</title>
+        <meta name="description" content="SpringMVC+Log4j配置定时生成、删除日志  SpringMVC开启定时任务   配置SpringMVC.xml 配置log4j.properties 定时任务执行类 shell脚本    " />
+        <link rel="icon" href="/assets/website/img/nekoraynode/favicon.ico" type="image/x-icon"/>
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <!-- Libraries Stylesheet -->
+    <link href="__ADDON__/js/frontend/nekoraynode/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6TD6QHWW6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6TD6QHWW6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid p-0">
+                <nav class="navbar navbar-expand-lg fixed-top navbar-light px-4 px-lg-5 py-3 py-lg-0">
+            <a href="/" class="navbar-brand p-0">
+                                <span class="display-6 text-primary m-0">
+                    <i class="fas fa-envelope me-3"></i>NekoRay Node
+                </span>
+                            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                                        <a href="/" class="nav-item nav-link">首页</a>
+                                        <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                        <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                        <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                        <a href="#" class="nav-item nav-link">关于</a>
+                    <a href="#" class="nav-item nav-link">联系</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar & Hero End -->
+    <!-- Header Start -->
+    <div class="container-fluid bg-breadcrumb">
+        <ul class="breadcrumb-animation">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="container text-center py-5" style="max-width: 900px;">
+            <h3 class="display-3 mb-4 wow fadeInDown" data-wow-delay="0.1s">SpringMVC+Log4j配置定时生成、删除日志</h1>
+                <ol class="breadcrumb justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+                    <li class="breadcrumb-item"><a href="/">首页</a></li>
+                    <li class="breadcrumb-item"><a href="/news/">新闻资讯</a></li>
+                    <li class="breadcrumb-item active text-primary">正文</li>
+                </ol>
+        </div>
+    </div>
+    <!-- Header End -->
+    <!-- About Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="markdown_views prism-tomorrow-night"> <div class="toc"> <h3>SpringMVC+Log4j配置定时生成、删除日志</h3> <ul> <li><a href="#SpringMVC_2" rel="nofollow">SpringMVC开启定时任务</a></li> <li> <ul> <li><a href="#SpringMVCxml_4" rel="nofollow">配置SpringMVC.xml</a></li> <li><a href="#log4jproperties_19" rel="nofollow">配置log4j.properties</a></li> <li><a href="#_56" rel="nofollow">定时任务执行类</a></li> <li><a href="#shell_98" rel="nofollow">shell脚本</a></li> </ul> </li> </ul> </div> </h1> <blockquote> <p>建议开发者不要养成面向百度编程的习惯，可以参考，但是一定要知道利用官方文档<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://logging.apache.org/log4j/2.x/manual/appenders.html#ConsoleAppender"  rel="nofollow">log4j官方文档</a></p> </blockquote> <h2><a id="SpringMVCxml_4" rel="nofollow"></a>配置SpringMVC.xml</h2> <pre><code>xmlns:task="http://www.springframework.org/schema/task" http://www.springframework.org/schema/task   http://www.springframework.org/schema/task/spring-task-3.2.xsd</code></pre> <pre><code>    // 扫描包配置     &lt;context:component-scan 		base-package="com.carson.test.controller" /&gt; 	&lt;context:component-scan 	// 开启定时任务注解配置 	&lt;task:annotation-driven /&gt;</code></pre> <h2><a id="log4jproperties_19" rel="nofollow"></a>配置log4j.properties</h2> <blockquote></blockquote> <pre><code># rootLogger 第一参数为日志级别, 其后参数为日志载体 # 定义日志级别为INFO，那debug级别的日志将不会被打印出来，stdout、I、E可以任意但必须和后面配置的名称对应 # OFF&gt;FATAL&gt;ERROR&gt;WARN&gt;INFO&gt;DEBUG&gt;ALL log4j.rootLogger=INFO,stdout,I,E   #定义日志输出目的地为控制台 log4j.appender.stdout=org.apache.log4j.ConsoleAppender log4j.appender.stdout.Target=System.out log4j.appender.stdout.Threshold=DEBUG log4j.appender.stdout.layout=org.apache.log4j.PatternLayout log4j.appender.stdout.layout.ConversionPattern=[%-5p] %d{yyyy-MM-dd HH:mm:ss,SSS} method: %l%n%m%n   # 定义日志输出到文件 按时间划分日志文件，超过200MB重新生成另一个文件，原来文件名称由"xxx.log" -&gt; "xxx.log1" # info log4j.appender.I=org.apache.log4j.DailyRollingFileAppender log4j.appender.I.File=/Users/ksmasterasy/Desktop/logs/info/info.log log4j.appender.I.Append=false log4j.appender.I.Threshold=INFO log4j.appender.I.layout=org.apache.log4j.PatternLayout log4j.appender.I.DatePattern ='_'yyyy-MM-dd'.log' log4j.appender.I.MaxFileSize=200MB log4j.appender.I.layout.ConversionPattern=%-d{yyyy-MM-dd HH:mm:ss} - [%p]-[%l] %m%n # error log4j.appender.E=org.apache.log4j.DailyRollingFileAppender log4j.appender.E.File=/Users/ksmasterasy/Desktop/logs/error/error.log log4j.appender.E.Append=false log4j.appender.E.Threshold=ERROR log4j.appender.E.layout=org.apache.log4j.PatternLayout log4j.appender.E.DatePattern ='_'yyyy-MM-dd'.log' log4j.appender.E.MaxFileSize=200MB log4j.appender.E.layout.ConversionPattern=%-d{yyyy-MM-dd HH:mm:ss} - [%p][%l] %m%n</code></pre> <h2><a id="_56" rel="nofollow"></a>定时任务执行类</h2> <blockquote> <p>该类配在了controller包目录下，原因参考上面配置的springmvc配置文件</p> </blockquote> <pre><code>@Component public class ScheduleTask {  	private static final Logger log = Logger.getLogger(ScheduleTask.class); 	// 脚本路径 	private static String SHELL_FILE_DIR = "/usr/local/shell/"; 	// 脚本名称 	private static String FILE_NAME = "auto_del_log.sh"; 	 	/** 	 * @Description: 每天检查一次，每次删除30天以前产生的日志（待优化，删除时间间隔可以通过代码传参数） 	 */     //	@Scheduled(cron = "0/10 * * * * ?")  开发测试配置10s执行一次 	// 每月10号9点执行任务 	@Scheduled(cron = "0 15 9 10 * ?")   	public void work() throws Exception { 		log.info("执行删除日志shell脚本..."); 		String shellPath = SHELL_FILE_DIR +FILE_NAME; 		LinuxCommandUtil linuxCommandUtil = new LinuxCommandUtil(); 		// 返回值为0，说明命令执行成功，为1删除info日志出现错误，为2说明删除error日志错误 		int res = linuxCommandUtil.executeCommand(shellPath); 		log.info(String.format("执行删除日志shell脚本结果：%d", res));		 	} }</code></pre> <p>LinuxCommandUtil是执行shell脚本命令的封装类，如果想简单省事的话，可以直接在服务器编写脚本，crontab -e配置定时任务，也是一样的，都是一个道理，如果强迫症非要用代码实现，可以用以下代码替代，实质上LinuxCommandUtil就是对这个命令进行的封装</p> <pre><code>// 更改脚本读写执行权限的linux命令 String permissionStr = "chmod 777 " + SHELL_FILE_DIR + FILE_NAME; // 执行上述命令 Process process = Runtime.getRuntime().exec(permissionStr); // 脚本执行之后exit返回的预期值 int status = process.waitFor(); // 执行脚本命令 String cmdStr = "bash  " + SHELL_FILE_DIR + FILE_NAME; // 执行上述命令 Process process = Runtime.getRuntime().exec(cmdStr);</code></pre> <h2><a id="shell_98" rel="nofollow"></a>shell脚本</h2> <blockquote> <p>我编写shell脚本暂时不是很熟练，写的很浅显不规范，虽然能用，但我不能接受,后续优化了之后会改进，至少达到代码规范，灵活变参</p> </blockquote> <pre><code># aoto del xxx day ago logfile # 参数个数是否为3 if [ $# -ne 3 ] then     echo $1     echo $2     echo $3     exit 100 fi # 文件路径、时间限制变量赋值 FILE_PATH_INFO=$1 FILE_PATH_ERROR=$2 TIME_LIMIT=$3 # 删除FILE_PATH_INFO目录下30天以前的、以.out格式结尾的文件 find FILE_PATH_INFO -mtime +30 -name "*.out" -exec rm -rf {} \; # 上述命令执行是否成功 if [ $? -ne 0 ] then         exit 1 fi # 删除FILE_PATH_INFO目录下30天以前的、以.out格式结尾的文件 find FILE_PATH_ERROR -mtime +30 -name "*.out" -exec rm -rf {} \; # 上述命令执行是否成功 if [ $? -ne 0 ] then         exit 2 fi exit 0</code></pre> <p><strong>最后也是希望大家能多提意见，不管的好的意见或者批评的话语都可以的，你如果有什么疑惑可以留言我会在1小时之内尽快为你解答，或者发邮件ksmasterasy@icloud.com我都能及时收到消息，也是希望大家能够多交流意见。</strong></p> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-32417.htm">宠物粮食加工厂设备哪的好一点呢视频教程（宠物粮食加工厂设备哪的好一点呢视频教程）</a></p>
+                                        <p>下一个：<a href="/news/article-32897.htm">宠物领养APP信息架构设计（宠物领养软件下载）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-29843.htm" title="兽药生产厂家排名（兽药生产企业排名）">兽药生产厂家排名（兽药生产企业排名）</a></li>
+                        <li class="py-2"><a href="/news/article-28164.htm" title="Mac安装Kubernetes-minikube专治各种坑">Mac安装Kubernetes-minikube专治各种坑</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-23-node-share-links.htm" title="「8月23日」最高速度19M/S，2024年NekoRay每天更新免费节点订阅链接">「8月23日」最高速度19M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-5-node-share.htm" title="「9月5日」最高速度19.3M/S，2024年NekoRay每天更新免费节点订阅链接">「9月5日」最高速度19.3M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-7-6-free-clash-subscribe.htm" title="「7月6日」最高速度21.3M/S，2024年NekoRay每天更新免费节点订阅链接">「7月6日」最高速度21.3M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-6-windows-nekoray.htm" title="「12月6日」最高速度22.4M/S，2024年NekoRay每天更新免费节点订阅链接">「12月6日」最高速度22.4M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-31936.htm" title="python——json，dict之间的转换load,dump, loads, dumps">python——json，dict之间的转换load,dump, loads, dumps</a></li>
+                        <li class="py-2"><a href="/news/article-26317.htm" title="猫打疫苗到底是几针（猫打几针疫苗?）">猫打疫苗到底是几针（猫打几针疫苗?）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-6-free-node-subscribe.htm" title="「11月6日」最高速度19.3M/S，2024年NekoRay每天更新免费节点订阅链接">「11月6日」最高速度19.3M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-7-9-free-clash.htm" title="「7月9日」最高速度19.8M/S，2024年NekoRay每天更新免费节点订阅链接">「7月9日」最高速度19.8M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">87</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-08/" title="2024-08 归档">2024-08</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">27</span> <a href="/date/2024-07/" title="2024-07 归档">2024-07</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">4</span> <a href="/date/2024-06/" title="2024-06 归档">2024-06</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+        <!-- Copyright Start -->
+    <div class="container-fluid copyright py-4">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-md-0">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                    <span class="text-white">NekoRayNode节点订阅站 版权所有 Powered by WordPress</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright End -->
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary btn-lg-square back-to-top"><i class="fa fa-arrow-up"></i></a>
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/easing/easing.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/lightbox/js/lightbox.min.js"></script>
+    <!-- Template Javascript -->
+    <script src="/assets/website/js/frontend/nekoraynode/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
