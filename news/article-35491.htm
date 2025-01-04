@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://nekoraynode.github.io/news/article-35491.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>自动类型安全的REST.NET标准库refit_实用技巧</title>
+        <meta name="description" content="目录  1.简介 2.API属性 3.动态查询字符串参数(Dynamic Querystring Parameters) 4.集合作为查询字符串参数(Collections as Querystrin" />
+        <link rel="icon" href="/assets/website/img/nekoraynode/favicon.ico" type="image/x-icon"/>
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <!-- Libraries Stylesheet -->
+    <link href="__ADDON__/js/frontend/nekoraynode/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6TD6QHWW6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6TD6QHWW6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid p-0">
+                <nav class="navbar navbar-expand-lg fixed-top navbar-light px-4 px-lg-5 py-3 py-lg-0">
+            <a href="/" class="navbar-brand p-0">
+                                <span class="display-6 text-primary m-0">
+                    <i class="fas fa-envelope me-3"></i>NekoRay Node
+                </span>
+                            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                                        <a href="/" class="nav-item nav-link">首页</a>
+                                        <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                        <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                        <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                        <a href="#" class="nav-item nav-link">关于</a>
+                    <a href="#" class="nav-item nav-link">联系</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar & Hero End -->
+    <!-- Header Start -->
+    <div class="container-fluid bg-breadcrumb">
+        <ul class="breadcrumb-animation">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="container text-center py-5" style="max-width: 900px;">
+            <h3 class="display-3 mb-4 wow fadeInDown" data-wow-delay="0.1s">自动类型安全的REST.NET标准库refit_实用技巧</h1>
+                <ol class="breadcrumb justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+                    <li class="breadcrumb-item"><a href="/">首页</a></li>
+                    <li class="breadcrumb-item"><a href="/news/">新闻资讯</a></li>
+                    <li class="breadcrumb-item active text-primary">正文</li>
+                </ol>
+        </div>
+    </div>
+    <!-- Header End -->
+    <!-- About Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="navCategory"> <h5 class="catalogue">目录</h5> <ul class="first_class_ul"> <li><a href="#_label0" rel="nofollow">1.简介</a></li> <li><a href="#_label1" rel="nofollow">2.API属性</a></li> <li><a href="#_label2" rel="nofollow">3.动态查询字符串参数(Dynamic Querystring Parameters)</a></li> <li><a href="#_label3" rel="nofollow">4.集合作为查询字符串参数(Collections as Querystring Parameters)</a></li> <li><a href="#_label4" rel="nofollow">5.转义符查询字符串参数(Unescape Querystring Parameters)</a></li> <li><a href="#_label5" rel="nofollow">6.Body内容</a></li> <ul class="second_class_ul"> <li><a href="#_lab2_5_0" rel="nofollow">6.1.JSON内容</a></li> <li><a href="#_lab2_5_1" rel="nofollow">6.2XML内容</a></li> <li><a href="#_lab2_5_2" rel="nofollow">6.3.表单发布(Form posts)</a></li> </ul> <li><a href="#_label6" rel="nofollow">7.设置请求头</a></li> <ul class="second_class_ul"> <li><a href="#_lab2_6_3" rel="nofollow">7.1静态头(Static headers)</a></li> <li><a href="#_lab2_6_4" rel="nofollow">7.2动态头(Dynamic headers)</a></li> <li><a href="#_lab2_6_5" rel="nofollow">7.3授权(动态头redux)</a></li> </ul> </ul> </div> <p class="maodian"><a name="_label0" rel="nofollow"></a></p> <h2>1.简介</h2> <p>Refit是一个受到Square的Retrofit库（Java）启发的自动类型安全REST库。通过HttpClient网络请求(POST，GET,PUT，DELETE等封装)把REST API返回的数据转化为POCO(Plain Ordinary C# Object,简单C#对象) to JSON。我们的应用程序通过Refit请求网络，实际上是使用Refit接口层封装请求参数、Header、Url等信息，之后由HttpClient完成后续的请求操作，在服务端返回数据之后，HttpClient将原始的结果交给Refit，后者根据用户的需求对结果进行解析的过程。安装组件命令行：</p> <div class="ay1code"> <pre class="brush:ps;">Install-Package refit</pre> </div> <p>代码例子：</p> <div class="ay1code"> <pre class="brush:csharp;">[Headers("User-Agent: Refit Integration Tests")]//这里因为目标源是GitHubApi，所以一定要加入这个静态请求标头信息，让其这是一个测试请求，不然会返回数据异常。  public interface IGitHubApi  {      [Get("/users/{user}")]      Task&lt;User&gt; GetUser(string user);  }  public class GitHubApi  {      public async Task&lt;User&gt; GetUser()      {          var gitHubApi = RestService.For&lt;IGitHubApi&gt;("https://api.github.com");          var octocat = await gitHubApi.GetUser("octocat");          return octocat;      }  }  public class User  {      public string login { get; set; }      public int? id { get; set; }      public string url { get; set; }  }  [HttpGet]  public async Task&lt;ActionResult&lt;IEnumerable&lt;string&gt;&gt;&gt; Get()  {      var result = await new GitHubApi().GetUser();      return new string[] { result.id.Value.ToString(), result.login };  }</pre> </div> <p>注：接口中Headers、Get这些属性叫做Refit的特性。<br />定义上面的一个IGitHubApi的REST API接口，该接口定义了一个函数GetUser，该函数会通过HTTP GET请求去访问服务器的/users/{user}路径把返回的结果封装为User POCO对象并返回。其中URL路径中的{user}的值为GetUser函数中的参数user的取值，这里赋值为octocat。然后通过RestService类来生成一个IGitHubApi接口的实现并供HttpClient调用。</p> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220424/99db6a6059160d1d39dc44668c8711ae.jpg"></p> <p class="maodian"><a name="_label1" rel="nofollow"></a></p> <h2>2.API属性</h2> <p>每个方法必须具有提供请求URL和HTTP属性。HTTP属性有六个内置注释：Get, Post, Put, Delete, Patch and Head，例：</p> <div class="ay1code"> <pre class="brush:csharp;">[Get("/users/list")]</pre> </div> <p>您还可以在请求URL中指定查询参数：</p> <div class="ay1code"> <pre class="brush:csharp;">[Get("/users/list?sort=desc")]</pre> </div> <p>还可以使用相对URL上的替换块和参数来动态请求资源。替换块是由{and，即&amp;}包围的字母数字字符串。如果参数名称与URL路径中的名称不匹配，请使用AliasAs属性，例：</p> <div class="ay1code"> <pre class="brush:csharp;">[Get("/group/{id}/users")]  Task&lt;List&lt;User&gt;&gt; GroupList([AliasAs("id")] int groupId);</pre> </div> <p>请求URL还可以将替换块绑定到自定义对象，例：</p> <div class="ay1code"> <pre class="brush:csharp;">[Get("/group/{request.groupId}/users/{request.userId}")]  Task&lt;List&lt;User&gt;&gt; GroupList(UserGroupRequest request);  class UserGroupRequest{      int groupId { get;set; }      int userId { get;set; }  }</pre> </div> <p>未指定为URL替换的参数将自动用作查询参数。这与Retrofit不同，在Retrofit中，必须明确指定所有参数，例：</p> <div class="ay1code"> <pre class="brush:csharp;">[Get("/group/{id}/users")]  Task&lt;List&lt;User&gt;&gt; GroupList([AliasAs("id")] int groupId, [AliasAs("sort")] string sortOrder);  GroupList(4, "desc");</pre> </div> <p>输出结果："/group/4/users?sort=desc"</p> <p class="maodian"><a name="_label2" rel="nofollow"></a></p> <h2>3.动态查询字符串参数(Dynamic Querystring Parameters)</h2> <p>方法还可以传递自定义对象，把对象属性追加到查询字符串参数当中，例如：</p> <div class="ay1code"> <pre class="brush:csharp;">public class MyQueryParams  {      [AliasAs("order")]      public string SortOrder { get; set; }      public int Limit { get; set; }  }  [Get("/group/{id}/users")]  Task&lt;List&lt;User&gt;&gt; GroupList([AliasAs("id")] int groupId, MyQueryParams params);  [Get("/group/{id}/users")]  Task&lt;List&lt;User&gt;&gt; GroupListWithAttribute([AliasAs("id")] int groupId, [Query(".","search")]MyQueryParams params);  params.SortOrder = "desc";  params.Limit = 10;  GroupList(4, params)</pre> </div> <p>输出结果："/group/4/users?order=desc&amp;Limit=10"</p> <div class="ay1code"> <pre class="brush:csharp;">GroupListWithAttribute(4, params)</pre> </div> <p>输出结果："/group/4/users?search.order=desc&amp;search.Limit=10"<br />您还可以使用[Query]指定querystring参数，并将其在非GET请求中扁平化，类似于：</p> <div class="ay1code"> <pre class="brush:csharp;">[Post("/statuses/update.json")]  Task&lt;Tweet&gt; PostTweet([Query]TweetParams params);</pre> </div> <p class="maodian"><a name="_label3" rel="nofollow"></a></p> <h2>4.集合作为查询字符串参数(Collections as Querystring Parameters)</h2> <p>方法除了支持传递自定义对象查询，还支持集合查询的，例：</p> <div class="ay1code"> <pre class="brush:csharp;">[Get("/users/list")]  Task Search([Query(CollectionFormat.Multi)]int[] ages);  Search(new [] {10, 20, 30})</pre> </div> <p>输出结果："/users/list?ages=10&amp;ages=20&amp;ages=30"</p> <div class="ay1code"> <pre class="brush:csharp;">[Get("/users/list")]  Task Search([Query(CollectionFormat.Csv)]int[] ages);  Search(new [] {10, 20, 30})</pre> </div> <p>输出结果："/users/list?ages=10%2C20%2C30"</p> <p class="maodian"><a name="_label4" rel="nofollow"></a></p> <h2>5.转义符查询字符串参数(Unescape Querystring Parameters)</h2> <p>使用QueryUriFormat属性指定查询参数是否应转义网址，例：</p> <div class="ay1code"> <pre class="brush:csharp;">[Get("/query")]  [QueryUriFormat(UriFormat.Unescaped)]  Task Query(string q);  Query("Select+Id,Name+From+Account")</pre> </div> <p>输出结果："/query?q=Select+Id,Name+From+Account"</p> <p class="maodian"><a name="_label5" rel="nofollow"></a></p> <h2>6.Body内容</h2> <p>通过使用Body属性，可以把自定义对象参数追加到HTTP请求Body当中。</p> <div class="ay1code"> <pre class="brush:csharp;">[Post("/users/new")]  Task CreateUser([Body] User user)</pre> </div> <p>根据参数的类型，提供Body数据有四种可能性：</p> <ul> <li>如果类型为Stream，则内容将通过StreamContent流形式传输。</li> <li>如果类型为string，则字符串将直接用作内容，除非[Body(BodySerializationMethod.Json)]设置了字符串，否则将其作为StringContent。</li> <li>如果参数具有属性[Body(BodySerializationMethod.UrlEncoded)]，则内容将被URL编码。</li> <li>对于所有其他类型，将使用RefitSettings中指定的内容序列化程序将对象序列化（默认为JSON）。</li> <li>缓冲和Content-Length头</li> </ul> <p>默认情况下，Refit重新调整流式传输正文内容而不缓冲它。例如，这意味着您可以从磁盘流式传输文件，而不会产生将整个文件加载到内存中的开销。这样做的缺点是没有在请求上设置内容长度头（Content-Length）。如果您的API需要您随请求发送一个内容长度头，您可以通过将[Body]属性的缓冲参数设置为true来禁用此流行为：</p> <div class="ay1code"> <pre class="brush:csharp;">Task CreateUser([Body(buffered: true)] User user);</pre> </div> <p class="maodian"><a name="_lab2_5_0" rel="nofollow"></a></p> <h3>6.1.JSON内容</h3> <p>使用Json.NET对JSON请求和响应进行序列化/反序列化。默认情况下，Refit将使用可以通过设置Newtonsoft.Json.JsonConvert.DefaultSettings进行配置的序列化器设置：</p> <div class="ay1code"> <pre class="brush:csharp;">JsonConvert.DefaultSettings =      () =&gt; new JsonSerializerSettings() {          ContractResolver = new CamelCasePropertyNamesContractResolver(),          Converters = {new StringEnumConverter()}      };  //Serialized as: {"day":"Saturday"}  await PostSomeStuff(new { Day = DayOfWeek.Saturday });</pre> </div> <p>由于默认静态配置是全局设置，它们将影响您的整个应用程序。有时候我们只想要对某些特定API进行设置，您可以选择使用RefitSettings属性，以允许您指定所需的序列化程序进行设置，这使您可以为单独的API设置不同的序列化程序设置：</p> <div class="ay1code"> <pre class="brush:csharp;">var gitHubApi = RestService.For&lt;IGitHubApi&gt;("https://api.github.com",      new RefitSettings {          ContentSerializer = new JsonContentSerializer(              new JsonSerializerSettings {                  ContractResolver = new SnakeCasePropertyNamesContractResolver()          }      )});  var otherApi = RestService.For&lt;IOtherApi&gt;("https://api.example.com",      new RefitSettings {          ContentSerializer = new JsonContentSerializer(              new JsonSerializerSettings {                  ContractResolver = new CamelCasePropertyNamesContractResolver()          }      )});</pre> </div> <p>还可以使用Json.NET的JsonProperty属性来自定义属性序列化/反序列化：</p> <div class="ay1code"> <pre class="brush:csharp;">public class Foo  {      //像[AliasAs(“ b”)]一样会在表单中发布      [JsonProperty(PropertyName="b")]      public string Bar { get; set; }  }</pre> </div> <p class="maodian"><a name="_lab2_5_1" rel="nofollow"></a></p> <h3>6.2XML内容</h3> <p>XML请求和响应使用System.XML.Serialization.XmlSerializer进行序列化/反序列化。默认情况下，Refit只会使用JSON将内容序列化，若要使用XML内容，请将ContentSerializer配置为使用XmlContentSerializer：</p> <div class="ay1code"> <pre class="brush:csharp;">var gitHubApi = RestService.For&lt;IXmlApi&gt;("https://www.w3.org/XML",      new RefitSettings {          ContentSerializer = new XmlContentSerializer()  });</pre> </div> <p>属性序列化/反序列化可以使用System.Xml.serialization命名空间中的属性进行自定义：</p> <div class="ay1code"> <pre class="brush:csharp;">public class Foo  {     [XmlElement(Namespace = "https://www.w3.org/XML")]     public string Bar { get; set; }  }</pre> </div> <p>System.Xml.Serialization.XmlSerializer提供了许多序列化选项，可以通过向XmlContentSerializer构造函数提供XmlContentSerializer设置来设置这些选项：</p> <div class="ay1code"> <pre class="brush:csharp;">var gitHubApi = RestService.For&lt;IXmlApi&gt;("https://www.w3.org/XML",      new RefitSettings {          ContentSerializer = new XmlContentSerializer(              new XmlContentSerializerSettings              {                  XmlReaderWriterSettings = new XmlReaderWriterSettings()                  {                      ReaderSettings = new XmlReaderSettings                      {                          IgnoreWhitespace = true                      }                  }              }          )  });</pre> </div> <p class="maodian"><a name="_lab2_5_2" rel="nofollow"></a></p> <h3>6.3.表单发布(Form posts)</h3> <p>对于以表单形式发布（即序列化为application/x-www-form-urlencoded）的API，请使用初始化Body属性BodySerializationMethod.UrlEncoded属性，参数可以是IDictionary字典，例：</p> <div class="ay1code"> <pre class="brush:csharp;">public interface IMeasurementProtocolApi  {      [Post("/collect")]      Task Collect([Body(BodySerializationMethod.UrlEncoded)] Dictionary&lt;string, object&gt; data);  }  var data = new Dictionary&lt;string, object&gt; {      {"v", 1},      {"tid", "UA-1234-5"},      {"cid", new Guid("d1e9ea6b-2e8b-4699-93e0-0bcbd26c206c")},      {"t", "event"},  };  // Serialized as: v=1&amp;tid=UA-1234-5&amp;cid=d1e9ea6b-2e8b-4699-93e0-0bcbd26c206c&amp;t=event  await api.Collect(data);</pre> </div> <p>如果我们传递对象跟请求表单中字段名称不一致时，可在对象属性名称上加入[AliasAs("你定义字段名称")] 属性，那么加入属性的对象字段都将会被序列化为请求中的表单字段：</p> <div class="ay1code"> <pre class="brush:csharp;">public interface IMeasurementProtocolApi  {      [Post("/collect")]      Task Collect([Body(BodySerializationMethod.UrlEncoded)] Measurement measurement);  }  public class Measurement  {      // Properties can be read-only and [AliasAs] isn't required      public int v { get { return 1; } }      [AliasAs("tid")]      public string WebPropertyId { get; set; }      [AliasAs("cid")]      public Guid ClientId { get; set; }      [AliasAs("t")]      public string Type { get; set; }      public object IgnoreMe { private get; set; }  }  var measurement = new Measurement {      WebPropertyId = "UA-1234-5",      ClientId = new Guid("d1e9ea6b-2e8b-4699-93e0-0bcbd26c206c"),      Type = "event"  };  // Serialized as: v=1&amp;tid=UA-1234-5&amp;cid=d1e9ea6b-2e8b-4699-93e0-0bcbd26c206c&amp;t=event  await api.Collect(measurement);</pre> </div> <p class="maodian"><a name="_label6" rel="nofollow"></a></p> <h2>7.设置请求头</h2> <p class="maodian"><a name="_lab2_6_3" rel="nofollow"></a></p> <h3>7.1静态头(Static headers)</h3> <p>您可以为将headers属性应用于方法的请求设置一个或多个静态请求头：</p> <div class="ay1code"> <pre class="brush:csharp;">[Headers("User-Agent: Awesome Octocat App")]  [Get("/users/{user}")]  Task&lt;User&gt; GetUser(string user);</pre> </div> <p>通过将headers属性应用于接口，还可以将静态头添加到API中的每个请求：</p> <div class="ay1code"> <pre class="brush:csharp;">[Headers("User-Agent: Awesome Octocat App")]  public interface IGitHubApi  {      [Get("/users/{user}")]      Task&lt;User&gt; GetUser(string user);      [Post("/users/new")]      Task CreateUser([Body] User user);  }</pre> </div> <p class="maodian"><a name="_lab2_6_4" rel="nofollow"></a></p> <h3>7.2动态头(Dynamic headers)</h3> <p>如果需要在运行时设置头的内容，则可以通过将头属性应用于参数来向请求添加具有动态值的头：</p> <div class="ay1code"> <pre class="brush:csharp;">[Get("/users/{user}")]  Task&lt;User&gt; GetUser(string user, [Header("Authorization")] string authorization);  // Will add the header "Authorization: token OAUTH-TOKEN" to the request  var user = await GetUser("octocat", "token OAUTH-TOKEN");</pre> </div> <p class="maodian"><a name="_lab2_6_5" rel="nofollow"></a></p> <h3>7.3授权(动态头redux)</h3> <p>使用头的最常见原因是为了授权。而现在大多数API使用一些oAuth风格的访问令牌，这些访问令牌会过期，刷新寿命更长的令牌。封装这些类型的令牌使用的一种方法是，可以插入自定义的HttpClientHandler。这样做有两个类：一个是AuthenticatedHttpClientHandler，它接受一个Func&lt;Task&lt;string&gt;&gt;参数，在这个参数中可以生成签名，而不必知道请求。另一个是authenticatedparameteredhttpclienthandler，它接受一个Func&lt;HttpRequestMessage，Task&lt;string&gt;&gt;参数，其中签名需要有关请求的信息（参见前面关于Twitter的API的注释），<br />例如：</p> <div class="ay1code"> <pre class="brush:csharp;">class AuthenticatedHttpClientHandler : HttpClientHandler  {      private readonly Func&lt;Task&lt;string&gt;&gt; getToken;      public AuthenticatedHttpClientHandler(Func&lt;Task&lt;string&gt;&gt; getToken)      {          if (getToken == null) throw new ArgumentNullException(nameof(getToken));          this.getToken = getToken;      }      protected override async Task&lt;HttpResponseMessage&gt; SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)      {          // See if the request has an authorize header          var auth = request.Headers.Authorization;          if (auth != null)          {              var token = await getToken().ConfigureAwait(false);              request.Headers.Authorization = new AuthenticationHeaderValue(auth.Scheme, token);          }          return await base.SendAsync(request, cancellationToken).ConfigureAwait(false);      }  }</pre> </div> <p>或者：</p> <div class="ay1code"> <pre class="brush:csharp;">class AuthenticatedParameterizedHttpClientHandler : DelegatingHandler      {          readonly Func&lt;HttpRequestMessage, Task&lt;string&gt;&gt; getToken;          public AuthenticatedParameterizedHttpClientHandler(Func&lt;HttpRequestMessage, Task&lt;string&gt;&gt; getToken, HttpMessageHandler innerHandler = null)              : base(innerHandler ?? new HttpClientHandler())          {              this.getToken = getToken ?? throw new ArgumentNullException(nameof(getToken));          }            protected override async Task&lt;HttpResponseMessage&gt; SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)          {              // See if the request has an authorize header              var auth = request.Headers.Authorization;              if (auth != null)              {                  var token = await getToken(request).ConfigureAwait(false);                  request.Headers.Authorization = new AuthenticationHeaderValue(auth.Scheme, token);              }              return await base.SendAsync(request, cancellationToken).ConfigureAwait(false);          }      }</pre> </div> <p>虽然HttpClient包含一个几乎相同的方法签名，但使用方式不同。重新安装未调用HttpClient.SendAsync。必须改为修改HttpClientHandler。此类的用法与此类似（示例使用ADAL库来管理自动令牌刷新，但主体用于Xamarin.Auth或任何其他库：</p> <div class="ay1code"> <pre class="brush:csharp;">class LoginViewModel  {      AuthenticationContext context = new AuthenticationContext(...);      private async Task&lt;string&gt; GetToken()      {          // The AcquireTokenAsync call will prompt with a UI if necessary          // Or otherwise silently use a refresh token to return          // a valid access token              var token = await context.AcquireTokenAsync("http://my.service.uri/app", "clientId", new Uri("callback://complete"));          return token;      }      public async Task LoginAndCallApi()      {          var api = RestService.For&lt;IMyRestService&gt;(new HttpClient(new AuthenticatedHttpClientHandler(GetToken)) { BaseAddress = new Uri("https://the.end.point/") });          var location = await api.GetLocationOfRebelBase();      }  }  interface IMyRestService  {      [Get("/getPublicInfo")]      Task&lt;Foobar&gt; SomePublicMethod();      [Get("/secretStuff")]      [Headers("Authorization: Bearer")]      Task&lt;Location&gt; GetLocationOfRebelBase();  }</pre> </div> <p>在上面的示例中，每当调用需要身份验证的方法时，AuthenticatedHttpClientHandler将尝试获取新的访问令牌。由应用程序提供，检查现有访问令牌的过期时间，并在需要时获取新的访问令牌。</p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-35490.htm">.NET 6上的WebView2体验_在线工具</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-8-21-free-v2ray-subscribe.htm" title="「8月21日」最高速度22.5M/S，2024年NekoRay每天更新免费节点订阅链接">「8月21日」最高速度22.5M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-29-share-windows-nekoray.htm" title="「8月29日」最高速度21.4M/S，2024年NekoRay每天更新免费节点订阅链接">「8月29日」最高速度21.4M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-10-free-nekoray.htm" title="「10月10日」最高速度20.6M/S，2024年NekoRay每天更新免费节点订阅链接">「10月10日」最高速度20.6M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-21-nekoray-node.htm" title="「12月21日」最高速度21.7M/S，2024年NekoRay每天更新免费节点订阅链接">「12月21日」最高速度21.7M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-7-31-free-high-speed-nodes.htm" title="「7月31日」最高速度22.7M/S，2024年NekoRay每天更新免费节点订阅链接">「7月31日」最高速度22.7M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-22154.htm" title="springboot整合Dubbo与Feign的实现 (无注册中心)_java">springboot整合Dubbo与Feign的实现 (无注册中心)_java</a></li>
+                        <li class="py-2"><a href="/news/article-23521.htm" title="新疆养狗基地（新疆大型犬基地）">新疆养狗基地（新疆大型犬基地）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-13-nekoray-node.htm" title="「9月13日」最高速度20M/S，2024年NekoRay每天更新免费节点订阅链接">「9月13日」最高速度20M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-10-linux-nekoray.htm" title="「11月10日」最高速度21.9M/S，2024年NekoRay每天更新免费节点订阅链接">「11月10日」最高速度21.9M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-2-free-nekoray.htm" title="「10月2日」最高速度20.1M/S，2024年NekoRay每天更新免费节点订阅链接">「10月2日」最高速度20.1M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">12</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-08/" title="2024-08 归档">2024-08</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">27</span> <a href="/date/2024-07/" title="2024-07 归档">2024-07</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">4</span> <a href="/date/2024-06/" title="2024-06 归档">2024-06</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+        <!-- Copyright Start -->
+    <div class="container-fluid copyright py-4">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-md-0">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                    <span class="text-white">NekoRayNode节点订阅站 版权所有 Powered by WordPress</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright End -->
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary btn-lg-square back-to-top"><i class="fa fa-arrow-up"></i></a>
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/easing/easing.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/lightbox/js/lightbox.min.js"></script>
+    <!-- Template Javascript -->
+    <script src="/assets/website/js/frontend/nekoraynode/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
