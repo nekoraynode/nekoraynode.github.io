@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://nekoraynode.github.io/news/article-37216.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>【定义+用法+区别+使用场景】escape(),encodeURI(),encodeURIComponent()</title>
+        <meta name="description" content="文章目录    一、escape 二、encodeURI 三、encodeURIComponent 四、encodeURI和encodeURIComponent的不同点 五、使用场合     一、es" />
+        <link rel="icon" href="/assets/website/img/nekoraynode/favicon.ico" type="image/x-icon"/>
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <!-- Libraries Stylesheet -->
+    <link href="__ADDON__/js/frontend/nekoraynode/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6TD6QHWW6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6TD6QHWW6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid p-0">
+                <nav class="navbar navbar-expand-lg fixed-top navbar-light px-4 px-lg-5 py-3 py-lg-0">
+            <a href="/" class="navbar-brand p-0">
+                                <span class="display-6 text-primary m-0">
+                    <i class="fas fa-envelope me-3"></i>NekoRay Node
+                </span>
+                            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                                        <a href="/" class="nav-item nav-link">首页</a>
+                                        <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                        <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                        <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                        <a href="#" class="nav-item nav-link">关于</a>
+                    <a href="#" class="nav-item nav-link">联系</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar & Hero End -->
+    <!-- Header Start -->
+    <div class="container-fluid bg-breadcrumb">
+        <ul class="breadcrumb-animation">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="container text-center py-5" style="max-width: 900px;">
+            <h3 class="display-3 mb-4 wow fadeInDown" data-wow-delay="0.1s">【定义+用法+区别+使用场景】escape(),encodeURI(),encodeURIComponent()</h1>
+                <ol class="breadcrumb justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+                    <li class="breadcrumb-item"><a href="/">首页</a></li>
+                    <li class="breadcrumb-item"><a href="/news/">新闻资讯</a></li>
+                    <li class="breadcrumb-item active text-primary">正文</li>
+                </ol>
+        </div>
+    </div>
+    <!-- Header End -->
+    <!-- About Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> <div class="toc"> <h3>文章目录</h3> <ul> <li> <ul> <li><a href="#escape_2" rel="nofollow">一、escape</a></li> <li><a href="#encodeURI_12" rel="nofollow">二、encodeURI</a></li> <li><a href="#encodeURIComponent_24" rel="nofollow">三、encodeURIComponent</a></li> <li><a href="#encodeURIencodeURIComponent_36" rel="nofollow">四、encodeURI和encodeURIComponent的不同点</a></li> <li><a href="#_57" rel="nofollow">五、使用场合</a></li> </ul> </li> </ul> </div> <h2><a id="escape_2" rel="nofollow"></a>一、escape</h2> <p>escape是对字符串进行编码</p> <p>作用：让它们在所有电脑上可读</p> <p><span class="katex--inline"><span class="katex"><span class="katex-mathml"></p> <p>          已</p> <p>          废</p> <p>          弃</p> <p>       \color{#ea4335}{已废弃}</span><span class="katex-html"><span class="base"><span class="strut" style="height: 0em; vertical-align: 0em;"></span><span class="mord" style="color: rgb(234, 67, 53);"><span class="mord cjk_fallback" style="color: rgb(234, 67, 53);">已</span><span class="mord cjk_fallback" style="color: rgb(234, 67, 53);">废</span><span class="mord cjk_fallback" style="color: rgb(234, 67, 53);">弃</span></span></span></span></span></span>: 该特性已经从 Web 标准中删除，虽然一些浏览器目前仍然支持它，但也许会在未来的某个时间停止支持，请尽量不要使用该特性。</p> <p>废弃的 escape() 方法生成新的由十六进制转义序列替换的字符串. 使用 encodeURI 或 encodeURIComponent 代替.</p> <h2><a id="encodeURI_12" rel="nofollow"></a>二、encodeURI</h2> <p>encodeURI() 函数通过将特定字符的每个实例替换为一个、两个、三或四转义序列来对统一资源标识符 (URI) 进行编码</p> <p>encodeURI 会替换所有的字符，但不包括以下字符，即使它们具有适当的UTF-8转义序列：</p> <table> <thead> <tr> <th>类型</th> <th>包含</th> </tr> </thead> <tbody> <tr> <td>保留字符</td> <td>; , / ? : @ &amp; = + $</td> </tr> <tr> <td>非转义的字符</td> <td>字母 数字 - _ . ! ~ * ’ ( )</td> </tr> <tr> <td>数字符号</td> <td>#</td> </tr> </tbody> </table> <h2><a id="encodeURIComponent_24" rel="nofollow"></a>三、encodeURIComponent</h2> <p>encodeURIComponent()函数通过将一个，两个，三个或四个表示字符的UTF-8编码的转义序列替换某些字符的每个实例来编码 URI(二者定义基本相同)</p> <p>encodeURI 会替换所有的字符，但不包括以下字符，即使它们具有适当的UTF-8转义序列：</p> <table> <thead> <tr> <th>类型</th> <th>包含</th> </tr> </thead> <tbody> <tr> <td>非转义的字符</td> <td>字母 数字 - _ . ! ~ * ’ ( )</td> </tr> </tbody> </table> <p>所以encodeURIComponent比encodeURI编码的范围更大。</p> <h2><a id="encodeURIencodeURIComponent_36" rel="nofollow"></a>四、encodeURI和encodeURIComponent的不同点</h2> <pre><code class="prism language-javaScript">var set1 = ";,/?:@&amp;=+$";  // 保留字符 var set2 = "-_.!~*'()";   // 不转义字符 var set3 = "#";           // 数字标志 var set4 = "ABC abc 123"; // 字母数字字符和空格  console.log(encodeURI(set1)); // ;,/?:@&amp;=+$ console.log(encodeURI(set2)); // -_.!~*'() console.log(encodeURI(set3)); // # console.log(encodeURI(set4)); // ABC%20abc%20123 (the space gets encoded as %20)  console.log(encodeURIComponent(set1)); // %3B%2C%2F%3F%3A%40%26%3D%2B%24 console.log(encodeURIComponent(set2)); // -_.!~*'() console.log(encodeURIComponent(set3)); // %23 console.log(encodeURIComponent(set4)); // ABC%20abc%20123 (the space gets encoded as %20)</code></pre> <p>从上述代码可以看出，与encodeURI相比，encodeURIComponent会对保留字符和数字标志进行转义</p> <h2><a id="_57" rel="nofollow"></a>五、使用场合</h2> <ol> <li>假定一个URI是完整的URI，那么使用<span class="katex--inline"><span class="katex"><span class="katex-mathml"> <p>           e</p> <p>           n</p> <p>           c</p> <p>           o</p> <p>           d</p> <p>           e</p> <p>           U</p> <p>           R</p> <p>           I</p> <p>        \color{#ea4335}{encodeURI}</span><span class="katex-html"><span class="base"><span class="strut" style="height: 0.69444em; vertical-align: 0em;"></span><span class="mord" style="color: rgb(234, 67, 53);"><span class="mord mathdefault" style="color: rgb(234, 67, 53);">e</span><span class="mord mathdefault" style="color: rgb(234, 67, 53);">n</span><span class="mord mathdefault" style="color: rgb(234, 67, 53);">c</span><span class="mord mathdefault" style="color: rgb(234, 67, 53);">o</span><span class="mord mathdefault" style="color: rgb(234, 67, 53);">d</span><span class="mord mathdefault" style="color: rgb(234, 67, 53);">e</span><span class="mord mathdefault" style="margin-right: 0.10903em; color: rgb(234, 67, 53);">U</span><span class="mord mathdefault" style="margin-right: 0.00773em; color: rgb(234, 67, 53);">R</span><span class="mord mathdefault" style="margin-right: 0.07847em; color: rgb(234, 67, 53);">I</span></span></span></span></span></span>对无需对那些保留的并且在URI中有特殊意思的字符进行编码。</li> <li>在GET和POST请求中，使用<span class="katex--inline"><span class="katex"><span class="katex-mathml"> <p>           e</p> <p>           n</p> <p>           c</p> <p>           o</p> <p>           d</p> <p>           e</p> <p>           U</p> <p>           R</p> <p>           I</p> <p>           C</p> <p>           o</p> <p>           m</p> <p>           p</p> <p>           o</p> <p>           n</p> <p>           e</p> <p>           n</p> <p>           t</p> <p>        \color{#ea4335}{encodeURIComponent}</span><span class="katex-html"><span class="base"><span class="strut" style="height: 0.88888em; vertical-align: -0.19444em;"></span><span class="mord" style="color: rgb(234, 67, 53);"><span class="mord mathdefault" style="color: rgb(234, 67, 53);">e</span><span class="mord mathdefault" style="color: rgb(234, 67, 53);">n</span><span class="mord mathdefault" style="color: rgb(234, 67, 53);">c</span><span class="mord mathdefault" style="color: rgb(234, 67, 53);">o</span><span class="mord mathdefault" style="color: rgb(234, 67, 53);">d</span><span class="mord mathdefault" style="color: rgb(234, 67, 53);">e</span><span class="mord mathdefault" style="margin-right: 0.10903em; color: rgb(234, 67, 53);">U</span><span class="mord mathdefault" style="margin-right: 0.00773em; color: rgb(234, 67, 53);">R</span><span class="mord mathdefault" style="margin-right: 0.07847em; color: rgb(234, 67, 53);">I</span><span class="mord mathdefault" style="margin-right: 0.07153em; color: rgb(234, 67, 53);">C</span><span class="mord mathdefault" style="color: rgb(234, 67, 53);">o</span><span class="mord mathdefault" style="color: rgb(234, 67, 53);">m</span><span class="mord mathdefault" style="color: rgb(234, 67, 53);">p</span><span class="mord mathdefault" style="color: rgb(234, 67, 53);">o</span><span class="mord mathdefault" style="color: rgb(234, 67, 53);">n</span><span class="mord mathdefault" style="color: rgb(234, 67, 53);">e</span><span class="mord mathdefault" style="color: rgb(234, 67, 53);">n</span><span class="mord mathdefault" style="color: rgb(234, 67, 53);">t</span></span></span></span></span></span>这个方法会对这些字符编码</li> </ol> <p>必要性：为了避免服务器收到不可预知的请求，对任何用户输入的作为URI部分的内容你都需要用encodeURIComponent进行转义。</p> <p>原因：<br /> 假如一个用户输入了"abc&amp;time=123"作为填入comment变量的一部分，若不使用encodeURIComponent进行转义，服务器将得到的是component=abc&amp;time=123。此时服务器得到两个键值对，因此出现参数错误，故在对用户输入的内容进行转义时，必须使用encodeURIComponent()函数</p> <p>参考链接：</p> <ul> <li><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent"  rel="nofollow">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent</a></li> <li><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/encodeURI"  rel="nofollow">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/encodeURI</a></li> <li><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/escape"  rel="nofollow">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/escape</a></li> </ul> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-36724.htm">动物疫苗种类及类型有哪些名称 动物疫苗种类及类型有哪些名称图片</a></p>
+                                        <p>下一个：<a href="/news/article-37218.htm">开宠物店有什么机会吗（开宠物店有什么机会吗知乎）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-12-6-windows-nekoray.htm" title="「12月6日」最高速度22.4M/S，2024年NekoRay每天更新免费节点订阅链接">「12月6日」最高速度22.4M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-20775.htm" title="长沙猫咪领养中心在哪里有（长沙领养猫贴吧）">长沙猫咪领养中心在哪里有（长沙领养猫贴吧）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-29-free-node-subscribe.htm" title="「11月29日」最高速度20.5M/S，2024年NekoRay每天更新免费节点订阅链接">「11月29日」最高速度20.5M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-1-nekoray-node.htm" title="「1月1日」最高速度21.1M/S，2025年NekoRay每天更新免费节点订阅链接">「1月1日」最高速度21.1M/S，2025年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-23980.htm" title="宠物店粮食一个月要多少斤（宠物店粮食一个月要多少斤正常）">宠物店粮食一个月要多少斤（宠物店粮食一个月要多少斤正常）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-3-free-nekoray-node.htm" title="「1月3日」最高速度21.8M/S，2025年NekoRay每天更新免费节点订阅链接">「1月3日」最高速度21.8M/S，2025年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-35490.htm" title=".NET 6上的WebView2体验_在线工具">.NET 6上的WebView2体验_在线工具</a></li>
+                        <li class="py-2"><a href="/news/article-21666.htm" title="送养一个孩子怎样写协议书呢视频（送养一个孩子怎样写协议书呢视频教程）">送养一个孩子怎样写协议书呢视频（送养一个孩子怎样写协议书呢视频教程）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-21-nekoray-node.htm" title="「12月21日」最高速度21.7M/S，2024年NekoRay每天更新免费节点订阅链接">「12月21日」最高速度21.7M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-14-linux-nekoray-node.htm" title="「11月14日」最高速度18M/S，2024年NekoRay每天更新免费节点订阅链接">「11月14日」最高速度18M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">21</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">25</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+        <!-- Copyright Start -->
+    <div class="container-fluid copyright py-4">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-md-0">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                    <span class="text-white">NekoRayNode节点订阅站 版权所有 Powered by WordPress</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright End -->
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary btn-lg-square back-to-top"><i class="fa fa-arrow-up"></i></a>
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/easing/easing.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/lightbox/js/lightbox.min.js"></script>
+    <!-- Template Javascript -->
+    <script src="/assets/website/js/frontend/nekoraynode/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

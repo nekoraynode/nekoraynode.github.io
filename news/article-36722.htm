@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://nekoraynode.github.io/news/article-36722.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>自研FeignClient轻量级http客户端</title>
+        <meta name="description" content="一. 为什么会想到编写此项目 1. 背景 在工作中，经常会遇到与其他业务系统进行通讯交互，无非是通过调用对方的http接口进行数据的交互,少则一个，多则几十个。 随着Oauth2.0协议在各个业务系统" />
+        <link rel="icon" href="/assets/website/img/nekoraynode/favicon.ico" type="image/x-icon"/>
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <!-- Libraries Stylesheet -->
+    <link href="__ADDON__/js/frontend/nekoraynode/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6TD6QHWW6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6TD6QHWW6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid p-0">
+                <nav class="navbar navbar-expand-lg fixed-top navbar-light px-4 px-lg-5 py-3 py-lg-0">
+            <a href="/" class="navbar-brand p-0">
+                                <span class="display-6 text-primary m-0">
+                    <i class="fas fa-envelope me-3"></i>NekoRay Node
+                </span>
+                            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                                        <a href="/" class="nav-item nav-link">首页</a>
+                                        <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                        <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                        <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                        <a href="#" class="nav-item nav-link">关于</a>
+                    <a href="#" class="nav-item nav-link">联系</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar & Hero End -->
+    <!-- Header Start -->
+    <div class="container-fluid bg-breadcrumb">
+        <ul class="breadcrumb-animation">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="container text-center py-5" style="max-width: 900px;">
+            <h3 class="display-3 mb-4 wow fadeInDown" data-wow-delay="0.1s">自研FeignClient轻量级http客户端</h1>
+                <ol class="breadcrumb justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+                    <li class="breadcrumb-item"><a href="/">首页</a></li>
+                    <li class="breadcrumb-item"><a href="/news/">新闻资讯</a></li>
+                    <li class="breadcrumb-item active text-primary">正文</li>
+                </ol>
+        </div>
+    </div>
+    <!-- Header End -->
+    <!-- About Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-light"> </h1> <h2><a id="__2" rel="nofollow"></a>一. 为什么会想到编写此项目</h2> <h3><a id="1__3" rel="nofollow"></a>1. 背景</h3> <p>在工作中，经常会遇到与其他业务系统进行通讯交互，无非是通过调用对方的http接口进行数据的交互,少则一个，多则几十个。</p> <p>随着Oauth2.0协议在各个业务系统的应用，调用其他业务系统的方式也是千篇一律：首先通过对方颁发的客户端信息进行客户端认证，认证通过之后获取accessToken，随后所有业务接口携带accessToken调用接口。一些安全性较高的系统，还会增加一些加解密、验签、完整性、证书的验证。</p> <p>当前大部分思路是通过开发各个接口调用逻辑功能，然后通过统一封装http调用工具进行接口调用，整个代码会显得特别臃肿，同时最近在读feign源码，因此仿照feign客户端进行代码改造，旨在优化业务代码，同时也加深对feign的理解。</p> <h3><a id="2__9" rel="nofollow"></a>2. 改造后的代码示例</h3> <p>只需要按照接口出入参拼接实体类，再接口中维护接口信息即可。一些公共的接口调用逻辑，在动态代理的InvocationHandler中统一进行处理（序列化、反序列化、远程接口调用、异常处理等等）。<br /> 同时该部分代码单独打包成jar包，易于维护及管理。</p> <pre><code class="prism language-java"><span class="token annotation punctuation">@InvokeClient</span><span class="token punctuation">(</span>value<span class="token operator">=</span><span class="token string">"/v1/api"</span><span class="token punctuation">,</span> 		name<span class="token operator">=</span><span class="token string">"requestClient"</span><span class="token punctuation">,</span> 		configuration<span class="token operator">=</span><span class="token punctuation">{<!-- --></span><span class="token class-name">RemoteCallConfig</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token keyword">public</span><span class="token keyword">interface</span><span class="token class-name">RequestClient</span><span class="token punctuation">{<!-- --></span><span class="token annotation punctuation">@InvokeRequest</span><span class="token punctuation">(</span>value<span class="token operator">=</span><span class="token string">"/queryUser"</span><span class="token punctuation">,</span>method<span class="token operator">=</span><span class="token class-name">HttpMethod</span><span class="token punctuation">.</span>POST<span class="token punctuation">)</span><span class="token annotation punctuation">@BreakerCommand</span><span class="token punctuation">(</span>fallback<span class="token operator">=</span><span class="token class-name">RequestClientFallback</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token keyword">public</span><span class="token class-name">ResponseDto</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">&gt;</span></span><span class="token function">queryUser</span><span class="token punctuation">(</span><span class="token class-name">User</span> user<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span></code></pre> <h3><a id="3__22" rel="nofollow"></a>3. 能够实现什么功能</h3> <ul> <li>基础远程调用【已完成】</li> <li>重试机制【已完成】</li> <li>熔断机制【已完成】</li> <li>自定义配置类及客户段配置类之间的隔离【已完成】</li> <li>自定义请求拦截器【已完成】</li> <li>隔离策略（线程池及信号量）</li> </ul> <h3><a id="4_29" rel="nofollow"></a>4.项目地址</h3> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://github.com/beardlessCat/simple-remote-call"  rel="nofollow">项目地址：https://github.com/beardlessCat/simple-remote-call，喜欢的烦请star</a></p> <h2><a id="_32" rel="nofollow"></a>三.版本规划</h2> <h3><a id="10x_33" rel="nofollow"></a>1.0.x</h3> <p>该版本一些远程客户端的声明都必须在client包内，这样设计的初始目的主要是想规范将客户端的声明与客户端的调用区分开，使得代码更加的整洁已于管理。有需要改动时仅仅调整client包即可，<br /> 无需调整引入该包的相关代码。但是此种方式生成的依赖包仅仅能够供某一特定系统进行使用，系统兼容性较差。</p> <h3><a id="20x_36" rel="nofollow"></a>2.0.x</h3> <p>该版本建议将客户端的声明存放到引入该包的模块或系统中，这样的话，client包仅仅作为远程调用的工具，客户端的声明需在引入该包的模块或者系统中自行声明，<br /> 优劣势与1.0.x相反，同时这种方式也是openfeign的模式。后续的一些维护及升级也是主要基于此版本。</p> <h2><a id="_39" rel="nofollow"></a>四.功能原理</h2> <p>整个功能要实现最主要需要完成两点：远程调用client自动注入及动态代理生成生成客户端实现类进行远程调用处理。当这两个点完成后，其他的就剩下一下<br /> 代理逻辑的处理了。</p> <h3><a id="1_openFeign_42" rel="nofollow"></a>1. openFeign原理</h3> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220602/a3d3dea6c8dc6874b090da24ba984535.jpg" alt="自研FeignClient轻量级http客户端"></p> <h3><a id="2_44" rel="nofollow"></a>2.接口熔断机制</h3> <p>通过接口熔断管理器管理接口状态，对接口进行熔断保护<br /> （1）接口状态说明<br /> 接口基于断路器状态分为三种：OPEN,HAlf-OPEN,CLOSE</p> <ul> <li>CLOSE：熔断器处于关闭状态，接口可正常调用;</li> <li>HAlf-OPEN：熔断器处于半关闭状态，此时回对部门请求进行尝试调用，根据调用结果改变状态。</li> <li>OPEN：熔断器处于开启状态，此时所有请求均不再调用接口，而是直接返回接口熔断信息。</li> </ul> <p>（2）接口状态变更转换图<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220602/382ea5b588ba3907903d7ac46e868f4f.jpg" alt="自研FeignClient轻量级http客户端"></p> <ul> <li>CLOSE转换为OPEN：接口调用失败次数达到阈值</li> <li>OPEN转换为HALF_OPEN：接口熔断时间达到阈值</li> <li>HALF_OPEN转换为CLOSE：接口成功次数达到阈值</li> <li>HALF_OPEN转换为OPEN：接口失败次数达到阈值</li> </ul> <p>（3）接口状态流程图<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220602/3c1d8686cba529834178a0debe39c68b.jpg" alt="自研FeignClient轻量级http客户端"></p> <p>（4）熔断器测试日志</p> <pre><code>: 【断路器变为CLOSE】 : BreakerStateManager(failCount=0, successCount=0, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.ClosedState@43b23436) : 接口调用失败！ : BreakerStateManager(failCount=1, successCount=0, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.ClosedState@43b23436) : 接口调用失败！ : BreakerStateManager(failCount=2, successCount=0, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.ClosedState@43b23436) : 接口调用失败！ : BreakerStateManager(failCount=3, successCount=0, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.ClosedState@43b23436) : 接口调用失败！ : BreakerStateManager(failCount=4, successCount=0, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.ClosedState@43b23436) : 接口调用失败！ =============================================================================================== : 【断路器变为OPEN】 : BreakerStateManager(failCount=5, successCount=0, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.OpenState@189436cd) com.bigyj.exception.MethodNotAvailableException: 服务已熔断，请稍等重试！ : BreakerStateManager(failCount=5, successCount=0, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.OpenState@189436cd) com.bigyj.exception.MethodNotAvailableException: 服务已熔断，请稍等重试！ : BreakerStateManager(failCount=5, successCount=0, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.OpenState@189436cd) com.bigyj.exception.MethodNotAvailableException: 服务已熔断，请稍等重试！ : BreakerStateManager(failCount=5, successCount=0, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.OpenState@189436cd) com.bigyj.exception.MethodNotAvailableException: 服务已熔断，请稍等重试！ : BreakerStateManager(failCount=5, successCount=0, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.OpenState@189436cd) com.bigyj.exception.MethodNotAvailableException: 服务已熔断，请稍等重试！ : 【断路器变为HALF-OPEN】 : BreakerStateManager(failCount=5, successCount=0, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.HalfOpenState@4cef79fb) : 接口调用失败！ : BreakerStateManager(failCount=6, successCount=0, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=1, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.HalfOpenState@4cef79fb) : 接口调用失败！ : BreakerStateManager(failCount=7, successCount=0, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=2, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.HalfOpenState@4cef79fb) : 接口调用失败！ : BreakerStateManager(failCount=8, successCount=0, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=3, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.HalfOpenState@4cef79fb) com.bigyj.exception.MethodNotAvailableException: 服务已熔断，请稍等重试！ : BreakerStateManager(failCount=8, successCount=0, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=3, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.HalfOpenState@4cef79fb) com.bigyj.exception.MethodNotAvailableException: 服务已熔断，请稍等重试！ : BreakerStateManager(failCount=8, successCount=0, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=3, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.HalfOpenState@4cef79fb) : 接口调用失败！ : BreakerStateManager(failCount=9, successCount=0, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=4, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.HalfOpenState@4cef79fb) : 接口调用失败！ : 【断路器变为OPEN】 : BreakerStateManager(failCount=10, successCount=0, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.OpenState@485fb0e8) : 【断路器变为HALF-OPEN】 : BreakerStateManager(failCount=10, successCount=1, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.HalfOpenState@6bb3d520) com.bigyj.exception.MethodNotAvailableException: 服务已熔断，请稍等重试！ : BreakerStateManager(failCount=10, successCount=1, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.HalfOpenState@6bb3d520) com.bigyj.exception.MethodNotAvailableException: 服务已熔断，请稍等重试！ : BreakerStateManager(failCount=10, successCount=1, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.HalfOpenState@6bb3d520) : BreakerStateManager(failCount=10, successCount=2, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.HalfOpenState@6bb3d520) com.bigyj.exception.MethodNotAvailableException: 服务已熔断，请稍等重试！ : BreakerStateManager(failCount=10, successCount=2, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.HalfOpenState@6bb3d520) com.bigyj.exception.MethodNotAvailableException: 服务已熔断，请稍等重试！ : BreakerStateManager(failCount=10, successCount=2, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.HalfOpenState@6bb3d520) com.bigyj.exception.MethodNotAvailableException: 服务已熔断，请稍等重试！ : BreakerStateManager(failCount=10, successCount=2, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.HalfOpenState@6bb3d520) : BreakerStateManager(failCount=10, successCount=3, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.HalfOpenState@6bb3d520) : BreakerStateManager(failCount=10, successCount=4, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.HalfOpenState@6bb3d520) com.bigyj.exception.MethodNotAvailableException: 服务已熔断，请稍等重试！ : BreakerStateManager(failCount=10, successCount=4, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.HalfOpenState@6bb3d520) =============================================================================================== : 【断路器变为CLOSE】 : BreakerStateManager(failCount=0, successCount=0, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.ClosedState@44348bd0) : BreakerStateManager(failCount=0, successCount=1, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.ClosedState@44348bd0) : BreakerStateManager(failCount=0, successCount=2, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.ClosedState@44348bd0) : BreakerStateManager(failCount=0, successCount=3, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.ClosedState@44348bd0) : BreakerStateManager(failCount=0, successCount=4, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.ClosedState@44348bd0) : 接口调用失败！ : BreakerStateManager(failCount=1, successCount=4, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.ClosedState@44348bd0) : 接口调用失败！ : BreakerStateManager(failCount=2, successCount=4, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.ClosedState@44348bd0) : 接口调用失败！ : BreakerStateManager(failCount=3, successCount=4, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.ClosedState@44348bd0) : 接口调用失败！ : BreakerStateManager(failCount=4, successCount=4, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.ClosedState@44348bd0) : 接口调用失败！ =============================================================================================== : 【断路器变为OPEN】 : BreakerStateManager(failCount=5, successCount=0, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.OpenState@2e97b6dc) com.bigyj.exception.MethodNotAvailableException: 服务已熔断，请稍等重试！ : BreakerStateManager(failCount=5, successCount=0, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.OpenState@2e97b6dc) com.bigyj.exception.MethodNotAvailableException: 服务已熔断，请稍等重试！ : BreakerStateManager(failCount=5, successCount=0, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.OpenState@2e97b6dc) com.bigyj.exception.MethodNotAvailableException: 服务已熔断，请稍等重试！ : BreakerStateManager(failCount=5, successCount=0, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.OpenState@2e97b6dc) com.bigyj.exception.MethodNotAvailableException: 服务已熔断，请稍等重试！ : BreakerStateManager(failCount=5, successCount=0, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.OpenState@2e97b6dc) com.bigyj.exception.MethodNotAvailableException: 服务已熔断，请稍等重试！ : BreakerStateManager(failCount=5, successCount=0, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.OpenState@2e97b6dc) com.bigyj.exception.MethodNotAvailableException: 服务已熔断，请稍等重试！ : BreakerStateManager(failCount=5, successCount=0, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.OpenState@2e97b6dc) com.bigyj.exception.MethodNotAvailableException: 服务已熔断，请稍等重试！ : BreakerStateManager(failCount=5, successCount=0, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.OpenState@2e97b6dc) com.bigyj.exception.MethodNotAvailableException: 服务已熔断，请稍等重试！ : BreakerStateManager(failCount=5, successCount=0, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.OpenState@2e97b6dc) com.bigyj.exception.MethodNotAvailableException: 服务已熔断，请稍等重试！ : BreakerStateManager(failCount=5, successCount=0, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.OpenState@2e97b6dc) com.bigyj.exception.MethodNotAvailableException: 服务已熔断，请稍等重试！ : BreakerStateManager(failCount=5, successCount=0, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.OpenState@2e97b6dc) com.bigyj.exception.MethodNotAvailableException: 服务已熔断，请稍等重试！ : BreakerStateManager(failCount=5, successCount=0, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.OpenState@2e97b6dc) =============================================================================================== : 【断路器变为HALF-OPEN】 : BreakerStateManager(failCount=5, successCount=1, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.HalfOpenState@5143c073) com.bigyj.exception.MethodNotAvailableException: 服务已熔断，请稍等重试！ : BreakerStateManager(failCount=5, successCount=1, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.HalfOpenState@5143c073) : BreakerStateManager(failCount=5, successCount=2, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.HalfOpenState@5143c073: BreakerStateManager(failCount=5, successCount=3, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.HalfOpenState@5143c073) : BreakerStateManager(failCount=5, successCount=4, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.HalfOpenState@5143c073) =============================================================================================== : 【断路器变为CLOSE】 : BreakerStateManager(failCount=0, successCount=0, maxOpenToTryTime=60000, maxFailCount=5, maxSuccessCount=5, openRetryCount=0, maxOpenRetryCount=5, breakerState=com.bigyj.breaker.state.ClosedState@7236669a)</code></pre> <h3><a id="3_client_174" rel="nofollow"></a>3. 远程调用client自动注入</h3> <p>通过ImportBeanDefinitionRegistrar进行依赖注入</p> <pre><code class="prism language-java"><span class="token keyword">public</span><span class="token keyword">class</span><span class="token class-name">ClientBeanDefinitionRegistrar</span><span class="token keyword">implements</span><span class="token class-name">ImportBeanDefinitionRegistrar</span><span class="token punctuation">,</span><span class="token class-name">ResourceLoaderAware</span><span class="token punctuation">,</span><span class="token class-name">EnvironmentAware</span><span class="token punctuation">{<!-- --></span><span class="token keyword">private</span><span class="token class-name">Environment</span> environment<span class="token punctuation">;</span><span class="token keyword">private</span><span class="token class-name">ResourceLoader</span> resourceLoader<span class="token punctuation">;</span><span class="token comment">/**      * 自动注入相关类 	 * @param importingClassMetadata 	 * @param registry 	 */</span><span class="token annotation punctuation">@Override</span><span class="token keyword">public</span><span class="token keyword">void</span><span class="token function">registerBeanDefinitions</span><span class="token punctuation">(</span><span class="token class-name">AnnotationMetadata</span> importingClassMetadata<span class="token punctuation">,</span><span class="token class-name">BeanDefinitionRegistry</span> registry<span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token punctuation">}</span><span class="token annotation punctuation">@Override</span><span class="token keyword">public</span><span class="token keyword">void</span><span class="token function">setEnvironment</span><span class="token punctuation">(</span><span class="token class-name">Environment</span> environment<span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token keyword">this</span><span class="token punctuation">.</span>environment<span class="token operator">=</span> environment<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token annotation punctuation">@Override</span><span class="token keyword">public</span><span class="token keyword">void</span><span class="token function">setResourceLoader</span><span class="token punctuation">(</span><span class="token class-name">ResourceLoader</span> resourceLoader<span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token keyword">this</span><span class="token punctuation">.</span>resourceLoader<span class="token operator">=</span> resourceLoader<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">}</span></code></pre> <h3><a id="4__200" rel="nofollow"></a>4. 动态代理生成客户端实现类</h3> <p>通过自定义FactoryBean，在getObject方法中使用代理模式，动态生成相关类</p> <pre><code class="prism language-java"><span class="token keyword">public</span><span class="token keyword">class</span><span class="token class-name">InvokeClientFactoryBean</span><span class="token keyword">implements</span><span class="token class-name">FactoryBean</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Object</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">,</span><span class="token class-name">ApplicationContextAware</span><span class="token punctuation">{<!-- --></span><span class="token keyword">private</span><span class="token class-name">ApplicationContext</span> applicationContext<span class="token punctuation">;</span><span class="token annotation punctuation">@Setter</span><span class="token keyword">private</span><span class="token class-name">Class</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span><span class="token punctuation">&gt;</span></span> type<span class="token punctuation">;</span><span class="token annotation punctuation">@Setter</span><span class="token keyword">private</span><span class="token class-name">String</span> path<span class="token punctuation">;</span><span class="token comment">/** 	 * 生成代理对象 	 * @return 	 * @throws Exception 	 */</span><span class="token annotation punctuation">@Override</span><span class="token keyword">public</span><span class="token class-name">Object</span><span class="token function">getObject</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token keyword">return</span><span class="token class-name">Proxy</span><span class="token punctuation">.</span><span class="token function">newProxyInstance</span><span class="token punctuation">(</span>type<span class="token punctuation">.</span><span class="token function">getClassLoader</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token keyword">new</span><span class="token class-name">Class</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">{<!-- --></span>type<span class="token punctuation">}</span><span class="token punctuation">,</span> invocationHandler<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token annotation punctuation">@Override</span><span class="token keyword">public</span><span class="token class-name">Class</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span><span class="token punctuation">&gt;</span></span><span class="token function">getObjectType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token keyword">return</span><span class="token keyword">this</span><span class="token punctuation">.</span>type<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token annotation punctuation">@Override</span><span class="token keyword">public</span><span class="token keyword">void</span><span class="token function">setApplicationContext</span><span class="token punctuation">(</span><span class="token class-name">ApplicationContext</span> applicationContext<span class="token punctuation">)</span><span class="token keyword">throws</span><span class="token class-name">BeansException</span><span class="token punctuation">{<!-- --></span><span class="token keyword">this</span><span class="token punctuation">.</span>applicationContext<span class="token operator">=</span> applicationContext<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">}</span></code></pre> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-35961.htm">开一家动物医院创业启动资金（开动物医院需要具备哪些条件）</a></p>
+                                        <p>下一个：<a href="/news/article-36724.htm">动物疫苗种类及类型有哪些名称 动物疫苗种类及类型有哪些名称图片</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-10-7-linux-nekoray.htm" title="「10月7日」最高速度21.2M/S，2024年NekoRay每天更新免费节点订阅链接">「10月7日」最高速度21.2M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-28640.htm" title="广州领养宠物中心在哪里 广州领养宠物中心在哪里啊">广州领养宠物中心在哪里 广州领养宠物中心在哪里啊</a></li>
+                        <li class="py-2"><a href="/news/article-26785.htm" title="猫咪打疫苗要多少钱大概打几针（猫咪打疫苗要多少钱大概打几针呢）">猫咪打疫苗要多少钱大概打几针（猫咪打疫苗要多少钱大概打几针呢）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-18-windows-nekoray.htm" title="「12月18日」最高速度20.4M/S，2024年NekoRay每天更新免费节点订阅链接">「12月18日」最高速度20.4M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-13-node-share.htm" title="「11月13日」最高速度20.3M/S，2024年NekoRay每天更新免费节点订阅链接">「11月13日」最高速度20.3M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-19856.htm" title="宠物领养的平台叫什么（宠物领养平台免费）">宠物领养的平台叫什么（宠物领养平台免费）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-16-windows-nekoray.htm" title="「12月16日」最高速度18.7M/S，2024年NekoRay每天更新免费节点订阅链接">「12月16日」最高速度18.7M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-31352.htm" title="24小时宠物医院北京（北京宠物医院几点关门）">24小时宠物医院北京（北京宠物医院几点关门）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-29-node-share.htm" title="「12月29日」最高速度22.7M/S，2024年NekoRay每天更新免费节点订阅链接">「12月29日」最高速度22.7M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-23980.htm" title="宠物店粮食一个月要多少斤（宠物店粮食一个月要多少斤正常）">宠物店粮食一个月要多少斤（宠物店粮食一个月要多少斤正常）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">21</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">25</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+        <!-- Copyright Start -->
+    <div class="container-fluid copyright py-4">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-md-0">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                    <span class="text-white">NekoRayNode节点订阅站 版权所有 Powered by WordPress</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright End -->
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary btn-lg-square back-to-top"><i class="fa fa-arrow-up"></i></a>
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/easing/easing.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/lightbox/js/lightbox.min.js"></script>
+    <!-- Template Javascript -->
+    <script src="/assets/website/js/frontend/nekoraynode/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
