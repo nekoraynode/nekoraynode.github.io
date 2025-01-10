@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://nekoraynode.github.io/news/article-38177.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Halo 开源项目学习注册与登录</title>
+        <meta name="description" content="基本介绍 首次启动 Halo 项目时需要安装博客并注册用户信息，当博客安装完成后用户就可以根据注册的信息登录到管理员界面，下面我们分析一下整个过程中代码是如何执行的。 博客安装 项目启动成功后，我们可" />
+        <link rel="icon" href="/assets/website/img/nekoraynode/favicon.ico" type="image/x-icon"/>
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <!-- Libraries Stylesheet -->
+    <link href="__ADDON__/js/frontend/nekoraynode/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6TD6QHWW6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6TD6QHWW6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid p-0">
+                <nav class="navbar navbar-expand-lg fixed-top navbar-light px-4 px-lg-5 py-3 py-lg-0">
+            <a href="/" class="navbar-brand p-0">
+                                <span class="display-6 text-primary m-0">
+                    <i class="fas fa-envelope me-3"></i>NekoRay Node
+                </span>
+                            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                                        <a href="/" class="nav-item nav-link">首页</a>
+                                        <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                        <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                        <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                        <a href="#" class="nav-item nav-link">关于</a>
+                    <a href="#" class="nav-item nav-link">联系</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar & Hero End -->
+    <!-- Header Start -->
+    <div class="container-fluid bg-breadcrumb">
+        <ul class="breadcrumb-animation">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="container text-center py-5" style="max-width: 900px;">
+            <h3 class="display-3 mb-4 wow fadeInDown" data-wow-delay="0.1s">Halo 开源项目学习注册与登录</h1>
+                <ol class="breadcrumb justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+                    <li class="breadcrumb-item"><a href="/">首页</a></li>
+                    <li class="breadcrumb-item"><a href="/news/">新闻资讯</a></li>
+                    <li class="breadcrumb-item active text-primary">正文</li>
+                </ol>
+        </div>
+    </div>
+    <!-- Header End -->
+    <!-- About Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<h2 id="基本介绍">基本介绍</h2> <p>首次启动 Halo 项目时需要安装博客并注册用户信息，当博客安装完成后用户就可以根据注册的信息登录到管理员界面，下面我们分析一下整个过程中代码是如何执行的。</p> <h2 id="博客安装">博客安装</h2> <p>项目启动成功后，我们可以访问<code>http://127.0.0.1:8090</code> 进入到博客首页，或者访问<code>http://127.0.0.1:8090/admin</code> 进入到管理员页面。但如果博客未安装，那么页面会被重定向到安装页面：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/3839eebd0b20c3fa25f71aa8bac94fd3.jpg" alt="Halo 开源项目学习注册与登录"></p> <p>这是因为 Halo 中定义了几个过滤器，分别为 ContentFilter、ApiAuthenticationFilter 和 AdminAuthenticationFilter。这三个过滤器均为 AbstractAuthenticationFilter 的子类，而 AbstractAuthenticationFilter 又继承自 OncePerRequestFilter，其重写的 doFilterInternal 方法如下：</p> <pre><code class="language-java">protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,     FilterChain filterChain) throws ServletException, IOException {     // Check whether the blog is installed or not     Boolean isInstalled =         optionService             .getByPropertyOrDefault(PrimaryProperties.IS_INSTALLED, Boolean.class, false);      // 如果博客未安装且当前并不是测试环境     if (!isInstalled &amp;&amp; !Mode.TEST.equals(haloProperties.getMode())) {         // If not installed         getFailureHandler().onFailure(request, response, new NotInstallException("当前博客还没有初始化"));         return;     }      try {         // Check the one-time-token         // 进行一次性 token 检查         if (isSufficientOneTimeToken(request)) {             filterChain.doFilter(request, response);             return;         }          // 一次性 token 验证失败则需要做身份认证         // Do authenticate         doAuthenticate(request, response, filterChain);     } catch (AbstractHaloException e) {         getFailureHandler().onFailure(request, response, e);     } finally {         SecurityContextHolder.clearContext();     } }</code></pre> <p>doFilterInternal 方法的主要逻辑为：</p> <ol> <li> <p>判断博客是否已安装，如果未安装且当前并非测试环境，那么由 failureHandler 处理 NotInstallException 异常并退出，否则继续向下执行。</p> </li> <li> <p>进行一次性 token 检查（本文并未使用到），如果一次性 token 验证成功则将该请求交付给下一个过滤器；如果失败则执行 doAuthenticate 方法对用户进行身份认证。若在发生异常，那么由 failureHandler 的  onFailure 方法处理该请求。</p> </li> </ol> <p>继承了 AbstractAuthenticationFilter 的子类都会根据上述逻辑处理用户的请求，只不过在不同的子类过滤器中，身份认证逻辑和 failureHandler 会有一定差异。下图展示了一个请求经过 Filter 的过程：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/37c7ab43095f24a05c94a388125cd43f.jpg" alt="Halo 开源项目学习注册与登录"></p> <p>可见，不同的过滤器之间拦截的请求并没有交集，因此一个请求最多会被一个过滤器处理。当我们访问<code>http://127.0.0.1:8090</code> 时，该请求会被 ContentFilter 拦截，然后执行 doFilterInternal 方法，由于博客未安装，所以由 failureHandler 处理 NotInstallException 异常。ContentFilter 中定义的 failureHandler 属于 ContentAuthenticationFailureHandler 类，该类中 onFailure 方法定义如下：</p> <pre><code class="language-java">public void onFailure(HttpServletRequest request, HttpServletResponse response,     AbstractHaloException exception) throws IOException, ServletException {     if (exception instanceof NotInstallException) {         // 重定向到 /install         response.sendRedirect(request.getContextPath() + "/install");         return;     }      // Forward to error     request.getRequestDispatcher(request.getContextPath() + "/error")         .forward(request, response); }</code></pre> <p>上述代码表示，当异常为 NotInstallException，就将请求重定向到<code>/install</code>：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/78c559af97841fb9dc341f0010586805.jpg" alt="Halo 开源项目学习注册与登录"></p> <p><code>/install</code> 请求在 MainController 中定义，且该请求又会被重定向到<code>/admin/index.html#install</code>：</p> <pre><code class="language-java">@GetMapping("install") public void installation(HttpServletResponse response) throws IOException {     String installRedirectUri =         StringUtils.appendIfMissing(this.haloProperties.getAdminPath(), "/") + INSTALL_REDIRECT_URI;     // /admin/index.html#install     response.sendRedirect(installRedirectUri); }</code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/3cb95519075c7bdca9fe82abf6e7a392.jpg" alt="Halo 开源项目学习注册与登录"></p> <p>index.html 文件位于<code>/resource/admin</code> 目录下，<code>#install</code> 表示定位到 index.html 页面的 install 表单，也就是上文中展示的安装页面。</p> <p>值得注意的是，当我们访问<code>http://127.0.0.1:8090/admin</code> 时，请求并不会被过滤器处理（三个过滤器均放行了<code>/admin</code>），但页面还是被重定向到了安装页面，这是因为 MainController 中也定义了<code>/admin</code> 请求的重定向规则：</p> <pre><code class="language-java">@GetMapping("${halo.admin-path:admin}") public void admin(HttpServletResponse response) throws IOException {     String adminIndexRedirectUri =         HaloUtils.ensureBoth(haloProperties.getAdminPath(), HaloUtils.URL_SEPARATOR)             + INDEX_REDIRECT_URI;     // /admin/index.html     response.sendRedirect(adminIndexRedirectUri); }</code></pre> <p>可见，访问<code>/admin</code> 时，请求会被重定向到<code>/admin/index.html</code>，但直接访问 index.html 还并不能显示安装页面，因为 URL 中并没有添加定位标识<code>#install</code>。查看 index.html 中的代码后可以发现，当该页面打开时，浏览器会自动访问<code>/favicon.ico</code> 和<code>/api/admin/is_installed</code>，<code>/api/admin/is_installed</code> 会被过滤器放行，但<code>/favicon.ico</code> 却会被 ContentFilter 拦截，之后又是两个重定向，最终让我们看到安装页面：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/113b60ddcb2ede747cd6b35cb59b283f.jpg" alt="Halo 开源项目学习注册与登录"></p> <p>在安装页面填写完信息后，点击 "安装" 按钮，触发<code>/api/admin/installations</code> 请求，请求中携带着我们填写的博客信息：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/0249d4be7f13ac316a5e0dab807b5d11.jpg" alt="Halo 开源项目学习注册与登录"></p> <p><code>/api/admin/installations</code> 在 InstallController 中定义，主要处理逻辑为：</p> <pre><code class="language-java">public BaseResponse&lt;String&gt; installBlog(@RequestBody InstallParam installParam) {     // Validate manually     ValidationUtils.validate(installParam, CreateCheck.class);      // Check is installed     boolean isInstalled = optionService         .getByPropertyOrDefault(PrimaryProperties.IS_INSTALLED, Boolean.class, false);      if (isInstalled) {         throw new BadRequestException("该博客已初始化，不能再次安装！");     }      // Initialize settings     initSettings(installParam);      // Create default user     User user = createUser(installParam);      // Create default category     Category category = createDefaultCategoryIfAbsent();      // Create default post     PostDetailVO post = createDefaultPostIfAbsent(category);      // Create default sheet     createDefaultSheet();      // Create default postComment     createDefaultComment(post);      // Create default menu     createDefaultMenu();      eventPublisher.publishEvent(         new LogEvent(this, user.getId().toString(), LogType.BLOG_INITIALIZED, "博客已成功初始化")     );      return BaseResponse.ok("安装完成！"); }</code></pre> <ol> <li> <p>初始化博客的系统设置：也可以称为初始化选项信息，例如将安装选项 is_installed 置为 true，将博客标题 blog_title 置为我们填写的标题等，这些信息会被保存到 options 表中。</p> </li> <li> <p>保存用户信息：也就是我们填写的姓名、email 等，在这些信息存储到 users 表之前，系统会将用户的密码进行加密处理，并为用户分配一个头像。</p> </li> <li> <p>创建默认的分类：分类名称为 "默认分类"。</p> </li> <li> <p>创建默认的文章：访问博客首页时看到的文章 "Hello Halo"。</p> </li> <li> <p>创建默认的页面：访问博客首页时看到的页面，标题为 "关于页面"。</p> </li> <li> <p>创建默认的评论：评论的 postId 为文章 "Hello Halo" 的 id，即表示该评论是属于 "Hello Halo" 的评论。</p> </li> <li> <p>创建默认的菜单：设置了 4 个一级菜单、菜单对应的 URL 以及菜单在首页排列的优先级，例如 "首页" 的优先级为 0（最高优先级），因此排列在第一位，访问的 URL 为 "/"，因此点击 "首页" 时会触发 "/" 请求。</p> </li> <li> <p>发布 LogEvent 事件：记录 "博客已成功初始化" 的系统日志。</p> </li> </ol> <h2 id="用户登录">用户登录</h2> <p>上文中提到，当用户访问<code>/admin</code> 时，请求会被重定向到<code>/admin/index.html</code>，而访问 index.html 时，默认显示的是登录表单，此时浏览器中的 URL 为<code>admin/index.html#/login?redirect=%2Fdashboard</code>，这是由 index.html 引入的的 js 文件<code>https://cdn.jsdelivr.net/npm/halo-admin@1.4.13/dist/js/app.22ce7788.js</code>（后文中将其简称为 js 文件）设置的，表示登录成功后重定向到 "Halo Dashboard" 界面（与定位 install 一样，这里是定位到 dashboard）。用户可填写 "用户名/邮箱" 和 "密码" 进行登录，登录按钮会触发<code>/api/admin/precheck</code> 请求，该请求的处理逻辑为：</p> <pre><code class="language-java">@PostMapping("login/precheck") @ApiOperation("Login") @CacheLock(autoDelete = false, prefix = "login_precheck") public LoginPreCheckDTO authPreCheck(@RequestBody @Valid LoginParam loginParam) {     final User user = adminService.authenticate(loginParam);     return new LoginPreCheckDTO(MFAType.useMFA(user.getMfaType())); }</code></pre> <p>上述方法首先调用 authenticate 方法验证用户的登录参数，然后告知前端登录参数是否正确以及是否需要输入两步验证码（默认关闭）。authenticate 方法会根据用户名/邮箱从 users 表中获取用户的信息，并判断当前用户账号是否有效，如果有效则继续判断登录的密码与设置的密码是否相同，如果密码正确则返回 User 对象：</p> <pre><code class="language-java">public User authenticate(@NonNull LoginParam loginParam) {     Assert.notNull(loginParam, "Login param must not be null");      String username = loginParam.getUsername();      String mismatchTip = "用户名或者密码不正确";      final User user;      try {     // Get user by username or email     // userName 是用户名还是邮箱     user = ValidationUtils.isEmail(username)     ? userService.getByEmailOfNonNull(username) :     userService.getByUsernameOfNonNull(username);     } catch (NotFoundException e) {     log.error("Failed to find user by name: " + username);     // 记录登录失败的日志     eventPublisher.publishEvent(     new LogEvent(this, loginParam.getUsername(), LogType.LOGIN_FAILED,     loginParam.getUsername()));      throw new BadRequestException(mismatchTip);     }      // 用户账号的有效时间 expireTime 必须小于当前时间, 否则无法正常登录，这个东西就很奇怪     userService.mustNotExpire(user);      // 检查登录密码是否正确     if (!userService.passwordMatch(user, loginParam.getPassword())) {     // If the password is mismatch     eventPublisher.publishEvent(     new LogEvent(this, loginParam.getUsername(), LogType.LOGIN_FAILED,     loginParam.getUsername()));      throw new BadRequestException(mismatchTip);     }      return user; }</code></pre> <p>虽然<code>/api/login/precheck</code> 返回的是一个 LoginPreCheckDTO 对象，但实际上前端收到的是一个 BaseResponse 对象，这是因为 Halo 中会使用 AOP 对 Controller 的响应进行封装：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/c1ceca4b09d8ad8512ca56cd2204a873.jpg" alt="Halo 开源项目学习注册与登录"></p> <p>默认情况下是不开启两步验证码的（MFAType 的默认值为 0），因此响应中的 needMFACode 为 false。如果需要，那么可在管理员页面的 "用户" -&gt; "个人资料" -&gt; "两步验证" 处开启。浏览器收到上图中的响应后，会自动发送<code>/api/admin/login</code> 请求（由  js 文件设置），但如果开启了两步验证码，那么还需要输入验证码才能继续访问<code>/api/admin/login</code>。</p> <p><code>/api/admin/login</code> 会向用户返回一个 AuthToken 对象：</p> <pre><code class="language-java">@PostMapping("login") @ApiOperation("Login") @CacheLock(autoDelete = false, prefix = "login_auth") public AuthToken auth(@RequestBody @Valid LoginParam loginParam) { 	return adminService.authCodeCheck(loginParam); }</code></pre> <p>authCodeCheck 方法的处理逻辑为：</p> <pre><code class="language-java">public AuthToken authCodeCheck(@NonNull final LoginParam loginParam) {     // get user     final User user = this.authenticate(loginParam);      // check authCode     // 检查两步验证码     if (MFAType.useMFA(user.getMfaType())) {         if (StringUtils.isBlank(loginParam.getAuthcode())) {         throw new BadRequestException("请输入两步验证码");     }     TwoFactorAuthUtils.validateTFACode(user.getMfaKey(), loginParam.getAuthcode());     }      if (SecurityContextHolder.getContext().isAuthenticated()) {         // If the user has been logged in         throw new BadRequestException("您已登录，请不要重复登录");     }      // Log it then login successful     // 记录登录成功的日志     eventPublisher.publishEvent(     new LogEvent(this, user.getUsername(), LogType.LOGGED_IN, user.getNickname()));      // Generate new token     // 为用户生成 token     return buildAuthToken(user); }</code></pre> <p>上述方法首先调用 authenticate 方法获取用户，然后检查两步验证码（如果设置的话），接着记录登录成功的日志，最后为用户生成一个 token，token 可作为用户的身份标识，服务器可以根据 token 验证用户的身份，而无需用户名和密码。token 的生成逻辑如下：</p> <pre><code class="language-java">private AuthToken buildAuthToken(@NonNull User user) {     Assert.notNull(user, "User must not be null");      // Generate new token     AuthToken token = new AuthToken();      token.setAccessToken(HaloUtils.randomUUIDWithoutDash());     token.setExpiredIn(ACCESS_TOKEN_EXPIRED_SECONDS);     token.setRefreshToken(HaloUtils.randomUUIDWithoutDash());      // Cache those tokens, just for clearing     cacheStore.putAny(SecurityUtils.buildAccessTokenKey(user), token.getAccessToken(),                       ACCESS_TOKEN_EXPIRED_SECONDS, TimeUnit.SECONDS);     cacheStore.putAny(SecurityUtils.buildRefreshTokenKey(user), token.getRefreshToken(),                       REFRESH_TOKEN_EXPIRED_DAYS, TimeUnit.DAYS);      // Cache those tokens with user id     cacheStore.putAny(SecurityUtils.buildTokenAccessKey(token.getAccessToken()), user.getId(),                       ACCESS_TOKEN_EXPIRED_SECONDS, TimeUnit.SECONDS);     cacheStore.putAny(SecurityUtils.buildTokenRefreshKey(token.getRefreshToken()), user.getId(),                       REFRESH_TOKEN_EXPIRED_DAYS, TimeUnit.DAYS);      return token; }</code></pre> <p>可以发现，token 中包含了 accessToken（随机生成的 UUID）、refreshToken（随机生成的 UUID）以及 accessToken 和 refreshToken 的过期时间。其中 accessToken 是用来做身份认证的，而 refreshToken 的作用是实现 token 的 "无痛刷新"。具体来讲，后端返回 token 信息后，浏览器会同时保存 accessToken 和 refreshToken，如果 accessToken 过期，那么当浏览器发送请求时，服务器会返回 "Token 已过期或不存在" 的失败响应，此时浏览器可以发送<code>/api/admin/refresh/{refreshToken}</code> 请求，通过 refreshToken 向服务器申请一个新的 token（包括 accessToken 和 refreshToken），然后使用新的 accessToken 重新发送之前未处理成功的请求。因此，accessToken 和 refreshToken 是绑定在一起的，且 refreshToken 的过期时间（Halo 中设置的是 30 天）要大于 accessToken（1 天）。上述代码中，服务器使用 cacheStore 存储用户 id 和 token ，cacheStore 是项目中的内部缓存，它使用 ConcurrentHashMap 作为容器。</p> <p>用户登录成功后浏览器获得的响应：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/a7b75ad2e90f5885a608fa6814df7771.jpg" alt="Halo 开源项目学习注册与登录"></p> <p>浏览器将 token 保存在了 Local Storate：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/54db04696eacf1105a5368b3fbc1a2c2.jpg" alt="Halo 开源项目学习注册与登录"></p> <p>当浏览器下次请求资源时，会将 accessToken 存入到 Request Headers 中<code>Admin-Authorization</code> 头域：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/465d1efc20a6600554f82616dc1d04a1.jpg" alt="Halo 开源项目学习注册与登录"></p> <p>accessToken 过期后，浏览器使用 refreshToken 申请新的 token：</p> <p>&lt;img src<img decoding="async" src="http://img.555519.xyz/uploads3/20220509/af6433b3fcbb036ed98c725279351dc9.jpg" alt="Halo 开源项目学习注册与登录"></p> <p>浏览器中 token 的保存、token 过期后的重新申请以及 Header 中 token 的添加都是由 js 文件设置的。另外，前文中提到，过滤器拦截请求后首先要进行一次性 token 检查，如果失败则需要验证用户的身份，而<code>Admin-Authorization</code> 头域就是用于身份认证的，例如上图中的请求<code>api/admin/users/profiles</code> 会被 AdminAuthenticationFilter 拦截，因为并未设置一次性 token，因此需要进行身份认证，而 AdminAuthenticationFilter 的身份认证逻辑为：</p> <pre><code class="language-java">protected void doAuthenticate(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {      // 如果未设置认证     if (!haloProperties.isAuthEnabled()) {         // Set security         userService.getCurrentUser().ifPresent(user -&gt;         SecurityContextHolder.setContext(         new SecurityContextImpl(new AuthenticationImpl(new UserDetail(user)))));          // Do filter         filterChain.doFilter(request, response);     return;     }      // 获取 token, 从请求的 Query 参数中获取 admin_token 或者从 Header 中获取 Admin-Authorization     // Get token from request     String token = getTokenFromRequest(request);      if (StringUtils.isBlank(token)) {     throw new AuthenticationException("未登录，请登录后访问");     }      // 根据 token 从 cacheStore 缓存中获取用户 id     // Get user id from cache     Optional&lt;Integer&gt; optionalUserId =     cacheStore.getAny(SecurityUtils.buildTokenAccessKey(token), Integer.class);      if (!optionalUserId.isPresent()) {     	throw new AuthenticationException("Token 已过期或不存在").setErrorData(token);     }      // 获取用户     // Get the user     User user = userService.getById(optionalUserId.get());      // Build user detail     UserDetail userDetail = new UserDetail(user);      // 将用户信息存储到 ThreadLocal 中     // Set security     SecurityContextHolder     .setContext(new SecurityContextImpl(new AuthenticationImpl(userDetail)));      // Do filter     filterChain.doFilter(request, response); }</code></pre> <ol> <li>如果博客未设置身份认证，那么将 users 表中的第一个用户作为当前用户，并存储到 ThreadLocal 容器中，ThreadLocal 可用于在同一个线程内的多个函数或者组件之间传递公共信息。如果开启了身份认证，则继续向下执行。</li> <li>获取 token，也就是从请求的 Query 参数中获取 admin_token 或者从 Header 中获取 Admin-Authorization。</li> <li>根据 token 从 cacheStore 缓存中获取用户 id，查询出用户后将用户存储到 ThreadLocal 中，身份认证通过。</li> </ol> <p>以上便是用户输入账号密码来登录管理员页面的过程。</p> <h2 id="用户登出">用户登出</h2> <p>用户退出登录时，触发<code>/api/admin/logout</code> 请求，请求的处理逻辑是清除掉用户的 token：</p> <pre><code class="language-java">public void logout() { 	adminService.clearToken(); }</code></pre> <p>clearToken 方法如下：</p> <pre><code class="language-java">@PostMapping("logout") @ApiOperation("Logs out (Clear session)") @CacheLock(autoDelete = false) public void clearToken() {     // 检查 ThreadLocal 是否为空     // Check if the current is logging in     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();      if (authentication == null) {     	throw new BadRequestException("您尚未登录，因此无法注销");     }      // 获取当前用户     // Get current user     User user = authentication.getDetail().getUser();      // 清除 accessToken     // Clear access token     cacheStore.getAny(SecurityUtils.buildAccessTokenKey(user), String.class)     .ifPresent(accessToken -&gt; {     	// Delete token     	cacheStore.delete(SecurityUtils.buildTokenAccessKey(accessToken));     	cacheStore.delete(SecurityUtils.buildAccessTokenKey(user));     });      // 清除 refreshToken     // Clear refresh token     cacheStore.getAny(SecurityUtils.buildRefreshTokenKey(user), String.class)     .ifPresent(refreshToken -&gt; {         cacheStore.delete(SecurityUtils.buildTokenRefreshKey(refreshToken));         cacheStore.delete(SecurityUtils.buildRefreshTokenKey(user));     });      eventPublisher.publishEvent(     new LogEvent(this, user.getUsername(), LogType.LOGGED_OUT, user.getNickname()));      log.info("You have been logged out, looking forward to your next visit!"); }</code></pre> <ol> <li> <p>检查 ThreadLocal 是否为空，为空表示用户并未登陆。</p> </li> <li> <p>获取当前用户并清除 cacheStore 中与用户相关的 token。</p> </li> <li> <p>记录用户登出日志。</p> </li> </ol> <h2 id="博客首页">博客首页</h2> <p>上文介绍的登录和登出指的是在管理员界面上的操作，实际上<code>127.0.0.1:8090</code> 才是博客的首页。当我们访问<code>/</code> 时，ContentIndexController 中的 index 方法会处理请求：</p> <pre><code class="language-java">@GetMapping public String index(Integer p, String token, Model model) {      PostPermalinkType permalinkType = optionService.getPostPermalinkType();      if (PostPermalinkType.ID.equals(permalinkType) &amp;&amp; !Objects.isNull(p)) {         Post post = postService.getById(p);         return postModel.content(post, token, model);     }      return this.index(model, 1); }</code></pre> <p>index(model, 1) 指的是显示博客的第一页：</p> <pre><code class="language-java">public String index(Model model,         @PathVariable(value = "page") Integer page) {     return postModel.list(page, model); }</code></pre> <p>postModel.list 方法的逻辑如下：</p> <pre><code class="language-java">public String list(Integer page, Model model) {     // 获取每页显示的文章数量     int pageSize = optionService.getPostPageSize();     Pageable pageable = PageRequest         .of(page &gt;= 1 ? page - 1 : page, pageSize, postService.getPostDefaultSort());      // 查询出所有已发布的文章, 默认按照发布时间降序排列     Page&lt;Post&gt; postPage = postService.pageBy(PostStatus.PUBLISHED, pageable);     Page&lt;PostListVO&gt; posts = postService.convertToListVo(postPage);      // 将文章以及相关属性存入到 model 中     model.addAttribute("is_index", true);     model.addAttribute("posts", posts);     model.addAttribute("meta_keywords", optionService.getSeoKeywords());     model.addAttribute("meta_description", optionService.getSeoDescription());     // 返回已激活主题文件中的 index.ftl     return themeService.render("index"); }</code></pre> <ol> <li>查看博客每页显示的文章数量，默认是 10。</li> <li>查询出所有已发布的文章并对其排序，默认按照发布时间降序排列。</li> <li>将文章以及相关属性存入到 model 中，Halo 中使用的是 FreeMaker 模板引擎，将信息存入到 model 后前端可通过 EL 表达式获取到这些内容。</li> <li>返回 "index" 路径，该路径指向已激活主题（默认主题为<code>caicai_anatole</code>）的 index.ftl 文件，该文件可生成我们看到的博客主页。</li> </ol> <p>博客首页：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/87a5f272060d5d5d0d4269c5a25f90ca.jpg" alt="Halo 开源项目学习注册与登录"></p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-37680.htm">被家猫轻微抓破皮要打针吗?（被家猫抓伤轻微出血需要打几针）</a></p>
+                                        <p>下一个：<a href="/news/article-38178.htm">厦门同安宠物店一条街在哪里（同安宠物店有哪些）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-11-19-free-v2ray-subscribe.htm" title="「11月19日」最高速度22.7M/S，2024年NekoRay每天更新免费节点订阅链接">「11月19日」最高速度22.7M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-8-free-node-subscribe.htm" title="「1月8日」最高速度21.3M/S，2025年NekoRay每天更新免费节点订阅链接">「1月8日」最高速度21.3M/S，2025年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-37679.htm" title="宠物的领养协议是有法律保护的吗为什么没有 宠物的领养协议是有法律保护的吗为什么没有">宠物的领养协议是有法律保护的吗为什么没有 宠物的领养协议是有法律保护的吗为什么没有</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-30-free-node-subscribe-links.htm" title="「10月30日」最高速度21M/S，2024年NekoRay每天更新免费节点订阅链接">「10月30日」最高速度21M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-37680.htm" title="被家猫轻微抓破皮要打针吗?（被家猫抓伤轻微出血需要打几针）">被家猫轻微抓破皮要打针吗?（被家猫抓伤轻微出血需要打几针）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-5-linux-nekoray-node.htm" title="「12月5日」最高速度21.6M/S，2024年NekoRay每天更新免费节点订阅链接">「12月5日」最高速度21.6M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-8-node-share.htm" title="「12月8日」最高速度22.9M/S，2024年NekoRay每天更新免费节点订阅链接">「12月8日」最高速度22.9M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-35960.htm" title="天津天照集团是什么产业（天照实业）">天津天照集团是什么产业（天照实业）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-15-node-share-links.htm" title="「12月15日」最高速度21.1M/S，2024年NekoRay每天更新免费节点订阅链接">「12月15日」最高速度21.1M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-27-share-windows-nekoray.htm" title="「12月27日」最高速度22M/S，2024年NekoRay每天更新免费节点订阅链接">「12月27日」最高速度22M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">25</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+        <!-- Copyright Start -->
+    <div class="container-fluid copyright py-4">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-md-0">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                    <span class="text-white">NekoRayNode节点订阅站 版权所有 Powered by WordPress</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright End -->
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary btn-lg-square back-to-top"><i class="fa fa-arrow-up"></i></a>
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/easing/easing.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/lightbox/js/lightbox.min.js"></script>
+    <!-- Template Javascript -->
+    <script src="/assets/website/js/frontend/nekoraynode/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
