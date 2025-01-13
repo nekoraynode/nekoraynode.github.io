@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://nekoraynode.github.io/news/article-39672.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>PHP从HTML转义详解</title>
+        <meta name="description" content="定义和用法 PHP文件可以将内容与代码混合在一起，而代码嵌入HTML文档中。解析器将忽略标记外部的代码，以供客户端浏览器解释。一个HTML文档可以有多个PHP块，每个块都在&lt;？php和？&gt;" />
+        <link rel="icon" href="/assets/website/img/nekoraynode/favicon.ico" type="image/x-icon"/>
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <!-- Libraries Stylesheet -->
+    <link href="__ADDON__/js/frontend/nekoraynode/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6TD6QHWW6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6TD6QHWW6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid p-0">
+                <nav class="navbar navbar-expand-lg fixed-top navbar-light px-4 px-lg-5 py-3 py-lg-0">
+            <a href="/" class="navbar-brand p-0">
+                                <span class="display-6 text-primary m-0">
+                    <i class="fas fa-envelope me-3"></i>NekoRay Node
+                </span>
+                            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                                        <a href="/" class="nav-item nav-link">首页</a>
+                                        <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                        <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                        <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                        <a href="#" class="nav-item nav-link">关于</a>
+                    <a href="#" class="nav-item nav-link">联系</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar & Hero End -->
+    <!-- Header Start -->
+    <div class="container-fluid bg-breadcrumb">
+        <ul class="breadcrumb-animation">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="container text-center py-5" style="max-width: 900px;">
+            <h3 class="display-3 mb-4 wow fadeInDown" data-wow-delay="0.1s">PHP从HTML转义详解</h1>
+                <ol class="breadcrumb justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+                    <li class="breadcrumb-item"><a href="/">首页</a></li>
+                    <li class="breadcrumb-item"><a href="/news/">新闻资讯</a></li>
+                    <li class="breadcrumb-item active text-primary">正文</li>
+                </ol>
+        </div>
+    </div>
+    <!-- Header End -->
+    <!-- About Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<h2>定义和用法</h2> <p>PHP文件可以将内容与代码混合在一起，而代码嵌入HTML文档中。解析器将忽略标记外部的代码，以供客户端浏览器解释。一个HTML文档可以有多个PHP块，每个块都在&lt;？php和？&gt;标记内。</p> <h2>语法</h2> <pre>&lt;p&gt; HTML&nbsp;block &lt;/p&gt; &lt;?php //PHP块 .. .. ?&gt; &lt;p&gt; HTML&nbsp;block &lt;/p&gt; &lt;?php //PHP块 .. .. ?&gt; &lt;p&gt; HTML&nbsp;block &lt;/p&gt;</pre> <p>每次遇到打开PHP标记时，解析器都会开始将输出呈现给客户端，直到到达关闭标记为止。如果代码使用条件语句，则解析器确定要跳过的块。</p> <p>再次直到另一个开始标记出现，所有内容都被视为HTML，而使浏览器进行处理。</p> <h2>PHP版本</h2> <p>此描述适用于所有版本的PHP。</p> <p>以下示例显示了嵌入HTML的PHP代码</p> <h2>示例</h2> <pre>&lt;html&gt; &lt;body&gt; &lt;!..HTML&nbsp;code--!&gt; &lt;h3&gt;Hello&nbsp;World&lt;/h3&gt; &lt;!--&nbsp;PHP&nbsp;code&nbsp;--!&gt; &lt;?php echo&nbsp;"Hello&nbsp;World&nbsp;in&nbsp;PHP"; ?&gt; &lt;!--&nbsp;This&nbsp;is&nbsp;HTML&nbsp;code&nbsp;--!&gt; &lt;p&gt;Hello&nbsp;world&nbsp;again&lt;/p&gt; &lt;?php echo&nbsp;"Hello&nbsp;World&nbsp;again&nbsp;in&nbsp;PHP"; ?&gt; &lt;/body&gt; &lt;/html&gt;</pre> <p>输出结果</p> <p>这将产生以下结果-</p> <pre>Hello&nbsp;WorldHello&nbsp;World&nbsp;in&nbsp;PHP Hello&nbsp;world&nbsp;again Hello&nbsp;World&nbsp;again&nbsp;in&nbsp;PHP</pre> <p>使用HTML和PHP混合代码的示例</p> <h2>示例</h2> <pre>&lt;?php&nbsp;$marks=10;&nbsp;?&gt; &lt;h1&gt;Using&nbsp;conditional&nbsp;statement&lt;/h1&gt; &lt;?php&nbsp;if&nbsp;($marks&nbsp;&gt;=50):&nbsp;?&gt; &lt;h2&nbsp;style="color:blue;"&gt;Result:pass&lt;/p&gt; &lt;?php&nbsp;else:&nbsp;?&gt; &lt;h2&nbsp;style="color:red;"&gt;&nbsp;Result:Fail&lt;/p&gt; &lt;?php&nbsp;endif;&nbsp;?&gt;</pre> <p>输出结果</p> <p>这将产生以下结果-</p> <pre>Using&nbsp;conditional&nbsp;statement Result:Failchange&nbsp;marks&nbsp;to&nbsp;60&nbsp;and&nbsp;run&nbsp;again Using&nbsp;conditional&nbsp;statement Result:pass</pre> <div></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-39196.htm">动物医院申请条件是什么意思呀怎么填（动物医院收费标准）</a></p>
+                                        <p>下一个：<a href="/news/article-39673.htm">vue-cli环境安装node-sass问题</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-10-15-share-windows-nekoray.htm" title="「10月15日」最高速度20M/S，2024年NekoRay每天更新免费节点订阅链接">「10月15日」最高速度20M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-16-windows-nekoray.htm" title="「12月16日」最高速度18.7M/S，2024年NekoRay每天更新免费节点订阅链接">「12月16日」最高速度18.7M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-11-free-node-subscribe.htm" title="「10月11日」最高速度21M/S，2024年NekoRay每天更新免费节点订阅链接">「10月11日」最高速度21M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-28-node-share-links.htm" title="「12月28日」最高速度21.2M/S，2024年NekoRay每天更新免费节点订阅链接">「12月28日」最高速度21.2M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-34974.htm" title="动物诊疗许可证办理流程视频（动物诊疗许可证申请条件）">动物诊疗许可证办理流程视频（动物诊疗许可证申请条件）</a></li>
+                        <li class="py-2"><a href="/news/article-23068.htm" title="Java 垃圾回收超详细讲解记忆集和卡表_java">Java 垃圾回收超详细讲解记忆集和卡表_java</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-17-linux-nekoray.htm" title="「12月17日」最高速度19.1M/S，2024年NekoRay每天更新免费节点订阅链接">「12月17日」最高速度19.1M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-22610.htm" title="太原市免费领养狗狗（太原哪里可以免费领养狗狗）">太原市免费领养狗狗（太原哪里可以免费领养狗狗）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-30-free-subscribe-node.htm" title="「11月30日」最高速度19.7M/S，2024年NekoRay每天更新免费节点订阅链接">「11月30日」最高速度19.7M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-33436.htm" title="给动物打疫苗要多少钱一次呀图片（给动物打疫苗要多少钱一次呀图片）">给动物打疫苗要多少钱一次呀图片（给动物打疫苗要多少钱一次呀图片）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">39</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">25</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+        <!-- Copyright Start -->
+    <div class="container-fluid copyright py-4">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-md-0">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                    <span class="text-white">NekoRayNode节点订阅站 版权所有 Powered by WordPress</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright End -->
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary btn-lg-square back-to-top"><i class="fa fa-arrow-up"></i></a>
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/easing/easing.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/lightbox/js/lightbox.min.js"></script>
+    <!-- Template Javascript -->
+    <script src="/assets/website/js/frontend/nekoraynode/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
