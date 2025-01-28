@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://nekoraynode.github.io/news/article-47597.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Python置换操作浅析(a, b=b, a)【Python】</title>
+        <meta name="description" content="在C/C++中，交换两个数的常规方法有以下两种：  借助临时变量 tmp = a a = b b = tmp   加法操作 a = a + b b = a - b a = a - b    但是在Py" />
+        <link rel="icon" href="/assets/website/img/nekoraynode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="NekoRayNode节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://nekoraynode.github.io/news/article-47597.htm" />
+    <meta property="og:site_name" content="NekoRayNode节点订阅站" />
+    <meta property="og:title" content="Python置换操作浅析(a, b=b, a)【Python】" />
+    <meta property="og:image" content="https://nekoraynode.github.io/uploads/20240626/e1e635b4cde20143e010dadcfcff5bac.webp" />
+        <meta property="og:release_date" content="2025-01-28T09:34:16" />
+    <meta property="og:updated_time" content="2025-01-28T09:34:16" />
+        <meta property="og:description" content="在C/C++中，交换两个数的常规方法有以下两种：  借助临时变量 tmp = a a = b b = tmp   加法操作 a = a + b b = a - b a = a - b    但是在Py" />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Python置换操作浅析(a, b=b, a)【Python】">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <!-- Libraries Stylesheet -->
+    <link href="/assets/website/js/frontend/nekoraynode/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6TD6QHWW6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6TD6QHWW6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid p-0">
+                <nav class="navbar navbar-expand-lg fixed-top navbar-light px-4 px-lg-5 py-3 py-lg-0">
+            <a href="/" class="navbar-brand p-0">
+                                <span class="display-6 text-primary m-0">
+                    <i class="fas fa-envelope me-3"></i>NekoRay Node
+                </span>
+                            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                                        <a href="/" class="nav-item nav-link">首页</a>
+                                        <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                        <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                        <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                        <a href="#" class="nav-item nav-link">关于</a>
+                    <a href="#" class="nav-item nav-link">联系</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar & Hero End -->
+    <!-- Header Start -->
+    <div class="container-fluid bg-breadcrumb">
+        <ul class="breadcrumb-animation">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="container text-center py-5" style="max-width: 900px;">
+            <h3 class="display-3 mb-4 wow fadeInDown" data-wow-delay="0.1s">Python置换操作浅析(a, b=b, a)【Python】</h1>
+                <ol class="breadcrumb justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+                    <li class="breadcrumb-item"><a href="/">首页</a></li>
+                    <li class="breadcrumb-item"><a href="/news/">新闻资讯</a></li>
+                    <li class="breadcrumb-item active text-primary">正文</li>
+                </ol>
+        </div>
+    </div>
+    <!-- Header End -->
+    <!-- About Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> <p>在C/C++中，交换两个数的常规方法有以下两种：</p> <ol> <li>借助临时变量 <pre><code class="prism language-python">tmp <span class="token operator">=</span> a a <span class="token operator">=</span> b b <span class="token operator">=</span> tmp </code></pre> </li> <li>加法操作 <pre><code class="prism language-python">a <span class="token operator">=</span> a <span class="token operator">+</span> b b <span class="token operator">=</span> a <span class="token operator">-</span> b a <span class="token operator">=</span> a <span class="token operator">-</span> b </code></pre> </li> </ol> <p>但是在Python中，还有一种更简便的方法：</p> <pre><code class="prism language-python">a<span class="token punctuation">,</span> b <span class="token operator">=</span> b<span class="token punctuation">,</span> a <span class="token comment"># 或 b, a = a, b</span> </code></pre> <p>这种方法在一般情况下可以很容易的完成变量交换，甚至在数组中一般情况也是成立的。但是这两天在刷Leetcode时， 题目：缺失的第一个正数，碰到了一个问题，在对数组中的两个值进行交换的时候，即将<code>nums[i]</code>和<code>nums[nums[i]-1]</code>交换时，下面的两个语句，只有第二个语句是正确的：</p> <pre><code class="prism language-python">nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> nums<span class="token punctuation">[</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> nums<span class="token punctuation">[</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> nums<span class="token punctuation">[</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> nums<span class="token punctuation">[</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> </code></pre> <p></p> <p><strong>究其原因，明白了置换操作的原理就可以很容易理解。</strong></p> <p>我们通过查看置换前后变量<code>a</code>,<code>b</code>的地址去理解，看下面的例子：</p> <pre><code class="prism language-python">a<span class="token punctuation">,</span>b <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span> <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"-----置换前------"</span><span class="token punctuation">)</span> <span class="token keyword">print</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span>b<span class="token punctuation">)</span> <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"a的地址:"</span><span class="token punctuation">,</span> <span class="token builtin">id</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"b的地址:"</span><span class="token punctuation">,</span> <span class="token builtin">id</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">)</span> a<span class="token punctuation">,</span>b <span class="token operator">=</span> b<span class="token punctuation">,</span>a <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"-----置换后------"</span><span class="token punctuation">)</span> <span class="token keyword">print</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span>b<span class="token punctuation">)</span> <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"a的地址:"</span><span class="token punctuation">,</span> <span class="token builtin">id</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"b的地址:"</span><span class="token punctuation">,</span> <span class="token builtin">id</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">)</span> </code></pre> <p>输出结果是</p> <pre><code class="prism language-python"><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span>置换前<span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span> <span class="token number">1</span> <span class="token number">2</span> a的地址<span class="token punctuation">:</span> <span class="token number">4444362368</span> b的地址<span class="token punctuation">:</span> <span class="token number">4444362400</span> <span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span>置换后<span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span> <span class="token number">2</span> <span class="token number">1</span> a的地址<span class="token punctuation">:</span> <span class="token number">4444362400</span> b的地址<span class="token punctuation">:</span> <span class="token number">4444362368</span> </code></pre> <p>可以看到，python中对变量的赋值是改变变量的指向，将变量指向目标值的地址。</p> <p>所以，对于置换操作<code>a, b = b, a</code>，操作顺序是先计算得到等号右边的所有数值，再将值<strong>依次</strong>赋给等号的左边。</p> <p>再回到上面出问题的例子<br /> 错误的：</p> <pre><code class="prism language-python">nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> nums<span class="token punctuation">[</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> nums<span class="token punctuation">[</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> </code></pre> <p>正确的：</p> <pre><code class="prism language-python">nums<span class="token punctuation">[</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> nums<span class="token punctuation">[</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> </code></pre> <p>问题就出在计算得到等式右边后，将值「依次」赋给等号的左边。可以看到<code>nums[nums[i] - 1]</code>引用了<code>nums[i]</code>。具体来说，对于错误的，由于<code>nums[nums[i] - 1]</code>引用了<code>nums[i]</code>，而这时的<code>nums[i]</code>已经重新赋值完毕，所以不正确。</p> <p> 总结一下，对于置换操作<code>a, b = b, a</code>，原理是计算得到等式右边后，将值「依次」赋给等号的左边。然后如果<code>a</code>和<code>b</code>存在引用关系，特别是在数组中，特别注意后者不能引用前者。</p> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-47596.htm">C ++程序使用Sundaram筛子在给定范围之间生成素数</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-11-9-share-windows-nekoray.htm" title="「11月9日」最高速度22.2M/S，2024年NekoRay每天更新免费节点订阅链接">「11月9日」最高速度22.2M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-26784.htm" title="成都宠物领养平台领养可靠吗现在多少钱（成都宠物领养平台领养可靠吗现在多少钱）">成都宠物领养平台领养可靠吗现在多少钱（成都宠物领养平台领养可靠吗现在多少钱）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-30-free-node-subscribe-links.htm" title="「10月30日」最高速度21M/S，2024年NekoRay每天更新免费节点订阅链接">「10月30日」最高速度21M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-42647.htm" title="mysql用哪种时间_mysql存储日期使用什么类型">mysql用哪种时间_mysql存储日期使用什么类型</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-27-windows-nekoray.htm" title="「1月27日」最高速度21.5M/S，2025年NekoRay每天更新免费节点订阅链接">「1月27日」最高速度21.5M/S，2025年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-10-free-nekoray.htm" title="「1月10日」最高速度22.8M/S，2025年NekoRay每天更新免费节点订阅链接">「1月10日」最高速度22.8M/S，2025年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-31939.htm" title="前端开发中需要搞懂的字符编码知识_在线工具">前端开发中需要搞懂的字符编码知识_在线工具</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-21-nekoray-node.htm" title="「12月21日」最高速度21.7M/S，2024年NekoRay每天更新免费节点订阅链接">「12月21日」最高速度21.7M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-28640.htm" title="广州领养宠物中心在哪里 广州领养宠物中心在哪里啊">广州领养宠物中心在哪里 广州领养宠物中心在哪里啊</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-12-linux-nekoray.htm" title="「11月12日」最高速度20.1M/S，2024年NekoRay每天更新免费节点订阅链接">「11月12日」最高速度20.1M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">25</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+        <!-- Copyright Start -->
+    <div class="container-fluid copyright py-4">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-md-0">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                    <span class="text-white">NekoRayNode节点订阅站 版权所有 Powered by WordPress</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright End -->
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary btn-lg-square back-to-top"><i class="fa fa-arrow-up"></i></a>
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/easing/easing.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/lightbox/js/lightbox.min.js"></script>
+    <!-- Template Javascript -->
+    <script src="/assets/website/js/frontend/nekoraynode/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

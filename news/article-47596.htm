@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://nekoraynode.github.io/news/article-47596.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>C ++程序使用Sundaram筛子在给定范围之间生成素数</title>
+        <meta name="description" content="这是C ++程序，用于实现Sundaram筛，以在给定范围之间生成素数。该算法由Sundaram于1934年发现。 算法 Begin &nbsp;&nbsp;&nbsp;printPrimes(n) " />
+        <link rel="icon" href="/assets/website/img/nekoraynode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="NekoRayNode节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://nekoraynode.github.io/news/article-47596.htm" />
+    <meta property="og:site_name" content="NekoRayNode节点订阅站" />
+    <meta property="og:title" content="C ++程序使用Sundaram筛子在给定范围之间生成素数" />
+    <meta property="og:image" content="https://nekoraynode.github.io/uploads/20240626/d6627d2577ed12fba73b72bed31de35d.webp" />
+        <meta property="og:release_date" content="2025-01-28T09:34:16" />
+    <meta property="og:updated_time" content="2025-01-28T09:34:16" />
+        <meta property="og:description" content="这是C ++程序，用于实现Sundaram筛，以在给定范围之间生成素数。该算法由Sundaram于1934年发现。 算法 Begin &nbsp;&nbsp;&nbsp;printPrimes(n) " />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="C ++程序使用Sundaram筛子在给定范围之间生成素数">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <!-- Libraries Stylesheet -->
+    <link href="/assets/website/js/frontend/nekoraynode/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6TD6QHWW6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6TD6QHWW6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid p-0">
+                <nav class="navbar navbar-expand-lg fixed-top navbar-light px-4 px-lg-5 py-3 py-lg-0">
+            <a href="/" class="navbar-brand p-0">
+                                <span class="display-6 text-primary m-0">
+                    <i class="fas fa-envelope me-3"></i>NekoRay Node
+                </span>
+                            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                                        <a href="/" class="nav-item nav-link">首页</a>
+                                        <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                        <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                        <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                        <a href="#" class="nav-item nav-link">关于</a>
+                    <a href="#" class="nav-item nav-link">联系</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar & Hero End -->
+    <!-- Header Start -->
+    <div class="container-fluid bg-breadcrumb">
+        <ul class="breadcrumb-animation">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="container text-center py-5" style="max-width: 900px;">
+            <h3 class="display-3 mb-4 wow fadeInDown" data-wow-delay="0.1s">C ++程序使用Sundaram筛子在给定范围之间生成素数</h1>
+                <ol class="breadcrumb justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+                    <li class="breadcrumb-item"><a href="/">首页</a></li>
+                    <li class="breadcrumb-item"><a href="/news/">新闻资讯</a></li>
+                    <li class="breadcrumb-item active text-primary">正文</li>
+                </ol>
+        </div>
+    </div>
+    <!-- Header End -->
+    <!-- About Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<p>这是C ++程序，用于实现Sundaram筛，以在给定范围之间生成素数。该算法由Sundaram于1934年发现。</p> <h2>算法</h2> <pre>Begin &nbsp;&nbsp;&nbsp;printPrimes(n) &nbsp;&nbsp;&nbsp;Here&nbsp;we&nbsp;find&nbsp;out&nbsp;primes &nbsp;&nbsp;&nbsp;smaller&nbsp;than&nbsp;n,&nbsp;we&nbsp;reduce&nbsp;n-2&nbsp;to&nbsp;half.&nbsp;We&nbsp;call&nbsp;it&nbsp;New. &nbsp;&nbsp;&nbsp;New&nbsp;=&nbsp;(n-2)/2; &nbsp;&nbsp;&nbsp;Create&nbsp;an&nbsp;array&nbsp;marked[n]&nbsp;that&nbsp;is&nbsp;going &nbsp;&nbsp;&nbsp;to&nbsp;be&nbsp;used&nbsp;to&nbsp;separate&nbsp;numbers&nbsp;of&nbsp;the&nbsp;form&nbsp;i+j+2ij&nbsp;from &nbsp;&nbsp;&nbsp;others&nbsp;where&nbsp;1&nbsp;&lt;=&nbsp;i&nbsp;&lt;=&nbsp;j &nbsp;&nbsp;&nbsp;Initialize&nbsp;all&nbsp;entries&nbsp;of&nbsp;marked[]&nbsp;as&nbsp;false. &nbsp;&nbsp;&nbsp;Mark&nbsp;all&nbsp;numbers&nbsp;of&nbsp;the&nbsp;form&nbsp;i&nbsp;+&nbsp;j&nbsp;+&nbsp;2ij&nbsp;as&nbsp;true &nbsp;&nbsp;&nbsp;where&nbsp;1&nbsp;&lt;=&nbsp;i&nbsp;&lt;=&nbsp;j &nbsp;&nbsp;&nbsp;for&nbsp;i=1&nbsp;to&nbsp;New &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a)&nbsp;j&nbsp;=&nbsp;i; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b)&nbsp;Loop&nbsp;While&nbsp;(i&nbsp;+&nbsp;j&nbsp;+&nbsp;2*i*j)&nbsp;2,&nbsp;then&nbsp;print&nbsp;2&nbsp;as&nbsp;first&nbsp;prime. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remaining&nbsp;primes&nbsp;are&nbsp;of&nbsp;the&nbsp;form&nbsp;2i&nbsp;+&nbsp;1&nbsp;where&nbsp;i&nbsp;is &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index&nbsp;of&nbsp;NOT&nbsp;marked&nbsp;numbers.&nbsp;So&nbsp;print&nbsp;2i&nbsp;+&nbsp;1&nbsp;for&nbsp;all&nbsp;i &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;such&nbsp;that&nbsp;marked[i]&nbsp;is&nbsp;false. End</pre> <h2>范例程式码</h2> <pre>#include&nbsp;&lt;bits/stdc++.h&gt; using&nbsp;namespace&nbsp;std; int&nbsp;SieveOfSundaram(int&nbsp;m)&nbsp;{ &nbsp;&nbsp;&nbsp;int&nbsp;N=&nbsp;(m-2)/2; &nbsp;&nbsp;&nbsp;bool&nbsp;marked[N&nbsp;+&nbsp;1]; &nbsp;&nbsp;&nbsp;memset(marked,&nbsp;false,&nbsp;sizeof(marked)); &nbsp;&nbsp;&nbsp;for&nbsp;(int&nbsp;i=1;&nbsp;i&lt;=N;&nbsp;i++) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(int&nbsp;j=i;&nbsp;(i&nbsp;+&nbsp;j&nbsp;+&nbsp;2*i*j)&nbsp;&lt;=&nbsp;N;&nbsp;j++) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;marked[i&nbsp;+&nbsp;j&nbsp;+&nbsp;2*i*j]&nbsp;=&nbsp;true; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(m&nbsp;&gt;&nbsp;2) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout&nbsp;&lt;&lt;&nbsp;2&nbsp;&lt;&lt;&nbsp;"&nbsp;"; &nbsp;&nbsp;&nbsp;for&nbsp;(int&nbsp;i=1;&nbsp;i&lt;=N;&nbsp;i++) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(marked[i]&nbsp;==&nbsp;false) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout&nbsp;&lt;&lt;&nbsp;2*i&nbsp;+&nbsp;1&nbsp;&lt;&lt;&nbsp;"&nbsp;"; } int&nbsp;main(void)&nbsp;{ &nbsp;&nbsp;&nbsp;int&nbsp;m&nbsp;=&nbsp;10; &nbsp;&nbsp;&nbsp;SieveOfSundaram(m); &nbsp;&nbsp;&nbsp;return&nbsp;0; }</pre> <p>输出结果</p> <pre>2&nbsp;3&nbsp;5&nbsp;7</pre> <div></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-47113.htm">宠物粮网店名字大全四个字（宠物粮取名）</a></p>
+                                        <p>下一个：<a href="/news/article-47597.htm">Python置换操作浅析(a, b=b, a)【Python】</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-36724.htm" title="动物疫苗种类及类型有哪些名称 动物疫苗种类及类型有哪些名称图片">动物疫苗种类及类型有哪些名称 动物疫苗种类及类型有哪些名称图片</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-21-nekoray-node.htm" title="「12月21日」最高速度21.7M/S，2024年NekoRay每天更新免费节点订阅链接">「12月21日」最高速度21.7M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-26-node-share.htm" title="「10月26日」最高速度18.4M/S，2024年NekoRay每天更新免费节点订阅链接">「10月26日」最高速度18.4M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-26-free-subscribe-node.htm" title="「11月26日」最高速度19.8M/S，2024年NekoRay每天更新免费节点订阅链接">「11月26日」最高速度19.8M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-21236.htm" title="Springboot 使用Maven实现多环境打包">Springboot 使用Maven实现多环境打包</a></li>
+                        <li class="py-2"><a href="/news/article-35960.htm" title="天津天照集团是什么产业（天照实业）">天津天照集团是什么产业（天照实业）</a></li>
+                        <li class="py-2"><a href="/news/article-20316.htm" title="瑞派宠物医院分布（瑞派宠物医院在哪）">瑞派宠物医院分布（瑞派宠物医院在哪）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-12-nekoray-node.htm" title="「12月12日」最高速度18.1M/S，2024年NekoRay每天更新免费节点订阅链接">「12月12日」最高速度18.1M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-34973.htm" title="上海宠物领养平台可靠吗现在（上海地区宠物领养）">上海宠物领养平台可靠吗现在（上海地区宠物领养）</a></li>
+                        <li class="py-2"><a href="/news/article-27245.htm" title="java springMVC之@RequestMapping注解">java springMVC之@RequestMapping注解</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">25</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+        <!-- Copyright Start -->
+    <div class="container-fluid copyright py-4">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-md-0">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                    <span class="text-white">NekoRayNode节点订阅站 版权所有 Powered by WordPress</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright End -->
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary btn-lg-square back-to-top"><i class="fa fa-arrow-up"></i></a>
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/easing/easing.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/lightbox/js/lightbox.min.js"></script>
+    <!-- Template Javascript -->
+    <script src="/assets/website/js/frontend/nekoraynode/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
