@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html xml:lang="zh-CN" lang="zh-CN">
 
 <head>
         <link rel="canonical" href="https://nekoraynode.github.io/news/article-35491.htm" />
@@ -8,6 +8,33 @@
     <title>自动类型安全的REST.NET标准库refit_实用技巧</title>
         <meta name="description" content="目录  1.简介 2.API属性 3.动态查询字符串参数(Dynamic Querystring Parameters) 4.集合作为查询字符串参数(Collections as Querystrin" />
         <link rel="icon" href="/assets/website/img/nekoraynode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="NekoRayNode节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://nekoraynode.github.io/news/article-35491.htm" />
+    <meta property="og:site_name" content="NekoRayNode节点订阅站" />
+    <meta property="og:title" content="自动类型安全的REST.NET标准库refit_实用技巧" />
+    <meta property="og:image" content="https://nekoraynode.github.io/uploads/20240626/d4a1225f971dcf462ebdd7908c157773.webp" />
+        <meta property="og:release_date" content="2025-01-04T10:23:50" />
+    <meta property="og:updated_time" content="2025-01-04T10:23:50" />
+        <meta property="og:description" content="目录  1.简介 2.API属性 3.动态查询字符串参数(Dynamic Querystring Parameters) 4.集合作为查询字符串参数(Collections as Querystrin" />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="自动类型安全的REST.NET标准库refit_实用技巧">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +42,7 @@
     <!-- Icon Font Stylesheet -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
     <!-- Libraries Stylesheet -->
-    <link href="__ADDON__/js/frontend/nekoraynode/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/nekoraynode/lightbox/css/lightbox.min.css" rel="stylesheet">
     <!-- Customized Bootstrap Stylesheet -->
     <link href="/assets/website/css/nekoraynode/bootstrap.min.css" rel="stylesheet">
     <!-- Template Stylesheet -->
@@ -108,16 +135,16 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/news/article-30988.htm" title="动物疫苗空瓶回收处理制度（疫苗空瓶回收登记表怎么填写）">动物疫苗空瓶回收处理制度（疫苗空瓶回收登记表怎么填写）</a></li>
-                        <li class="py-2"><a href="/news/article-34973.htm" title="上海宠物领养平台可靠吗现在（上海地区宠物领养）">上海宠物领养平台可靠吗现在（上海地区宠物领养）</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-10-free-nekoray.htm" title="「10月10日」最高速度20.6M/S，2024年NekoRay每天更新免费节点订阅链接">「10月10日」最高速度20.6M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/news/article-32417.htm" title="宠物粮食加工厂设备哪的好一点呢视频教程（宠物粮食加工厂设备哪的好一点呢视频教程）">宠物粮食加工厂设备哪的好一点呢视频教程（宠物粮食加工厂设备哪的好一点呢视频教程）</a></li>
-                        <li class="py-2"><a href="/news/article-25385.htm" title="领养协议书范本2019版本下载（领养协议书范本图片）">领养协议书范本2019版本下载（领养协议书范本图片）</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-12-nekoray-node.htm" title="「12月12日」最高速度18.1M/S，2024年NekoRay每天更新免费节点订阅链接">「12月12日」最高速度18.1M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/news/article-31939.htm" title="前端开发中需要搞懂的字符编码知识_在线工具">前端开发中需要搞懂的字符编码知识_在线工具</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-7-node-share-links.htm" title="「11月7日」最高速度21.1M/S，2024年NekoRay每天更新免费节点订阅链接">「11月7日」最高速度21.1M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-5-linux-nekoray-node.htm" title="「12月5日」最高速度21.6M/S，2024年NekoRay每天更新免费节点订阅链接">「12月5日」最高速度21.6M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/news/article-34806.htm" title="宠物用品一件代发网站有哪些品牌（宠物用品一件代发进货渠道）">宠物用品一件代发网站有哪些品牌（宠物用品一件代发进货渠道）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-20-windows-nekoray.htm" title="「11月20日」最高速度20.2M/S，2024年NekoRay每天更新免费节点订阅链接">「11月20日」最高速度20.2M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-41151.htm" title="宠物医院看猫癣贵吗（去宠物医院看猫癣）">宠物医院看猫癣贵吗（去宠物医院看猫癣）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-25-nekoray-node.htm" title="「1月25日」最高速度22.3M/S，2025年NekoRay每天更新免费节点订阅链接">「1月25日」最高速度22.3M/S，2025年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-20316.htm" title="瑞派宠物医院分布（瑞派宠物医院在哪）">瑞派宠物医院分布（瑞派宠物医院在哪）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-6-free-nekoray-node.htm" title="「1月6日」最高速度21.2M/S，2025年NekoRay每天更新免费节点订阅链接">「1月6日」最高速度21.2M/S，2025年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-2-node-share.htm" title="「1月2日」最高速度20.1M/S，2025年NekoRay每天更新免费节点订阅链接">「1月2日」最高速度20.1M/S，2025年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-47597.htm" title="Python置换操作浅析(a, b=b, a)【Python】">Python置换操作浅析(a, b=b, a)【Python】</a></li>
+                        <li class="py-2"><a href="/news/article-43143.htm" title="动物疫苗的生产原料有哪些,如何取得成功（动物疫苗工艺流程）">动物疫苗的生产原料有哪些,如何取得成功（动物疫苗工艺流程）</a></li>
+                        <li class="py-2"><a href="/news/article-46628.htm" title="适合养猫的生肖（适合养猫的生肖有哪些）">适合养猫的生肖（适合养猫的生肖有哪些）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-17-linux-nekoray-node.htm" title="「11月17日」最高速度21.2M/S，2024年NekoRay每天更新免费节点订阅链接">「11月17日」最高速度21.2M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
                     </ul>
     </div>
 </div>
@@ -129,16 +156,16 @@
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">21</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
             </li>
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">25</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
             </li>
                     </ul>
     </div>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html xml:lang="zh-CN" lang="zh-CN">
 
 <head>
         <link rel="canonical" href="https://nekoraynode.github.io/news/article-36722.htm" />
@@ -8,6 +8,33 @@
     <title>自研FeignClient轻量级http客户端</title>
         <meta name="description" content="一. 为什么会想到编写此项目 1. 背景 在工作中，经常会遇到与其他业务系统进行通讯交互，无非是通过调用对方的http接口进行数据的交互,少则一个，多则几十个。 随着Oauth2.0协议在各个业务系统" />
         <link rel="icon" href="/assets/website/img/nekoraynode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="NekoRayNode节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://nekoraynode.github.io/news/article-36722.htm" />
+    <meta property="og:site_name" content="NekoRayNode节点订阅站" />
+    <meta property="og:title" content="自研FeignClient轻量级http客户端" />
+    <meta property="og:image" content="https://nekoraynode.github.io/uploads/20240626/dbd8d2e81fd8ade766c64a8374361222.webp" />
+        <meta property="og:release_date" content="2025-01-06T09:50:50" />
+    <meta property="og:updated_time" content="2025-01-06T09:50:50" />
+        <meta property="og:description" content="一. 为什么会想到编写此项目 1. 背景 在工作中，经常会遇到与其他业务系统进行通讯交互，无非是通过调用对方的http接口进行数据的交互,少则一个，多则几十个。 随着Oauth2.0协议在各个业务系统" />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="自研FeignClient轻量级http客户端">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +42,7 @@
     <!-- Icon Font Stylesheet -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
     <!-- Libraries Stylesheet -->
-    <link href="__ADDON__/js/frontend/nekoraynode/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/nekoraynode/lightbox/css/lightbox.min.css" rel="stylesheet">
     <!-- Customized Bootstrap Stylesheet -->
     <link href="/assets/website/css/nekoraynode/bootstrap.min.css" rel="stylesheet">
     <!-- Template Stylesheet -->
@@ -108,16 +135,16 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2024-10-14-linux-nekoray.htm" title="「10月14日」最高速度20.2M/S，2024年NekoRay每天更新免费节点订阅链接">「10月14日」最高速度20.2M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-18-free-high-speed-nodes.htm" title="「10月18日」最高速度18.1M/S，2024年NekoRay每天更新免费节点订阅链接">「10月18日」最高速度18.1M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-22-free-nekoray.htm" title="「12月22日」最高速度22M/S，2024年NekoRay每天更新免费节点订阅链接">「12月22日」最高速度22M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-23-linux-nekoray.htm" title="「11月23日」最高速度22.5M/S，2024年NekoRay每天更新免费节点订阅链接">「11月23日」最高速度22.5M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-11-free-node-subscribe.htm" title="「10月11日」最高速度21M/S，2024年NekoRay每天更新免费节点订阅链接">「10月11日」最高速度21M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-9-share-windows-nekoray.htm" title="「11月9日」最高速度22.2M/S，2024年NekoRay每天更新免费节点订阅链接">「11月9日」最高速度22.2M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-18-windows-nekoray.htm" title="「12月18日」最高速度20.4M/S，2024年NekoRay每天更新免费节点订阅链接">「12月18日」最高速度20.4M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/news/article-37218.htm" title="开宠物店有什么机会吗（开宠物店有什么机会吗知乎）">开宠物店有什么机会吗（开宠物店有什么机会吗知乎）</a></li>
+                        <li class="py-2"><a href="/news/article-40164.htm" title="Vue中实现扫描指定路径自动加载路由">Vue中实现扫描指定路径自动加载路由</a></li>
+                        <li class="py-2"><a href="/news/article-41151.htm" title="宠物医院看猫癣贵吗（去宠物医院看猫癣）">宠物医院看猫癣贵吗（去宠物医院看猫癣）</a></li>
+                        <li class="py-2"><a href="/news/article-34806.htm" title="宠物用品一件代发网站有哪些品牌（宠物用品一件代发进货渠道）">宠物用品一件代发网站有哪些品牌（宠物用品一件代发进货渠道）</a></li>
                         <li class="py-2"><a href="/free-nodes/2025-1-4-node-share-links.htm" title="「1月4日」最高速度21.1M/S，2025年NekoRay每天更新免费节点订阅链接">「1月4日」最高速度21.1M/S，2025年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/news/article-28164.htm" title="Mac安装Kubernetes-minikube专治各种坑">Mac安装Kubernetes-minikube专治各种坑</a></li>
+                        <li class="py-2"><a href="/news/article-48446.htm" title="哈尔滨农大宠物医院电话号码是多少（哈尔滨农大动物医院地址）">哈尔滨农大宠物医院电话号码是多少（哈尔滨农大动物医院地址）</a></li>
+                        <li class="py-2"><a href="/news/article-34807.htm" title="狗粮加工厂前景如何发展好（狗粮加工厂挣钱吗）">狗粮加工厂前景如何发展好（狗粮加工厂挣钱吗）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-15-node-share-links.htm" title="「12月15日」最高速度21.1M/S，2024年NekoRay每天更新免费节点订阅链接">「12月15日」最高速度21.1M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-45622.htm" title="动物医院诊室如何管理 动物医院诊室如何管理好">动物医院诊室如何管理 动物医院诊室如何管理好</a></li>
+                        <li class="py-2"><a href="/news/article-33436.htm" title="给动物打疫苗要多少钱一次呀图片（给动物打疫苗要多少钱一次呀图片）">给动物打疫苗要多少钱一次呀图片（给动物打疫苗要多少钱一次呀图片）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-17-linux-nekoray.htm" title="「1月17日」最高速度20.5M/S，2025年NekoRay每天更新免费节点订阅链接">「1月17日」最高速度20.5M/S，2025年NekoRay每天更新免费节点订阅链接</a></li>
                     </ul>
     </div>
 </div>
@@ -129,16 +156,16 @@
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">24</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
             </li>
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">25</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
             </li>
                     </ul>
     </div>

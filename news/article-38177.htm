@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html xml:lang="zh-CN" lang="zh-CN">
 
 <head>
         <link rel="canonical" href="https://nekoraynode.github.io/news/article-38177.htm" />
@@ -8,6 +8,33 @@
     <title>Halo 开源项目学习注册与登录</title>
         <meta name="description" content="基本介绍 首次启动 Halo 项目时需要安装博客并注册用户信息，当博客安装完成后用户就可以根据注册的信息登录到管理员界面，下面我们分析一下整个过程中代码是如何执行的。 博客安装 项目启动成功后，我们可" />
         <link rel="icon" href="/assets/website/img/nekoraynode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="NekoRayNode节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://nekoraynode.github.io/news/article-38177.htm" />
+    <meta property="og:site_name" content="NekoRayNode节点订阅站" />
+    <meta property="og:title" content="Halo 开源项目学习注册与登录" />
+    <meta property="og:image" content="https://nekoraynode.github.io/uploads/20240626/44c79f30293c86d9cba636fb52d6fec7.webp" />
+        <meta property="og:release_date" content="2025-01-09T06:00:04" />
+    <meta property="og:updated_time" content="2025-01-09T06:00:04" />
+        <meta property="og:description" content="基本介绍 首次启动 Halo 项目时需要安装博客并注册用户信息，当博客安装完成后用户就可以根据注册的信息登录到管理员界面，下面我们分析一下整个过程中代码是如何执行的。 博客安装 项目启动成功后，我们可" />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Halo 开源项目学习注册与登录">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +42,7 @@
     <!-- Icon Font Stylesheet -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
     <!-- Libraries Stylesheet -->
-    <link href="__ADDON__/js/frontend/nekoraynode/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/nekoraynode/lightbox/css/lightbox.min.css" rel="stylesheet">
     <!-- Customized Bootstrap Stylesheet -->
     <link href="/assets/website/css/nekoraynode/bootstrap.min.css" rel="stylesheet">
     <!-- Template Stylesheet -->
@@ -108,16 +135,16 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2024-11-19-free-v2ray-subscribe.htm" title="「11月19日」最高速度22.7M/S，2024年NekoRay每天更新免费节点订阅链接">「11月19日」最高速度22.7M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-30-free-node-subscribe.htm" title="「12月30日」最高速度19.7M/S，2024年NekoRay每天更新免费节点订阅链接">「12月30日」最高速度19.7M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-21-nekoray-node.htm" title="「12月21日」最高速度21.7M/S，2024年NekoRay每天更新免费节点订阅链接">「12月21日」最高速度21.7M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-4-linux-nekoray-node.htm" title="「11月4日」最高速度18.4M/S，2024年NekoRay每天更新免费节点订阅链接">「11月4日」最高速度18.4M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/news/article-24203.htm" title="Java集合类型遍历和排序">Java集合类型遍历和排序</a></li>
-                        <li class="py-2"><a href="/news/article-31939.htm" title="前端开发中需要搞懂的字符编码知识_在线工具">前端开发中需要搞懂的字符编码知识_在线工具</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-1-3-free-nekoray-node.htm" title="「1月3日」最高速度21.8M/S，2025年NekoRay每天更新免费节点订阅链接">「1月3日」最高速度21.8M/S，2025年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/news/article-19855.htm" title="MaxCompute SQL函数详解 ODPS SQL函数详解之日期相关函数">MaxCompute SQL函数详解 ODPS SQL函数详解之日期相关函数</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-8-node-share.htm" title="「12月8日」最高速度22.9M/S，2024年NekoRay每天更新免费节点订阅链接">「12月8日」最高速度22.9M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/news/article-18725.htm" title="编程中常用的加密算法">编程中常用的加密算法</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-9-free-subscribe-node.htm" title="「12月9日」最高速度22.1M/S，2024年NekoRay每天更新免费节点订阅链接">「12月9日」最高速度22.1M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-18-node-share.htm" title="「11月18日」最高速度18.4M/S，2024年NekoRay每天更新免费节点订阅链接">「11月18日」最高速度18.4M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-21-linux-nekoray-node.htm" title="「1月21日」最高速度22.2M/S，2025年NekoRay每天更新免费节点订阅链接">「1月21日」最高速度22.2M/S，2025年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-47113.htm" title="宠物粮网店名字大全四个字（宠物粮取名）">宠物粮网店名字大全四个字（宠物粮取名）</a></li>
+                        <li class="py-2"><a href="/news/article-31936.htm" title="python——json，dict之间的转换load,dump, loads, dumps">python——json，dict之间的转换load,dump, loads, dumps</a></li>
+                        <li class="py-2"><a href="/news/article-35961.htm" title="开一家动物医院创业启动资金（开动物医院需要具备哪些条件）">开一家动物医院创业启动资金（开动物医院需要具备哪些条件）</a></li>
+                        <li class="py-2"><a href="/news/article-40668.htm" title="动物打一针疫苗多少钱啊（动物打疫苗的作用）">动物打一针疫苗多少钱啊（动物打疫苗的作用）</a></li>
+                        <li class="py-2"><a href="/news/article-30524.htm" title="上海地区宠物领养微信群号查询平台（上海宠物领养救助基地是真的吗）">上海地区宠物领养微信群号查询平台（上海宠物领养救助基地是真的吗）</a></li>
+                        <li class="py-2"><a href="/news/article-31353.htm" title="买狗狗在哪买（买狗狗在哪儿买）">买狗狗在哪买（买狗狗在哪儿买）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-6-free-nekoray-node.htm" title="「1月6日」最高速度21.2M/S，2025年NekoRay每天更新免费节点订阅链接">「1月6日」最高速度21.2M/S，2025年NekoRay每天更新免费节点订阅链接</a></li>
                     </ul>
     </div>
 </div>
@@ -129,16 +156,16 @@
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">33</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
             </li>
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">25</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
             </li>
                     </ul>
     </div>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html xml:lang="zh-CN" lang="zh-CN">
 
 <head>
         <link rel="canonical" href="https://nekoraynode.github.io/news/article-32895.htm" />
@@ -8,6 +8,33 @@
     <title>SpringMVC+Log4j配置定时生成、删除日志</title>
         <meta name="description" content="SpringMVC+Log4j配置定时生成、删除日志  SpringMVC开启定时任务   配置SpringMVC.xml 配置log4j.properties 定时任务执行类 shell脚本    " />
         <link rel="icon" href="/assets/website/img/nekoraynode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="NekoRayNode节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://nekoraynode.github.io/news/article-32895.htm" />
+    <meta property="og:site_name" content="NekoRayNode节点订阅站" />
+    <meta property="og:title" content="SpringMVC+Log4j配置定时生成、删除日志" />
+    <meta property="og:image" content="https://nekoraynode.github.io/uploads/20240626/e38ecf14d34b9dd7014dc90ae963cd0e.webp" />
+        <meta property="og:release_date" content="2024-12-29T05:25:03" />
+    <meta property="og:updated_time" content="2024-12-29T05:25:03" />
+        <meta property="og:description" content="SpringMVC+Log4j配置定时生成、删除日志  SpringMVC开启定时任务   配置SpringMVC.xml 配置log4j.properties 定时任务执行类 shell脚本    " />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="SpringMVC+Log4j配置定时生成、删除日志">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +42,7 @@
     <!-- Icon Font Stylesheet -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
     <!-- Libraries Stylesheet -->
-    <link href="__ADDON__/js/frontend/nekoraynode/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/nekoraynode/lightbox/css/lightbox.min.css" rel="stylesheet">
     <!-- Customized Bootstrap Stylesheet -->
     <link href="/assets/website/css/nekoraynode/bootstrap.min.css" rel="stylesheet">
     <!-- Template Stylesheet -->
@@ -108,16 +135,16 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2024-10-2-free-nekoray.htm" title="「10月2日」最高速度20.1M/S，2024年NekoRay每天更新免费节点订阅链接">「10月2日」最高速度20.1M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-8-nekoray-node.htm" title="「10月8日」最高速度19M/S，2024年NekoRay每天更新免费节点订阅链接">「10月8日」最高速度19M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-20-free-node-subscribe-links.htm" title="「12月20日」最高速度19.7M/S，2024年NekoRay每天更新免费节点订阅链接">「12月20日」最高速度19.7M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/news/article-32416.htm" title="宠物领养协议需要身份证复印件吗有效吗安全吗 领养宠物需要签协议吗">宠物领养协议需要身份证复印件吗有效吗安全吗 领养宠物需要签协议吗</a></li>
-                        <li class="py-2"><a href="/news/article-25384.htm" title="动物疫苗属于什么行业类别的（动物疫苗概念的上市公司）">动物疫苗属于什么行业类别的（动物疫苗概念的上市公司）</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-9-24-free-nekoray-node.htm" title="「9月24日」最高速度21.7M/S，2024年NekoRay每天更新免费节点订阅链接">「9月24日」最高速度21.7M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-9-free-subscribe-node.htm" title="「12月9日」最高速度22.1M/S，2024年NekoRay每天更新免费节点订阅链接">「12月9日」最高速度22.1M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-28-node-share-links.htm" title="「12月28日」最高速度21.2M/S，2024年NekoRay每天更新免费节点订阅链接">「12月28日」最高速度21.2M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/news/article-20318.htm" title="华畜兽药效果好吗（华畜兽药怎么样?）">华畜兽药效果好吗（华畜兽药怎么样?）</a></li>
-                        <li class="py-2"><a href="/news/article-30988.htm" title="动物疫苗空瓶回收处理制度（疫苗空瓶回收登记表怎么填写）">动物疫苗空瓶回收处理制度（疫苗空瓶回收登记表怎么填写）</a></li>
+                        <li class="py-2"><a href="/news/article-40165.htm" title="办理动物疫苗经营手续需要哪些 办理动物疫苗经营手续需要哪些资料">办理动物疫苗经营手续需要哪些 办理动物疫苗经营手续需要哪些资料</a></li>
+                        <li class="py-2"><a href="/news/article-47597.htm" title="Python置换操作浅析(a, b=b, a)【Python】">Python置换操作浅析(a, b=b, a)【Python】</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-17-linux-nekoray.htm" title="「1月17日」最高速度20.5M/S，2025年NekoRay每天更新免费节点订阅链接">「1月17日」最高速度20.5M/S，2025年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-28639.htm" title="动物疫苗价格一览表图片高清大全集下载（动物 疫苗）">动物疫苗价格一览表图片高清大全集下载（动物 疫苗）</a></li>
+                        <li class="py-2"><a href="/news/article-34974.htm" title="动物诊疗许可证办理流程视频（动物诊疗许可证申请条件）">动物诊疗许可证办理流程视频（动物诊疗许可证申请条件）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-7-node-share-links.htm" title="「11月7日」最高速度21.1M/S，2024年NekoRay每天更新免费节点订阅链接">「11月7日」最高速度21.1M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-48086.htm" title="Rancher上部署Redis部署">Rancher上部署Redis部署</a></li>
+                        <li class="py-2"><a href="/news/article-35491.htm" title="自动类型安全的REST.NET标准库refit_实用技巧">自动类型安全的REST.NET标准库refit_实用技巧</a></li>
+                        <li class="py-2"><a href="/news/article-38690.htm" title="昆明免费领养狗狗的地方在哪里（昆明哪里可以免费领养狗狗）">昆明免费领养狗狗的地方在哪里（昆明哪里可以免费领养狗狗）</a></li>
+                        <li class="py-2"><a href="/news/article-43144.htm" title="狗粮机器设备小型家用有哪些 狗粮机器设备小型家用有哪些品牌">狗粮机器设备小型家用有哪些 狗粮机器设备小型家用有哪些品牌</a></li>
                     </ul>
     </div>
 </div>
@@ -129,28 +156,16 @@
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">3</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
             </li>
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-08/" title="2024-08 归档">2024-08</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">27</span> <a href="/date/2024-07/" title="2024-07 归档">2024-07</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">4</span> <a href="/date/2024-06/" title="2024-06 归档">2024-06</a></h4>
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
             </li>
                     </ul>
     </div>
