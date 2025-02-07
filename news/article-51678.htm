@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://nekoraynode.github.io/news/article-51678.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Spring 校验（validator，JSR-303）简单实现</title>
+        <meta name="description" content="利用Spring MVC 与 hibernate的JSR-303规范结合实现后台校验（简单案例）：  什么是JSR-303规范 与Spring MVC结合 实体类添加验证注解 *控制器验证注解添加  " />
+        <link rel="icon" href="/assets/website/img/nekoraynode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="NekoRayNode节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://nekoraynode.github.io/news/article-51678.htm" />
+    <meta property="og:site_name" content="NekoRayNode节点订阅站" />
+    <meta property="og:title" content="Spring 校验（validator，JSR-303）简单实现" />
+    <meta property="og:image" content="https://nekoraynode.github.io/uploads/20240626/4d47ac748776d1b14c444efa10e624b9.webp" />
+        <meta property="og:release_date" content="2025-02-05T08:21:04" />
+    <meta property="og:updated_time" content="2025-02-05T08:21:04" />
+        <meta property="og:description" content="利用Spring MVC 与 hibernate的JSR-303规范结合实现后台校验（简单案例）：  什么是JSR-303规范 与Spring MVC结合 实体类添加验证注解 *控制器验证注解添加  " />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Spring 校验（validator，JSR-303）简单实现">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <!-- Libraries Stylesheet -->
+    <link href="/assets/website/js/frontend/nekoraynode/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6TD6QHWW6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6TD6QHWW6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid p-0">
+                <nav class="navbar navbar-expand-lg fixed-top navbar-light px-4 px-lg-5 py-3 py-lg-0">
+            <a href="/" class="navbar-brand p-0">
+                <a href="/">
+                                <span class="display-6 text-primary m-0">
+                    <i class="fas fa-envelope me-3"></i>NekoRay Node                </span>
+                                </a>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                                        <a href="/" class="nav-item nav-link">首页</a>
+                                        <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                        <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                        <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                        <a href="#" class="nav-item nav-link">关于</a>
+                    <a href="#" class="nav-item nav-link">联系</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar & Hero End -->
+    <!-- Header Start -->
+    <div class="container-fluid bg-breadcrumb">
+        <ul class="breadcrumb-animation">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="container text-center py-5" style="max-width: 900px;">
+            <h3 class="display-3 mb-4 wow fadeInDown" data-wow-delay="0.1s">Spring 校验（validator，JSR-303）简单实现</h1>
+                <ol class="breadcrumb justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+                    <li class="breadcrumb-item"><a href="/">首页</a></li>
+                    <li class="breadcrumb-item"><a href="/news/">新闻资讯</a></li>
+                    <li class="breadcrumb-item active text-primary">正文</li>
+                </ol>
+        </div>
+    </div>
+    <!-- Header End -->
+    <!-- About Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> </h1> <p>利用Spring MVC 与 hibernate的JSR-303规范结合实现后台校验（简单案例）：</p> <ul> <li><strong>什么是JSR-303规范</strong></li> <li><strong>与Spring MVC结合</strong></li> <li><strong>实体类添加验证注解</strong></li> <li><strong>*控制器验证注解添加</strong></li> </ul> <hr/> <div class="toc"> <ul> <li> <a href="#spring-%E6%A0%A1%E9%AA%8Cvalidatorjsr-303%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0" rel="nofollow">Spring 校验validatorJSR-303简单实现</a></p> <ul> <li><a href="#%E4%BB%80%E4%B9%88%E6%98%AFjsr-303%E8%A7%84%E8%8C%83" rel="nofollow">什么是JSR-303规范</a></li> <li><a href="#%E4%B8%8Espring-mvc%E7%BB%93%E5%90%88" rel="nofollow">与Spring MVC结合</a></li> <li><a href="#%E5%AE%9E%E4%BD%93%E7%B1%BB%E6%B7%BB%E5%8A%A0%E9%AA%8C%E8%AF%81%E6%B3%A8%E8%A7%A3" rel="nofollow">实体类添加验证注解</a></li> <li><a href="#%E6%8E%A7%E5%88%B6%E5%99%A8%E9%AA%8C%E8%AF%81%E6%B3%A8%E8%A7%A3%E6%B7%BB%E5%8A%A0" rel="nofollow">控制器验证注解添加</a></li> </ul> </li> </ul> </div> <h2 id="什么是jsr-303规范">什么是JSR-303规范</h2> <p>JSR 303是Java EE 6中的一项子规范，叫做Bean Validation，官方参考实现是hibernate Validator，此实现与Hibernate ORM没有任何关系。JSR 303用于对Java Bean中的字段的值进行验证。</p> <h2 id="与spring-mvc结合">与Spring MVC结合</h2> <p>Spring-mvc.xml配置：</p> <pre class="prettyprint"><code class="hljs xml">    <span class="hljs-comment">&lt;!--JSR-303--&gt;</span>     <span class="hljs-tag">&lt;<span class="hljs-title">mvc:annotation-driven</span> <span class="hljs-attribute">validator</span>=<span class="hljs-value">"validator"</span>/&gt;</span>      <span class="hljs-tag">&lt;<span class="hljs-title">bean</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"validator"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"</span>&gt;</span>         <span class="hljs-tag">&lt;<span class="hljs-title">property</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"providerClass"</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"org.hibernate.validator.HibernateValidator"</span>/&gt;</span>         <span class="hljs-tag">&lt;<span class="hljs-title">property</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"validationMessageSource"</span> <span class="hljs-attribute">ref</span>=<span class="hljs-value">"messageSource"</span>/&gt;</span>     <span class="hljs-tag">&lt;/<span class="hljs-title">bean</span>&gt;</span>     <span class="hljs-tag">&lt;<span class="hljs-title">bean</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"messageSource"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"org.springframework.context.support.ReloadableResourceBundleMessageSource"</span>&gt;</span>         <span class="hljs-tag">&lt;<span class="hljs-title">property</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"basename"</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"validatemessage"</span>/&gt;</span>         <span class="hljs-tag">&lt;<span class="hljs-title">property</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"useCodeAsDefaultMessage"</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"false"</span>/&gt;</span>         <span class="hljs-tag">&lt;<span class="hljs-title">property</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"defaultEncoding"</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"UTF-8"</span>/&gt;</span>         <span class="hljs-tag">&lt;<span class="hljs-title">property</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"cacheSeconds"</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"60"</span>/&gt;</span>     <span class="hljs-tag">&lt;/<span class="hljs-title">bean</span>&gt;</span>     <span class="hljs-tag">&lt;<span class="hljs-title">bean</span>  <span class="hljs-attribute">id</span>=<span class="hljs-value">"webBindingInitializer"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"org.springframework.web.bind.support.ConfigurableWebBindingInitializer"</span>&gt;</span>         <span class="hljs-tag">&lt;<span class="hljs-title">property</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"conversionService"</span>&gt;</span>             <span class="hljs-tag">&lt;<span class="hljs-title">bean</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"org.springframework.format.support.FormattingConversionServiceFactoryBean"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">bean</span>&gt;</span>         <span class="hljs-tag">&lt;/<span class="hljs-title">property</span>&gt;</span>         <span class="hljs-tag">&lt;<span class="hljs-title">property</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"validator"</span> <span class="hljs-attribute">ref</span>=<span class="hljs-value">"validator"</span>/&gt;</span>     <span class="hljs-tag">&lt;/<span class="hljs-title">bean</span>&gt;</span></code></pre> <h2 id="实体类添加验证注解">实体类添加验证注解</h2> <p>这里贴出部分代码，知道如何加注解即可：</p> <pre class="prettyprint"><code class="language-package com.lemontree.web.entity; hljs java"> <span class="hljs-keyword">import</span> com.lemontree.common.utils.AjaxResult; <span class="hljs-keyword">import</span> com.lemontree.common.utils.StringUtil; <span class="hljs-keyword">import</span> com.lemontree.common.utils.email.EmailUtils; <span class="hljs-keyword">import</span> org.hibernate.validator.constraints.NotEmpty;  <span class="hljs-keyword">import</span> java.util.Date;  <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span> {<!-- --></span>     <span class="hljs-javadoc">/**      * This field was generated by MyBatis Generator.      * This field corresponds to the database column user.id      *      *<span class="hljs-javadoctag"> @mbg</span>.generated Thu Mar 16 13:27:38 CST 2017      */</span>     <span class="hljs-keyword">private</span> Integer id;      <span class="hljs-javadoc">/**      * This field was generated by MyBatis Generator.      * This field corresponds to the database column user.user_name      *      *<span class="hljs-javadoctag"> @mbg</span>.generated Thu Mar 16 13:27:38 CST 2017      */</span>     <span class="hljs-annotation">@NotEmpty</span>(message = <span class="hljs-string">"用户名不能为空"</span>)     <span class="hljs-keyword">private</span> String userName;      <span class="hljs-javadoc">/**      * This field was generated by MyBatis Generator.      * This field corresponds to the database column user.password      *      *<span class="hljs-javadoctag"> @mbg</span>.generated Thu Mar 16 13:27:38 CST 2017      */</span>     <span class="hljs-annotation">@NotEmpty</span>(message = <span class="hljs-string">"密码不能为空"</span>)     <span class="hljs-keyword">private</span> String password;     } </code></pre> <h2 id="控制器验证注解添加">控制器验证注解添加</h2> <p>将@Validated 注解跟在实体类前面，BindingResult紧跟其后：</p> <pre class="prettyprint"><code class="hljs avrasm">    @RequestMapping(value = <span class="hljs-string">"/login.htm"</span>, method = RequestMethod<span class="hljs-preprocessor">.POST</span>)     public @ResponseBody AjaxResult login(@Validated User user, BindingResult bindingResult,                                           HttpServletRequest request, HttpServletResponse response) {         if (bindingResult<span class="hljs-preprocessor">.hasErrors</span>()){             List&lt;FieldError&gt; errorses = bindingResult<span class="hljs-preprocessor">.getFieldErrors</span>()<span class="hljs-comment">;</span>             if (CollectionUtils<span class="hljs-preprocessor">.isNotEmpty</span>(errorses)){                 errorses<span class="hljs-preprocessor">.forEach</span>(item-&gt;{                     System<span class="hljs-preprocessor">.out</span><span class="hljs-preprocessor">.println</span>(item<span class="hljs-preprocessor">.getDefaultMessage</span>())<span class="hljs-comment">;</span>                 })<span class="hljs-comment">;</span>             }         }       }</code></pre> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-51131.htm">免费领养宠物套路是真的吗（免费领养宠物的平台是真的吗）</a></p>
+                                        <p>下一个：<a href="/news/article-51680.htm">深度学习Pytorch——神经网络</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-11-25-node-share.htm" title="「11月25日」最高速度19.9M/S，2024年NekoRay每天更新免费节点订阅链接">「11月25日」最高速度19.9M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-26-free-subscribe-node.htm" title="「11月26日」最高速度19.8M/S，2024年NekoRay每天更新免费节点订阅链接">「11月26日」最高速度19.8M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-31939.htm" title="前端开发中需要搞懂的字符编码知识_在线工具">前端开发中需要搞懂的字符编码知识_在线工具</a></li>
+                        <li class="py-2"><a href="/news/article-48445.htm" title="动物医院诊疗活动范围包括哪些 动物医院诊疗活动范围包括哪些内容">动物医院诊疗活动范围包括哪些 动物医院诊疗活动范围包括哪些内容</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-12-nekoray-node.htm" title="「12月12日」最高速度18.1M/S，2024年NekoRay每天更新免费节点订阅链接">「12月12日」最高速度18.1M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-52213.htm" title="PHP类属性">PHP类属性</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-27-free-subscribe-node.htm" title="「11月27日」最高速度18.3M/S，2024年NekoRay每天更新免费节点订阅链接">「11月27日」最高速度18.3M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-22155.htm" title="领养宠物狗是什么意思啊英语怎么写（领养宠物狗是什么意思啊英语怎么写单词）">领养宠物狗是什么意思啊英语怎么写（领养宠物狗是什么意思啊英语怎么写单词）</a></li>
+                        <li class="py-2"><a href="/news/article-42648.htm" title="正规宠物领养平台排名 正规宠物领养平台排名前十">正规宠物领养平台排名 正规宠物领养平台排名前十</a></li>
+                        <li class="py-2"><a href="/news/article-31353.htm" title="买狗狗在哪买（买狗狗在哪儿买）">买狗狗在哪买（买狗狗在哪儿买）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">21</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+        <!-- Copyright Start -->
+    <div class="container-fluid copyright py-4">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-md-0">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                    <span class="text-white">NekoRayNode节点订阅站 版权所有 Powered by WordPress</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright End -->
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary btn-lg-square back-to-top"><i class="fa fa-arrow-up"></i></a>
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/easing/easing.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/lightbox/js/lightbox.min.js"></script>
+    <!-- Template Javascript -->
+    <script src="/assets/website/js/frontend/nekoraynode/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
