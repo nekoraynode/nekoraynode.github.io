@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://nekoraynode.github.io/news/article-60574.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Docker极简入门：使用Docker-Compose 搭建redis集群</title>
+        <meta name="description" content="为了构建一个集群，我们首先要让 redis 启用集群模式 一个简单的配置文件如下redis.conf # redis.conf file port 6379 cluster-enabled yes c" />
+        <link rel="icon" href="/assets/website/img/nekoraynode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="NekoRayNode节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://nekoraynode.github.io/news/article-60574.htm" />
+    <meta property="og:site_name" content="NekoRayNode节点订阅站" />
+    <meta property="og:title" content="Docker极简入门：使用Docker-Compose 搭建redis集群" />
+    <meta property="og:image" content="https://nekoraynode.github.io/uploads/20240626/b0efaa67b1664dfcacc9c436396cc5ff.webp" />
+        <meta property="og:release_date" content="2025-02-21T09:21:41" />
+    <meta property="og:updated_time" content="2025-02-21T09:21:41" />
+        <meta property="og:description" content="为了构建一个集群，我们首先要让 redis 启用集群模式 一个简单的配置文件如下redis.conf # redis.conf file port 6379 cluster-enabled yes c" />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Docker极简入门：使用Docker-Compose 搭建redis集群">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <!-- Libraries Stylesheet -->
+    <link href="/assets/website/js/frontend/nekoraynode/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6TD6QHWW6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6TD6QHWW6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid p-0">
+                <nav class="navbar navbar-expand-lg fixed-top navbar-light px-4 px-lg-5 py-3 py-lg-0">
+            <a href="/" class="navbar-brand p-0">
+                <a href="/">
+                                <span class="display-6 text-primary m-0">
+                    <i class="fas fa-envelope me-3"></i>NekoRay Node                </span>
+                                </a>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                                        <a href="/" class="nav-item nav-link">首页</a>
+                                        <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                        <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                        <a href="/client.htm" class="nav-item nav-link">客户端</a>
+                                        <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                    </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar & Hero End -->
+    <!-- Header Start -->
+    <div class="container-fluid bg-breadcrumb">
+        <ul class="breadcrumb-animation">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="container text-center py-5" style="max-width: 900px;">
+            <h3 class="display-3 mb-4 wow fadeInDown" data-wow-delay="0.1s">Docker极简入门：使用Docker-Compose 搭建redis集群</h1>
+                <ol class="breadcrumb justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+                    <li class="breadcrumb-item"><a href="/">首页</a></li>
+                    <li class="breadcrumb-item"><a href="/news/">新闻资讯</a></li>
+                    <li class="breadcrumb-item active text-primary">正文</li>
+                </ol>
+        </div>
+    </div>
+    <!-- Header End -->
+    <!-- About Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<p>为了构建一个集群，我们首先要让 redis 启用集群模式<br /> 一个简单的配置文件如下<code>redis.conf</code></p> <pre><code class="language-shell"># redis.conf file port 6379 cluster-enabled yes cluster-config-file nodes.conf cluster-node-timeout 5000 appendonly yes</code></pre> <p>因为是在单机上演示，所以我们得修改 port 防止冲突<br /> 比如我们要创建3主5副的集群，那么这八个 redis 实例启动的时候就应该用不同的端口(7000,7001...7007)，这样能防止冲突。</p> <pre><code class="language-shell">. ├── 7000 │   └── redis.conf ├── 7001 │   └── redis.conf ├── 7002 │   └── redis.conf ├── 7003 │   └── redis.conf ├── 7004 │   └── redis.conf ├── 7005 │   └── redis.conf ├── 7006 │   └── redis.conf ├── 7007 │   └── redis.conf</code></pre> <p><code>./7000/redis.conf</code> 中的 port 设置成7000,依此类推<code>./7007/redis.conf</code>中的 port 应该设置成7007</p> <p>万事俱备，只需运行<code>redis-server ./redis.conf</code>命令即可，当然你需要依次启动八个 redis server</p> <pre><code class="language-shell">for i in `seq 7000 7007`; do 	exec redis-server ./${i}/redis.conf &amp; done  redis-cli --cluster create\ 127.0.0.1:7000 127.0.0.1:7001 127.0.0.1:7002 127.0.0.1:7003\ 127.0.0.1:7004 127.0.0.1:7005 127.0.0.1:7006 127.0.0.1:7007\ --cluster-replicas 1</code></pre> <p>这样整个集群就搭建好了，你可以选择运行在 port 7000-7007中的任意一个 servr 登录，然后去执行一些你喜欢的命令验证一下[狗头]</p> <h2 id="使用docker-compose构建集群">使用Docker-Compose构建集群</h2> <p>现在让我们来明确一下流程，首先我们需要启动八个 redis server 实例，然后运行<code>redis-cli --cluster create</code> 命令创建集群，这意味着我们需要创建一个 docker network 使得集群成员能够互相通讯</p> <p>创建一个 network 也很简单</p> <pre><code class="language-shell">networks:   redis-network:     name: redis-network     ## 使用网桥     driver: bridge     ipam:       driver: default       ## 指定网段，需要注意不能与已有的 docker network 相冲突       config:         - subnet: 172.18.0.0/24</code></pre> <p>还记得之前命令行是如何启动集群的吗？最后需要运行命令<code>redis-cli --cluster create</code>，整个集群才算成功创建，那在 yml 文件中该怎么写呢？<br /> 我们可以借助<code>depends_on</code>来告诉 docker 当前的 service 依赖其他的 service<br /> 具体的细节请看完整的yml文件</p> <pre><code class="language-shell">## redis.conf port 6379 cluster-enabled yes cluster-config-file nodes-redis.conf cluster-node-timeout 5000 appendonly yes appendfilename "appendonly-redis.aof"</code></pre> <pre><code class="language-yaml">version: "3.7"  networks:   redis-network:     name: redis-network     driver: bridge     ipam:       driver: default       config:         - subnet: 172.18.0.0/24  services:   redis-cluster:     image: redis:6-alpine     command: 'redis-cli --cluster create      172.18.0.11:6379 172.18.0.12:6379 172.18.0.13:6379 172.18.0.14:6379      172.18.0.15:6379 172.18.0.16:6379 172.18.0.17:6379 172.18.0.18:6379     --cluster-yes --cluster-replicas 1'     networks:       - redis-network     depends_on:       - redis1       - redis2       - redis3       - redis4       - redis5       - redis6       - redis7       - redis8    redis1:     image: redis:6-alpine     container_name: redis1     command: redis-server /usr/local/etc/redis/redis.conf     networks:       redis-network:         ipv4_address: 172.18.0.11     expose:       - 6379     volumes:       - $PWD/docker-data/redis1:/data       - $PWD/docker-config/redis.conf:/usr/local/etc/redis/redis.conf    redis2:     image: redis:6-alpine     container_name: redis2     command: redis-server /usr/local/etc/redis/redis.conf     networks:       redis-network:         ipv4_address: 172.18.0.12     expose:       - 6379     volumes:       - $PWD/docker-data/redis2:/data       - $PWD/docker-config/redis.conf:/usr/local/etc/redis/redis.conf    redis3:     image: redis:6-alpine     container_name: redis3     command: redis-server /usr/local/etc/redis/redis.conf     networks:       redis-network:         ipv4_address: 172.18.0.13     expose:       - 6379     volumes:       - $PWD/docker-data/redis3:/data       - $PWD/docker-config/redis.conf:/usr/local/etc/redis/redis.conf    redis4:     image: redis:6-alpine     container_name: redis4     command: redis-server /usr/local/etc/redis/redis.conf     networks:       redis-network:         ipv4_address: 172.18.0.14     expose:       - 6379     volumes:       - $PWD/docker-data/redis4:/data       - $PWD/docker-config/redis.conf:/usr/local/etc/redis/redis.conf          redis5:     image: redis:6-alpine     container_name: redis5     command: redis-server /usr/local/etc/redis/redis.conf     networks:       redis-network:         ipv4_address: 172.18.0.15     expose:       - 6379     volumes:       - $PWD/docker-data/redis5:/data       - $PWD/docker-config/redis.conf:/usr/local/etc/redis/redis.conf          redis6:     image: redis:6-alpine     container_name: redis6     command: redis-server /usr/local/etc/redis/redis.conf     networks:       redis-network:         ipv4_address: 172.18.0.16     expose:       - 6379     volumes:       - $PWD/docker-data/redis6:/data       - $PWD/docker-config/redis.conf:/usr/local/etc/redis/redis.conf                redis7:     image: redis:6-alpine     container_name: redis7     command: redis-server /usr/local/etc/redis/redis.conf     networks:       redis-network:         ipv4_address: 172.18.0.17     expose:       - 6379     volumes:       - $PWD/docker-data/redis7:/data       - $PWD/docker-config/redis.conf:/usr/local/etc/redis/redis.conf          redis8:     image: redis:6-alpine     container_name: redis8     command: redis-server /usr/local/etc/redis/redis.conf     networks:       redis-network:         ipv4_address: 172.18.0.18     expose:       - 6379     volumes:       - $PWD/docker-data/redis8:/data       - $PWD/docker-config/redis.conf:/usr/local/etc/redis/redis.conf</code></pre> <p>最后不要忘记了最基本的命令</p> <pre><code class="language-shell">sudo docker-compose up # 在当前命令下运行，启动集群 sudo docker-compose down # 关闭集群的同时会将 docker-network也一并删除</code></pre> <h3 id="如何与集群通信">如何与集群通信</h3> <pre><code class="language-shell"># 登录任意一个节点执行命令即可，集群会根据key的哈希值，将你的命令重定位 sudo docker exec -it redis5 redis-cli -p 6379 set foo bar</code></pre> <pre><code class="language-shell">sudo docker exec -it redis1 redis-cli -p 6379 get foo # output bar</code></pre> <h3 id="参考">参考</h3> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://university.redis.com/courses/ru301/"  target="_blank" rel="nofollow">reids官网 course</a></p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-60573.htm">SpringAOP的源码解析</a></p>
+                                        <p>下一个：<a href="/news/article-61173.htm">动物疫苗厂家查询电话是多少（动物疫苗厂家查询电话是多少号码）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-11-27-free-subscribe-node.htm" title="「11月27日」最高速度18.3M/S，2024年NekoRay每天更新免费节点订阅链接">「11月27日」最高速度18.3M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-60574.htm" title="Docker极简入门：使用Docker-Compose 搭建redis集群">Docker极简入门：使用Docker-Compose 搭建redis集群</a></li>
+                        <li class="py-2"><a href="/news/article-27706.htm" title="农大动物医院怎么样好不好挂号（农大动物医院地址和联系电话）">农大动物医院怎么样好不好挂号（农大动物医院地址和联系电话）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-12-linux-nekoray.htm" title="「11月12日」最高速度20.1M/S，2024年NekoRay每天更新免费节点订阅链接">「11月12日」最高速度20.1M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-31936.htm" title="python——json，dict之间的转换load,dump, loads, dumps">python——json，dict之间的转换load,dump, loads, dumps</a></li>
+                        <li class="py-2"><a href="/news/article-29842.htm" title="办宠物医院需要什么资质（宠物医院开办批准手续）">办宠物医院需要什么资质（宠物医院开办批准手续）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-21-linux-nekoray-node.htm" title="「1月21日」最高速度22.2M/S，2025年NekoRay每天更新免费节点订阅链接">「1月21日」最高速度22.2M/S，2025年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-23980.htm" title="宠物店粮食一个月要多少斤（宠物店粮食一个月要多少斤正常）">宠物店粮食一个月要多少斤（宠物店粮食一个月要多少斤正常）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-19-node-share-links.htm" title="「12月19日」最高速度21.2M/S，2024年NekoRay每天更新免费节点订阅链接">「12月19日」最高速度21.2M/S，2024年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-27247.htm" title="Web前端：JavaScript和Nodejs有什么不同?">Web前端：JavaScript和Nodejs有什么不同?</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">66</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+        <!-- Copyright Start -->
+    <div class="container-fluid copyright py-4">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-md-0">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                    <span class="text-white">NekoRayNode节点订阅站 版权所有 Powered by WordPress</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright End -->
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary btn-lg-square back-to-top"><i class="fa fa-arrow-up"></i></a>
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/easing/easing.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/lightbox/js/lightbox.min.js"></script>
+    <!-- Template Javascript -->
+    <script src="/assets/website/js/frontend/nekoraynode/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
