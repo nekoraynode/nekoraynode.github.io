@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://nekoraynode.github.io/news/article-75839.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Java NIO 文件通道 FileChannel 用法_在线工具</title>
+        <meta name="description" content="FileChannel 提供了一种通过通道来访问文件的方式，它可以通过带参数 position(int) 方法定位到文件的任意位置开始进行操作，还能够将文件映射到直接内存，提高大文件的访问效率。本文将" />
+        <link rel="icon" href="/assets/website/img/nekoraynode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="NekoRayNode节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://nekoraynode.github.io/news/article-75839.htm" />
+    <meta property="og:site_name" content="NekoRayNode节点订阅站" />
+    <meta property="og:title" content="Java NIO 文件通道 FileChannel 用法_在线工具" />
+    <meta property="og:image" content="https://nekoraynode.github.io/uploads/20240626/dbd8d2e81fd8ade766c64a8374361222.webp" />
+        <meta property="og:release_date" content="2025-03-17T09:41:31" />
+    <meta property="og:updated_time" content="2025-03-17T09:41:31" />
+        <meta property="og:description" content="FileChannel 提供了一种通过通道来访问文件的方式，它可以通过带参数 position(int) 方法定位到文件的任意位置开始进行操作，还能够将文件映射到直接内存，提高大文件的访问效率。本文将" />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Java NIO 文件通道 FileChannel 用法_在线工具">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <!-- Libraries Stylesheet -->
+    <link href="/assets/website/js/frontend/nekoraynode/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6TD6QHWW6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6TD6QHWW6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid p-0">
+                <nav class="navbar navbar-expand-lg fixed-top navbar-light px-4 px-lg-5 py-3 py-lg-0">
+            <a href="/" class="navbar-brand p-0">
+                <a href="/">
+                                <span class="display-6 text-primary m-0">
+                    <i class="fas fa-envelope me-3"></i>NekoRay Node                </span>
+                                </a>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                                        <a href="/" class="nav-item nav-link">首页</a>
+                                        <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                        <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                        <a href="/client.htm" class="nav-item nav-link">客户端</a>
+                                        <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                    </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar & Hero End -->
+    <!-- Header Start -->
+    <div class="container-fluid bg-breadcrumb">
+        <ul class="breadcrumb-animation">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="container text-center py-5" style="max-width: 900px;">
+            <h3 class="display-3 mb-4 wow fadeInDown" data-wow-delay="0.1s">Java NIO 文件通道 FileChannel 用法_在线工具</h1>
+                <ol class="breadcrumb justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+                    <li class="breadcrumb-item"><a href="/">首页</a></li>
+                    <li class="breadcrumb-item"><a href="/news/">新闻资讯</a></li>
+                    <li class="breadcrumb-item active text-primary">正文</li>
+                </ol>
+        </div>
+    </div>
+    <!-- Header End -->
+    <!-- About Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<p>FileChannel 提供了一种通过通道来访问文件的方式，它可以通过带参数 position(int) 方法定位到文件的任意位置开始进行操作，还能够将文件映射到直接内存，提高大文件的访问效率。本文将介绍其详细用法和原理。</p> <h2 id="1-通道获取">1. 通道获取</h2> <p>FileChannel 可以通过 FileInputStream, FileOutputStream, RandomAccessFile 的实例方法 getChannel() 来获取，也可以同通过静态方法 FileChannel.open(Path, OpenOption ...) 来打开。</p> <h3 id="11-从-fileinputstream--fileoutputstream-中获取">1.1 从 FileInputStream / FileOutputStream 中获取</h3> <p>从 FileInputStream 对象中获取的通道是以读的方式打开文件，从 FileOutpuStream 对象中获取的通道是以写的方式打开文件。</p> <pre><code class="language-java">FileOutputStream ous = new FileOutputStream(new File("a.txt")); FileChannel out = ous.getChannel(); // 获取一个只读通道 FileInputStream ins = new FileInputStream(new File("a.txt")); FileChannel in = ins.getChannel();  // 获取一个只写通道 </code></pre> <h3 id="12-从-randomaccessfile-中获取">1.2 从 RandomAccessFile 中获取</h3> <p>从 RandomAccessFaile 中获取的通道取决于 RandomAccessFaile 对象是以什么方式创建的，"r", "w", "rw" 分别对应着读模式，写模式，以及读写模式。</p> <pre><code class="language-java">RandomAccessFile file = new RandomAccessFile("a.txt", "rw"); FileChannel channel = file.getChannel(); // 获取一个可读写文件通道 </code></pre> <h3 id="13-通过-filechannelopen-打开">1.3 通过 FileChannel.open() 打开</h3> <p>通过静态静态方法 FileChannel.open() 打开的通道可以指定打开模式，模式通过 StandardOpenOption 枚举类型指定。</p> <pre><code class="language-java">FileChannel channel = FileChannel.open(Paths.get("a.txt"), StandardOpenOption.READ); // 以只读的方式打开一个文件 a.txt 的通道 </code></pre> <h2 id="2-读取数据">2. 读取数据</h2> <p>读取数据的 read(ByteBuffer buf) 方法返回的值表示读取到的字节数，如果读到了文件末尾，返回值为 -1。读取数据时，position 会往后移动。</p> <h3 id="21-将数据读取到单个缓冲区">2.1 将数据读取到单个缓冲区</h3> <p>和一般通道的操作一样，数据也是需要读取到1个缓冲区中，然后从缓冲区取出数据。在调用 read 方法读取数据的时候，可以传入参数 position 和 length 来指定开始读取的位置和长度。</p> <pre><code class="language-java">FileChannel channel = FileChannel.open(Paths.get("a.txt"), StandardOpenOption.READ); ByteBuffer buf = ByteBuffer.allocate(5); while(channel.read(buf)!=-1){     buf.flip();     System.out.print(new String(buf.array()));     buf.clear(); } channel.close(); </code></pre> <h3 id="22-读取到多个缓冲区">2.2 读取到多个缓冲区</h3> <p>文件通道 FileChannel 实现了 ScatteringByteChannel 接口，可以将文件通道中的内容同时读取到多个 ByteBuffer 当中，这在处理包含若干长度固定数据块的文件时很有用。</p> <pre><code class="language-java">ScatteringByteChannel channel = FileChannel.open(Paths.get("a.txt"), StandardOpenOption.READ); ByteBuffer key = ByteBuffer.allocate(5), value=ByteBuffer.allocate(10); ByteBuffer[] buffers = new ByteBuffer[]{key, value}; while(channel.read(buffers)!=-1){     key.flip();     value.flip();     System.out.println(new String(key.array()));     System.out.println(new String(value.array()));     key.clear();     value.clear(); } channel.close(); </code></pre> <h2 id="3-写入数据">3. 写入数据</h2> <h3 id="31-从单个缓冲区写入">3.1 从单个缓冲区写入</h3> <p>单个缓冲区操作也非常简单，它返回往通道中写入的字节数。</p> <pre><code class="language-java">FileChannel channel = FileChannel.open(Paths.get("a.txt"), StandardOpenOption.WRITE); ByteBuffer buf = ByteBuffer.allocate(5); byte[] data = "Hello, Java NIO.".getBytes(); for (int i = 0; i &lt; data.length; ) {     buf.put(data, i, Math.min(data.length - i, buf.limit() - buf.position()));     buf.flip();     i += channel.write(buf);     buf.compact(); } channel.force(false); channel.close(); </code></pre> <h3 id="32-从多个缓冲区写入">3.2 从多个缓冲区写入</h3> <p>FileChannel 实现了 GatherringByteChannel 接口，与 ScatteringByteChannel 相呼应。可以一次性将多个缓冲区的数据写入到通道中。</p> <pre><code class="language-java">FileChannel channel = FileChannel.open(Paths.get("a.txt"), StandardOpenOption.WRITE); ByteBuffer key = ByteBuffer.allocate(10), value = ByteBuffer.allocate(10); byte[] data = "017 Robothy".getBytes(); key.put(data, 0, 3); value.put(data, 4, data.length-4); ByteBuffer[] buffers = new ByteBuffer[]{key, value}; key.flip(); value.flip(); channel.write(buffers); channel.force(false); // 将数据刷出到磁盘 channel.close(); </code></pre> <h3 id="33-数据刷出">3.3 数据刷出</h3> <p>为了减少访问磁盘的次数，通过文件通道对文件进行操作之后可能不会立即刷出到磁盘，此时如果系统崩溃，将导致数据的丢失。为了减少这种风险，在进行了重要数据的操作之后应该调用 force() 方法强制将数据刷出到磁盘。</p> <p>无论是否对文件进行过修改操作，即使文件通道是以只读模式打开的，只要调用了 force(metaData) 方法，就会进行一次 I/O 操作。参数 metaData 指定是否将元数据（例如：访问时间）也刷出到磁盘。</p> <pre><code class="language-java">channel.force(false); // 将数据刷出到磁盘，但不包括元数据 </code></pre> <h2 id="4-文件锁">4. 文件锁</h2> <p>可以通过调用 FileChannel 的 lock() 或者 tryLock() 方法来获得一个文件锁，获取锁的时候可以指定参数起始位置 position，锁定大小 size，是否共享 shared。如果没有指定参数，默认参数为 position = 0, size = Long.MAX_VALUE, shared = false。</p> <p>位置 position 和大小 size 不需要严格与文件保持一致，position 和 size 均可以超过文件的大小范围。例如：文件大小为 100，可以指定位置为 200， 大小为 50；则当文件大小扩展到 250 时，[200,250) 的部分会被锁住。</p> <p>shared 参数指定是排他的还是共享的。要获取共享锁，文件通道必须是可读的；要获取排他锁，文件通道必须是可写的。</p> <p>由于 Java 的文件锁直接映射为操作系统的文件锁实现，因此获取文件锁时代表的是整个虚拟机，而非当前线程。若操作系统不支持共享的文件锁，即使指定了文件锁是共享的，也会被转化为排他锁。</p> <pre><code class="language-java">FileLock lock = channel.lock(0, Long.MAX_VALUE, false);// 排它锁，此时同一操作系统下的其它进程不能访问 a.txt System.out.println("Channel locked in exclusive mode."); Thread.sleep(30 * 1000L); // 锁住 30 s lock.release(); // 释放锁  lock = channel.lock(0, Long.MAX_VALUE, true); // 共享锁，此时文件可以被其它文件访问 System.out.println("Channel locked in shared mode."); Thread.sleep(30 * 1000L); // 锁住 30 s lock.release(); </code></pre> <p>与 lock() 相比，tryLock() 是非阻塞的，无论是否能够获取到锁，它都会立即返回。若 tryLock() 请求锁定的区域已经被操作系统内的其它的进程锁住了，则返回 null；而 lock() 会阻塞，直到获取到了锁、通道被关闭或者线程被中断为止。</p> <h2 id="5-通道转换">5. 通道转换</h2> <p>普通的读写方式是利用一个 ByteBuffer 缓冲区，作为数据的容器。但如果是两个通道之间的数据交互，利用缓冲区作为媒介是多余的。文件通道允许从一个 ReadableByteChannel 中直接输入数据，也允许直接往 WritableByteChannel 中写入数据。实现这两个操作的分别为 transferFrom(ReadableByteChannel src, position, count) 和 transferTo(position, count, WritableChannel target) 方法。</p> <p>这进行通道间的数据传输时，这两个方法比使用 ByteBuffer 作为媒介的效率要高；很多操作系统支持文件系统缓存，两个文件之间实际可能并没有发生复制。</p> <p>transferFrom 或者 transferTo 在调用之后并不会改变 position 的位置。</p> <p>下面示例是一个 <a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://github.com/spring-projects/eclipse-integration-tcserver/blob/f5c717cdcc5420c98036b89ac8f2f77b5e725e63/com.vmware.vfabric.ide.eclipse.tcserver.configurator/src/com/vmware/vfabric/ide/eclipse/tcserver/configurator/util/FileUtil.java#L160"  target="_blank"  rel="nofollow">spring 源码</a>中的一个工具方法。</p> <pre><code class="language-java">public static void copy(File source, File target) throws IOException {     FileInputStream sourceOutStream = new FileInputStream(source);     FileOutputStream targetOutStream = new FileOutputStream(target);     FileChannel sourceChannel = sourceOutStream.getChannel();     FileChannel targetChannel = targetOutStream.getChannel();     sourceChannel.transferTo(0, sourceChannel.size(), targetChannel);     sourceChannel.close();     targetChannel.close();     sourceOutStream.close();     targetOutStream.close(); } </code></pre> <p>需要注意的是，调用这两个转换方法之后，某些情况下并不保证数据能够全部完成传输，确切传输了多少字节的数据需要根据返回的值来进行判断。例如：从一个非阻塞模式下的 SocketChannel 中输入数据就不能够一次性将数据全部传输过来，或者将文件通道的数据传输给一个非阻塞模式下的 SocketChannel 不能一次性传输过去。</p> <p>下面给出一个示例，客户端连接到服务端，然后从服务端下载一个叫 video.mp4 文件，文件在当前目录存在。</p> <p>错误示例：</p> <pre><code class="language-java">/** 服务端 **/ ServerSocketChannel serverSocketChannel = ServerSocketChannel.open(); // 打开服务通道 serverSocketChannel.bind(new InetSocketAddress(9090)); // 绑定端口号 SocketChannel clientChannel = serverSocketChannel.accept(); // 等待客户端连接，获取 SocketChannel FileChannel fileChannel = FileChannel.open(Paths.get("video.mp4"), StandardOpenOption.READ); // 打开文件通道 fileChannel.transferTo(0, fileChannel.size(), clientChannel); // 【可能出错位置】文件通道数据输出转化到 socket 通道，输出范围为整个文件。文件太大将导致输出不完整  /** 客户端 **/ SocketChannel socketChannel = SocketChannel.open(new InetSocketAddress("localhost", 9090)); // 打卡 socket 通道并连接到服务端 FileChannel fileChannel = FileChannel.open(Paths.get("video-downloaded.mp4"), StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE, StandardOpenOption.CREATE); // 打开文件通道 fileChannel.transferFrom(socketChannel, 0, Long.MAX_VALUE); // 【非阻塞模式下可能出错】 fileChannel.force(false); // 确保数据刷出到磁盘 </code></pre> <p>正确的姿势是：transferTo/transferFrom 的时候应该用一个循环检查实际输出内容大小是否和期望输出内容大小一致，特别是通道处于非阻塞模式下，极大概率不能够一次传输完成。</p> <p>所以服务端正确的转换方式是：</p> <pre><code class="language-java">long transfered = 0; while (transfered &lt; fileChannel.size()){     transfered += fileChannel.transferTo(transfered, fileChannel.size(), clientChannel); } </code></pre> <p>本例中客户端使用的是阻塞模式，服务端通道关闭输出（socketChannel.shutdownOutput()）之后 transferFrom 才退出，服务端正常关闭通道的情况下数据传输不会出错，这里就不处理非正常关闭的情况了。（<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://github.com/Robothy/java-experiments/blob/8376def49c812b3b9dff72796817124bf0002937/nio/Channel/FileChannelTransferTest.java"  target="_blank"  rel="nofollow">完整代码</a>）。</p> <h2 id="6-截取文件">6. 截取文件</h2> <p>FileChannel.truncate(long size) 可以截取指定的文件，指定大小之后的内容将被丢弃。size 的值可以超过文件大小，超过的话不会截取任何内容，也不会增加任何内容。</p> <pre><code class="language-java">FileChannel fileChannel = FileChannel.open(Paths.get("a.txt"), StandardOpenOption.WRITE); fileChannel.truncate(1); System.out.println(fileChannel.size()); // 输出 1 fileChannel.write(ByteBuffer.wrap("Hello".getBytes())); System.out.println(fileChannel.size()); // 输出 5 fileChannel.force(true); fileChannel.close(); </code></pre> <h2 id="7-映射文件到直接内存">7. 映射文件到直接内存</h2> <p>文件通道 FileChannel 可以将文件的指定范围映射到程序的地址空间中，映射部分使用字节缓冲区的一个子类 MappedByteBuffer 的对象表示，只要对映射字节缓冲区进行操作就能够达到操作文件的效果。与之相对应的，前面介绍的内容是通过操作文件通道和堆内存中的字节缓冲区 HeapByteBuffer 来达到操作文件的目的。</p> <p>通过 ByteBuffer.allocate() 分配的缓冲区是一个 HeapByteBuffer，存在于 JVM 堆中；而 FileChannle.map() 将文件映射到直接内存，返回的是一个 MappedByteBuffer，存在于堆外的直接内存中；这块内存在 MappedByteBuffer 对象本身被回收之前有效。</p> <p><svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns="http://www.w3.org/2000/svg" width="723" height="280" viewbox="0 0 723 280"></p> <style type="text/css"> .st11 {fill:#191919;font-family:72 Condensed;font-size:9pt} </style> <p><defs></defs><g transform="translate(5,5)" id="page1"><rect width="713" height="270" y="0" stroke="#808080" x="0" fill="#ffffff"></rect><g transform="translate(39,39)"><path d="M11,0L260.7,0C266.8,0,271.7,4.9,271.7,11L271.7,145.3C271.7,151.3,266.8,156.3,260.7,156.3L11,156.3C4.9,156.3,0,151.3,0,145.3L0,11C0,4.9,4.9,0,11,0z" stroke="#6d6d6d" id="shape1" fill="#cde6c7" fill-rule="evenodd"></path></g><g transform="translate(39,39)" id="shape2"><text class="st11"><tspan y="21.4" x="11.2">主存</tspan></text></g><g transform="translate(402.26,39)"><path d="M11,0L260.7,0C266.8,0,271.7,4.9,271.7,11L271.7,145.3C271.7,151.3,266.8,156.3,260.7,156.3L11,156.3C4.9,156.3,0,151.3,0,145.3L0,11C0,4.9,4.9,0,11,0z" stroke="#6d6d6d" id="shape3" fill="#cde6c7" fill-rule="evenodd"></path></g><g transform="translate(402.26,39)" id="shape4"><text class="st11"><tspan y="21.4" x="11.2">主存</tspan></text></g><g transform="translate(59,71.5)"><path d="M11,0L217,0C223.1,0,228,4.9,228,11L228,101.5C228,107.6,223.1,112.5,217,112.5L11,112.5C4.9,112.5,0,107.6,0,101.5L0,11C0,4.9,4.9,0,11,0z" stroke="#6d6d6d" id="shape5" fill="#fde9d0" fill-rule="evenodd"></path></g><g transform="translate(50.5,71.5)" id="shape6"><text class="st11"><tspan y="21.4" x="23.2">JVM进程内存</tspan></text></g><g transform="translate(74,104)"><path d="M11,0L185,0C191.1,0,196,4.9,196,11L196,57.1C196,63.1,191.1,68.1,185,68.1L11,68.1C4.9,68.1,0,63.1,0,57.1L0,11C0,4.9,4.9,0,11,0z" stroke="#6d6d6d" id="shape7" fill="#ebc4db" fill-rule="evenodd"></path></g><g transform="translate(158,119.85)" id="shape8"><path d="M92,34L92,0L0,0L0,34L92,34z" stroke="#323232" fill="#fde1e7" fill-rule="evenodd"></path><text class="st11" style="font-size: 8pt"><tspan y="20.6" x="11.2">HeapByteBuffer</tspan></text></g><g transform="translate(74,104.76)" id="shape9"><text class="st11"><tspan y="16.8" x="10.1">JVM 堆内存</tspan></text></g><g transform="translate(78.69,196)" id="shape10"><text class="st11"><tspan y="21.9" x="10.7">a) HeapByteBuffer 在内存中的位置</tspan></text></g><g transform="translate(444.63,196)" id="shape11"><text class="st11"><tspan y="21.9" x="4.3">b) MappedByteBuffer 在内存中的位置</tspan></text></g><g transform="translate(422.26,71.5)"><path d="M11,0L217,0C223.1,0,228,4.9,228,11L228,101.5C228,107.6,223.1,112.5,217,112.5L11,112.5C4.9,112.5,0,107.6,0,101.5L0,11C0,4.9,4.9,0,11,0z" stroke="#6d6d6d" id="shape12" fill="#fde9d0" fill-rule="evenodd"></path></g><g transform="translate(437.26,119.85)"><path d="M11,0L185,0C191.1,0,196,4.9,196,11L196,41.2C196,47.3,191.1,52.2,185,52.2L11,52.2C4.9,52.2,0,47.3,0,41.2L0,11C0,4.9,4.9,0,11,0z" stroke="#6d6d6d" id="shape13" fill="#ebc4db" fill-rule="evenodd"></path></g><g transform="translate(449.84,124.49)" id="shape14"><text class="st11"><tspan y="16.8" x="10.1">JVM 堆内存</tspan></text></g><g transform="translate(413.76,71.5)" id="shape15"><text class="st11"><tspan y="21.4" x="23.2">JVM进程内存</tspan></text></g><g transform="translate(517,80)" id="shape16"><path d="M107,34L107,0L0,0L0,34L107,34z" stroke="#323232" fill="#fde1e7" fill-rule="evenodd"></path><text class="st11" style="font-size: 8pt"><tspan y="20.6" x="12">MappedByteBuffer</tspan></text></g></g></svg></p> <h3 id="71-内存映射原理">7.1 内存映射原理</h3> <p>前面使用堆缓冲区 ByteBuffer 和文件通道 FileChannel 对文件的操作使用的是 read()/write() 系统调用。读取数据时数据从 I/O 设备读到内核缓存，再从内核缓存复制到用户空间缓存，这里是 JVM 的堆内存。而映射磁盘文件是使用 mmap() 系统调用，将文件的指定部分映射到程序地址空间中；数据交互发生在 I/O 设备于用户空间之间，不需要经过内核空间。</p> <p><svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns="http://www.w3.org/2000/svg" width="707" height="316" viewbox="0 0 707 316"></p> <style type="text/css"> .st1 {fill:#191919;font-size:9pt} </style> <p><defs></defs><g transform="translate(5,5)" id="page2"><rect width="697" height="306" y="0" stroke="#808080" x="0" fill="#ffffff"></rect><path transform="translate(195,65)" d="M100,60L100,0L0,0L0,60L100,60z" stroke="#323232" id="shape1" fill="#cde6c7" fill-rule="evenodd"></path><path transform="translate(39,64)" d="M100,60L100,0L0,0L0,60L100,60z" stroke="#323232" id="shape2" fill="#fde9d0" fill-rule="evenodd"></path><path transform="translate(39,173)" d="M220,60L220,0L0,0L0,60L220,60z" stroke="#323232" id="shape3" fill="#cad4cc" fill-rule="evenodd"></path><g transform="translate(108,184)" id="shape4"><path d="M100,22L100,0L0,0L0,22L100,22z" stroke="#323232" fill="#ffffff" fill-rule="evenodd"></path><text class="st1"><tspan y="15.4" x="38.1">文件</tspan></text></g><g transform="translate(51.5,40)" id="shape5"><text class="st1"><tspan y="15.6" x="13.6">内核空间</tspan></text></g><g transform="translate(207.5,41)" id="shape6"><text class="st1"><tspan y="15.9" x="13.6">用户空间</tspan></text></g><g transform="translate(71.5,82.28)" id="shape7"><path d="M55,22.5L55,0L0,0L0,22.5L55,22.5z" stroke="#323232" fill="#ffffff" fill-rule="evenodd"></path><text class="st1"><tspan y="15.6" x="15.2">缓存</tspan></text></g><g transform="translate(39,149.75)" id="shape8"><text class="st1"><tspan y="15.9" x="20.8">IO设备</tspan></text></g><g transform="translate(213,82.63)" id="shape9"><path d="M55,22.8L55,0L0,0L0,22.8L55,22.8z" stroke="#323232" fill="#ffffff" fill-rule="evenodd"></path><text class="st1"><tspan y="15.9" x="15.2">缓存</tspan></text></g><g transform="translate(126.5,94)" id="shape10"><path d="M4.4,0L82.1,0" stroke="#323232" fill="none"></path><path stroke-width="1" d="M0,0L5.2,3C4.7,2.1,4.4,1.1,4.4,0C4.4,-1.1,4.7,-2.1,5.2,-3L0,0" stroke="#323232" stroke-linecap="round" fill="#323232"></path><path stroke-width="1" d="M86.5,0L81.3,-3C81.8,-2.1,82.1,-1.1,82.1,0C82.1,1.1,81.8,2.1,81.3,3L86.5,0" stroke="#323232" stroke-linecap="round" fill="#323232"></path></g><g transform="translate(158,184)" id="shape11"><path d="M-2.6,-3.5L-56.4,-75.7" stroke="#323232" fill="none"></path><path stroke-width="1" d="M0,0L-0.7,-6C-1.1,-5,-1.7,-4.2,-2.6,-3.5C-3.5,-2.9,-4.5,-2.5,-5.5,-2.4L0,0" stroke="#323232" stroke-linecap="round" fill="#323232"></path><path stroke-width="1" d="M-59,-79.2L-58.3,-73.3C-57.9,-74.2,-57.3,-75,-56.4,-75.7C-55.5,-76.4,-54.5,-76.7,-53.5,-76.8L-59,-79.2" stroke="#323232" stroke-linecap="round" fill="#323232"></path></g><path transform="translate(558,64)" d="M100,60L100,0L0,0L0,60L100,60z" stroke="#323232" id="shape12" fill="#cde6c7" fill-rule="evenodd"></path><path transform="translate(402,63)" d="M100,60L100,0L0,0L0,60L100,60z" stroke="#323232" id="shape13" fill="#fde9d0" fill-rule="evenodd"></path><path transform="translate(402,172)" d="M220,60L220,0L0,0L0,60L220,60z" stroke="#323232" id="shape14" fill="#cad4cc" fill-rule="evenodd"></path><g transform="translate(471,183)" id="shape15"><path d="M100,22L100,0L0,0L0,22L100,22z" stroke="#323232" fill="#ffffff" fill-rule="evenodd"></path><text class="st1"><tspan y="15.4" x="38.4">文件</tspan></text></g><g transform="translate(414.5,39)" id="shape16"><text class="st1"><tspan y="15.6" x="13.6">内核空间</tspan></text></g><g transform="translate(570.5,40)" id="shape17"><text class="st1"><tspan y="15.9" x="13.6">用户空间</tspan></text></g><g transform="translate(434.5,81.28)" id="shape18"><path d="M55,22.5L55,0L0,0L0,22.5L55,22.5z" stroke="#323232" fill="#ffffff" fill-rule="evenodd"></path><text class="st1"><tspan y="15.6" x="15.2">缓存</tspan></text></g><g transform="translate(402,148.75)" id="shape19"><text class="st1"><tspan y="15.9" x="20.8">IO设备</tspan></text></g><g transform="translate(576,81.63)" id="shape20"><path d="M55,22.8L55,0L0,0L0,22.8L55,22.8z" stroke="#323232" fill="#ffffff" fill-rule="evenodd"></path><text class="st1"><tspan y="15.9" x="15.2">缓存</tspan></text></g><g transform="translate(521,183)" id="shape21"><path d="M3.2,-3L79.3,-75.6" stroke="#323232" fill="none"></path><path stroke-width="1" d="M0,0L5.8,-1.4C4.9,-1.7,3.9,-2.2,3.2,-3C2.4,-3.8,1.9,-4.8,1.7,-5.8L0,0" stroke="#323232" stroke-linecap="round" fill="#323232"></path><path stroke-width="1" d="M82.5,-78.6L76.7,-77.2C77.6,-76.9,78.6,-76.4,79.3,-75.6C80.1,-74.8,80.6,-73.9,80.8,-72.9L82.5,-78.6" stroke="#323232" stroke-linecap="round" fill="#323232"></path></g><path transform="translate(576,104.38)" d="M0,0L-78.6,78.6" stroke="#323232" id="shape22" stroke-dasharray="2.5,2.5" fill="none"></path><path transform="translate(631,104.38)" d="M0,0L-78.6,78.6" stroke="#323232" id="shape23" stroke-dasharray="2,5" fill="none"></path><g transform="translate(71.5,235)" id="shape24"><text class="st1"><tspan y="19.9" x="66.4">a) 普通 I/O</tspan></text></g><g transform="translate(420,234)" id="shape25"><text class="st1"><tspan y="20.9" x="54.4">b) 内存映射 I/O</tspan></text></g></g></svg></p> <p>虽然映射磁盘文件减少了一次数据复制，但对于大多数操作系统来说，将文件映射到内存这个操作本身开销较大；如果操作的文件很小，只有数十KB，映射文件所获得的好处将不及其开销。因此，只有在操作大文件的时候才将其映射到直接内存。</p> <h3 id="72-映射缓冲区用法">7.2 映射缓冲区用法</h3> <p>文件通道 FileChanle 通过成员方法 map(MapMode mode, long position, long size) 将文件映射到应用内存。</p> <pre><code class="language-java">FileChannel fileChannel = FileChannel.open(Paths.get("a.txt"), StandardOpenOption.READ, StandardOpenOption.WRITE); // 以读写的方式打开文件通道 MappedByteBuffer buf = fileChannel.map(FileChannel.MapMode.READ_WRITE, 0, fileChannel.size()); // 将整个文件映射到内存 </code></pre> <p><code>mode</code> 表示打开模式，为枚举值，其值可以为 READ_ONLY, READ_WRITE, PRIVATE。</p> <ul> <li>模式为 READ_ONLY 时，不能对 buf 进行写操作；</li> <li>模式为 READ_WRITE 时，通道 fileChannel 必须具有读写文件的权限；对 buf 进行的写操作将对文件生效，但不保证立即同步到 I/O 设备；</li> <li>模式为 PRIVATE 时，通道 fileChannle 必须对文件有读写权限；但是对文件的修改操作不会传播到 I/O 设备，而是会在内存复制一份数据。此时对文件的修改对其它线程和进程不可见。</li> </ul> <p><code>position</code> 指定文件的开始映射到内存的位置；</p> <p><code>size</code> 指定映射的大小，值为非负 int 型整数。</p> <p>调用 map() 方法之后，返回的 MappedByteBuffer 就与 fileChannel 脱离了关系，关闭 fileChannel 对 buf 没有影响。同时，如果要确保对 buf 修改的数据能够同步到文件 I/O 设备中，需要调用 MappedByteBuffer 中的无参数的 force() 方法，而调用 FileChannel 中的 force(metaData) 方法无效。</p> <p>此时可以通过操作缓冲区来操作文件了。不过映射的内容存在于 JVM 程序的堆外内存中，这部分内存是虚拟内存，意味着 buf 中的内容不一定都在物理内存中，要让这些内容加载到物理内存，可以调用 MappedByteBuffer 中的 load() 方法。另外，还可以调用 isLoaded() 来判断 buf 中的内容是否在物理内存中。</p> <pre><code class="language-java">FileChannel fileChannel = FileChannel.open(Paths.get("a.txt"), StandardOpenOption.WRITE, StandardOpenOption.READ); MappedByteBuffer buf = fileChannel.map(FileChannel.MapMode.READ_WRITE, 0, fileChannel.size()); fileChannel.close();    // 关于文件通道对 buf 没有影响 System.out.println(buf.capacity()); // 输出 fileChannel.size() System.out.println(buf.limit());    // 输出 fileChannel.size() System.out.println(buf.position()); // 输出 0 buf.put((byte)'R'); // 写入内容 buf.compact();      // 截掉 positoin 之前的内容 buf.force();        // 将数据刷出到 I/O 设备 </code></pre> <h2 id="8-小结">8. 小结</h2> <p>1）文件通道 FileChannel 能够将数据从 I/O 设备中读入(read)到字节缓冲区中，或者将字节缓冲区中的数据写入(write)到 I/O 设备中。</p> <p>2）文件通道能够转换到 (transferTo) 一个可写通道中，也可以从一个可读通道转换而来（transferFrom）。这种方式使用于通道之间地数据传输，比使用缓冲区更加高效。</p> <p>3）文件通道能够将文件的部分内容映射（map）到 JVM 堆外内存中，这种方式适合处理大文件，不适合处理小文件，因为映射过程本身开销很大。</p> <p>4）在对文件进行重要的操作之后，应该将数据刷出刷出(force)到磁盘，避免操作系统崩溃导致的数据丢失。</p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-75148.htm">submodule + gradle配置实现动态打包</a></p>
+                                        <p>下一个：<a href="/news/article-75840.htm">宠物领养协议书模板图片高清 宠物领养协议书模板图片高清版</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-58507.htm" title="动物疾病预防控制中心可以打疫苗吗多少钱（动物疫控中心可以打疫苗吗）">动物疾病预防控制中心可以打疫苗吗多少钱（动物疫控中心可以打疫苗吗）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-10-free-nekoray.htm" title="「1月10日」最高速度22.8M/S，2025年NekoRay每天更新免费节点订阅链接">「1月10日」最高速度22.8M/S，2025年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-36722.htm" title="自研FeignClient轻量级http客户端">自研FeignClient轻量级http客户端</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-8-node-share-links.htm" title="「2月8日」最高速度20.1M/S，2025年NekoRay每天更新免费节点订阅链接">「2月8日」最高速度20.1M/S，2025年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-61753.htm" title="笔记：Linux命令（目录和文件管理）">笔记：Linux命令（目录和文件管理）</a></li>
+                        <li class="py-2"><a href="/news/article-75839.htm" title="Java NIO 文件通道 FileChannel 用法_在线工具">Java NIO 文件通道 FileChannel 用法_在线工具</a></li>
+                        <li class="py-2"><a href="/news/article-69843.htm" title="开宠物店亏本怎么办理（开宠物店亏本怎么办理营业执照）">开宠物店亏本怎么办理（开宠物店亏本怎么办理营业执照）</a></li>
+                        <li class="py-2"><a href="/news/article-60000.htm" title="上海地区宠物领养平台 上海地区宠物领养平台有哪些">上海地区宠物领养平台 上海地区宠物领养平台有哪些</a></li>
+                        <li class="py-2"><a href="/news/article-41651.htm" title="国家速滑专用冰刀(速滑冰刀品牌排行)">国家速滑专用冰刀(速滑冰刀品牌排行)</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-18-shadowrocket-node.htm" title="「1月18日」最高速度22M/S，2025年NekoRay每天更新免费节点订阅链接">「1月18日」最高速度22M/S，2025年NekoRay每天更新免费节点订阅链接</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">51</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+        <!-- Copyright Start -->
+    <div class="container-fluid copyright py-4">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-md-0">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                    <span class="text-white">NekoRayNode节点订阅站 版权所有 Powered by WordPress</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright End -->
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary btn-lg-square back-to-top"><i class="fa fa-arrow-up"></i></a>
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/easing/easing.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/lightbox/js/lightbox.min.js"></script>
+    <!-- Template Javascript -->
+    <script src="/assets/website/js/frontend/nekoraynode/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

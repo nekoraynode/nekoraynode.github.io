@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://nekoraynode.github.io/news/article-75148.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>submodule + gradle配置实现动态打包</title>
+        <meta name="description" content="项目背景  最近的项目是一个通用的播放框架。内部集成了目前市面上主流的视频网站的播放sdk，比如爱奇艺、腾讯、华数等。另外，还需要支持明流的url播放。这个通用的播放框架需要在多个项目中使用，各个项目" />
+        <link rel="icon" href="/assets/website/img/nekoraynode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="NekoRayNode节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://nekoraynode.github.io/news/article-75148.htm" />
+    <meta property="og:site_name" content="NekoRayNode节点订阅站" />
+    <meta property="og:title" content="submodule + gradle配置实现动态打包" />
+    <meta property="og:image" content="https://nekoraynode.github.io/uploads/20240626/baa10f05b6c084027d2b3c920a1c9f01.webp" />
+        <meta property="og:release_date" content="2025-03-16T10:30:14" />
+    <meta property="og:updated_time" content="2025-03-16T10:30:14" />
+        <meta property="og:description" content="项目背景  最近的项目是一个通用的播放框架。内部集成了目前市面上主流的视频网站的播放sdk，比如爱奇艺、腾讯、华数等。另外，还需要支持明流的url播放。这个通用的播放框架需要在多个项目中使用，各个项目" />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="submodule + gradle配置实现动态打包">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <!-- Libraries Stylesheet -->
+    <link href="/assets/website/js/frontend/nekoraynode/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6TD6QHWW6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6TD6QHWW6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid p-0">
+                <nav class="navbar navbar-expand-lg fixed-top navbar-light px-4 px-lg-5 py-3 py-lg-0">
+            <a href="/" class="navbar-brand p-0">
+                <a href="/">
+                                <span class="display-6 text-primary m-0">
+                    <i class="fas fa-envelope me-3"></i>NekoRay Node                </span>
+                                </a>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                                        <a href="/" class="nav-item nav-link">首页</a>
+                                        <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                        <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                        <a href="/client.htm" class="nav-item nav-link">客户端</a>
+                                        <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                    </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar & Hero End -->
+    <!-- Header Start -->
+    <div class="container-fluid bg-breadcrumb">
+        <ul class="breadcrumb-animation">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="container text-center py-5" style="max-width: 900px;">
+            <h3 class="display-3 mb-4 wow fadeInDown" data-wow-delay="0.1s">submodule + gradle配置实现动态打包</h1>
+                <ol class="breadcrumb justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+                    <li class="breadcrumb-item"><a href="/">首页</a></li>
+                    <li class="breadcrumb-item"><a href="/news/">新闻资讯</a></li>
+                    <li class="breadcrumb-item active text-primary">正文</li>
+                </ol>
+        </div>
+    </div>
+    <!-- Header End -->
+    <!-- About Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> <h3 id="项目背景">项目背景</h3> <h3 id="title"></h3> <p>最近的项目是一个通用的播放框架。内部集成了目前市面上主流的视频网站的播放sdk，比如爱奇艺、腾讯、华数等。另外，还需要支持明流的url播放。这个通用的播放框架需要在多个项目中使用，各个项目需要支持的播放方式也是不一样的。有的项目只需要支持url播放，有的项目需要支持所有的播放方式。如果统一的只提供一个jar或者aar，将导致只需要url播放的应用也需要集成一个巨大无比的库。而且，这个库里，so和资源文件体积都很大，无法通过proguard的方式减小体积。所以，有必要实现一种简单的方式，让项目能够自己配置需要集成的第三方库，以支持多个项目不同的播放需求。</p> <hr/> <h3 id="如何集成">如何集成？</h3> <h3 id="title-1"></h3> <p>普通的maven方式集成第三方库简单方便，但是无法实现上述需求。当然，你可以自己设计一个专门的打包脚本，针对多个不同的需求，打包不同的第三方sdk，然后上传到maven仓库给其它项目使用。但是随着需求的复杂化和集成第三方sdk的增多，你需要维护的库文件将指数级增长。<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://blog.csdn.net/mountains2001/article/details/72638009"  rel="nofollow">submodule集成第三方库</a>提供了一种相当灵活的集成方式。但是并没有解决上一节中提到的问题。</p> <hr/> <h3 id="如何动态配置依赖">如何动态配置依赖？</h3> <h3 id="title-2"></h3> <p>下面以第一节提到的播放框架来做示例。在这个示例中，播放框架支持url、wasu、qiyi和tencent共四种视频资源的播放，demo中只配置了其中的3种url、wasu和qiyi，tencent的sdk并未被打包到demo中。</p> <ul> <li> <p>项目结构如下图： <br /><img decoding="async" src="http://img.555519.xyz/uploads/20230205/5fa5deeacd7bce0485c2cc4d6796af16.jpg" alt="submodule + gradle配置实现动态打包"></p> <p>BaseLibs是一个被很多项目依赖的项目，内部包含了一个测试demo、一个logger模块和一个widget模块。widget就是我们在第一节中提到的统一播放框架。</p> </li> <li> <p>widget模块的目录结构如下图： <br /><img decoding="async" src="http://img.555519.xyz/uploads/20230205/e27036319e9f440b0cf4ee8839abd271.jpg" alt="submodule + gradle配置实现动态打包"></p> <p>src目录存放播放框架的代码，sdk目录存放第三方sdk的so、jar和assets，libs里存放框架代码必须依赖的jar和aar文件。</p> </li> <li> <p>widget模块的gradle配置如下图： <br /><img decoding="async" src="http://img.555519.xyz/uploads/20230205/e7a4958cbc26b39666a71d1b08c5a2f9.jpg" alt="submodule + gradle配置实现动态打包"></p> <p>图中的配置，省略了通用配置，只列出了3个关键部分。</p> <p>1、从gradle.ext中获取外部定义的video_licenses数据。如果外部没有定义，则取默认的licenses。 <br /> 2、sourceSets中，遍历licenses数组，并针对每一个license，将其对应的so库和assets文件加入编译。 <br /> 3、dependencies中，遍历所有的licenses，针对每一个license对应的jar文件，根据配置采用provided或者compile方式编译打包。</p> </li> <li> <p>demo模块的gradle配置如下图： <br /><img decoding="async" src="http://img.555519.xyz/uploads/20230205/3d5a3441d3a7c6b42f815969c1521110.jpg" alt="submodule + gradle配置实现动态打包"></p> </li> </ul> <hr/> <h3 id="总结">总结</h3> <h3 id="title-3"></h3> <p>结合<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://blog.csdn.net/mountains2001/article/details/72638009%20%E2%80%9C123%E2%80%9D"  rel="nofollow">submodule集成第三方库</a>和gradle的配置脚本，轻松实现了按需打包。</p> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-75147.htm">通过覆盖的HTML元素<div>传递鼠标单击</a></p>
+                                        <p>下一个：<a href="/news/article-75839.htm">Java NIO 文件通道 FileChannel 用法_在线工具</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-69842.htm" title="Java高级之LinkedList的ListIterator迭代器">Java高级之LinkedList的ListIterator迭代器</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-16-linux-nekoray.htm" title="「3月16日」最高速度18.8M/S，2025年NekoRay每天更新免费节点订阅链接">「3月16日」最高速度18.8M/S，2025年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-17-free-nekoray-node.htm" title="「3月17日」最高速度19.7M/S，2025年NekoRay每天更新免费节点订阅链接">「3月17日」最高速度19.7M/S，2025年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-65995.htm" title="猫粮制作工艺流程图片（猫粮的工艺）">猫粮制作工艺流程图片（猫粮的工艺）</a></li>
+                        <li class="py-2"><a href="/news/article-57719.htm" title="养猫最忌讳的一个生肖是蛇吗（不宜养猫的生肖）">养猫最忌讳的一个生肖是蛇吗（不宜养猫的生肖）</a></li>
+                        <li class="py-2"><a href="/news/article-58507.htm" title="动物疾病预防控制中心可以打疫苗吗多少钱（动物疫控中心可以打疫苗吗）">动物疾病预防控制中心可以打疫苗吗多少钱（动物疫控中心可以打疫苗吗）</a></li>
+                        <li class="py-2"><a href="/news/article-45140.htm" title="合肥宠物领养吧百度贴吧（合肥宠物狗领养）">合肥宠物领养吧百度贴吧（合肥宠物狗领养）</a></li>
+                        <li class="py-2"><a href="/news/article-71153.htm" title="广州宠物领养中心官网网址（广州哪里有宠物领养机构）">广州宠物领养中心官网网址（广州哪里有宠物领养机构）</a></li>
+                        <li class="py-2"><a href="/news/article-64141.htm" title="nginx+tomcat负载均衡集群">nginx+tomcat负载均衡集群</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-18-shadowrocket-node.htm" title="「1月18日」最高速度22M/S，2025年NekoRay每天更新免费节点订阅链接">「1月18日」最高速度22M/S，2025年NekoRay每天更新免费节点订阅链接</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">51</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+        <!-- Copyright Start -->
+    <div class="container-fluid copyright py-4">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-md-0">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                    <span class="text-white">NekoRayNode节点订阅站 版权所有 Powered by WordPress</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright End -->
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary btn-lg-square back-to-top"><i class="fa fa-arrow-up"></i></a>
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/easing/easing.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/lightbox/js/lightbox.min.js"></script>
+    <!-- Template Javascript -->
+    <script src="/assets/website/js/frontend/nekoraynode/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
