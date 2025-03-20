@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://nekoraynode.github.io/news/article-76518.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Spring Boot拦截器示例及源码原理分析</title>
+        <meta name="description" content="在SpringMVC源码分析一文中，已经对SpringMVC的初始化及请求响应过程进行了分析，但未对拦截器进行深入研究。 本文将首先通过示例的方式了解拦截器的工作原理，然后再深入分析其源码来了解其内部" />
+        <link rel="icon" href="/assets/website/img/nekoraynode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="NekoRayNode节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://nekoraynode.github.io/news/article-76518.htm" />
+    <meta property="og:site_name" content="NekoRayNode节点订阅站" />
+    <meta property="og:title" content="Spring Boot拦截器示例及源码原理分析" />
+    <meta property="og:image" content="https://nekoraynode.github.io/uploads/20240626/44c79f30293c86d9cba636fb52d6fec7.webp" />
+        <meta property="og:release_date" content="2025-03-18T06:13:54" />
+    <meta property="og:updated_time" content="2025-03-18T06:13:54" />
+        <meta property="og:description" content="在SpringMVC源码分析一文中，已经对SpringMVC的初始化及请求响应过程进行了分析，但未对拦截器进行深入研究。 本文将首先通过示例的方式了解拦截器的工作原理，然后再深入分析其源码来了解其内部" />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Spring Boot拦截器示例及源码原理分析">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <!-- Libraries Stylesheet -->
+    <link href="/assets/website/js/frontend/nekoraynode/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6TD6QHWW6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6TD6QHWW6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid p-0">
+                <nav class="navbar navbar-expand-lg fixed-top navbar-light px-4 px-lg-5 py-3 py-lg-0">
+            <a href="/" class="navbar-brand p-0">
+                <a href="/">
+                                <span class="display-6 text-primary m-0">
+                    <i class="fas fa-envelope me-3"></i>NekoRay Node                </span>
+                                </a>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                                        <a href="/" class="nav-item nav-link">首页</a>
+                                        <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                        <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                        <a href="/client.htm" class="nav-item nav-link">客户端</a>
+                                        <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                    </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar & Hero End -->
+    <!-- Header Start -->
+    <div class="container-fluid bg-breadcrumb">
+        <ul class="breadcrumb-animation">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="container text-center py-5" style="max-width: 900px;">
+            <h3 class="display-3 mb-4 wow fadeInDown" data-wow-delay="0.1s">Spring Boot拦截器示例及源码原理分析</h1>
+                <ol class="breadcrumb justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+                    <li class="breadcrumb-item"><a href="/">首页</a></li>
+                    <li class="breadcrumb-item"><a href="/news/">新闻资讯</a></li>
+                    <li class="breadcrumb-item active text-primary">正文</li>
+                </ol>
+        </div>
+    </div>
+    <!-- Header End -->
+    <!-- About Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> <p>在<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://blog.csdn.net/icarusliu/article/details/78809790"  rel="nofollow">SpringMVC源码分析</a>一文中，已经对SpringMVC的初始化及请求响应过程进行了分析，但未对拦截器进行深入研究。<br /> 本文将首先通过示例的方式了解拦截器的工作原理，然后再深入分析其源码来了解其内部原理。<br /> 本文代码基于Spring Boot+Kotlin。</p> </h1> <p>GITHUB地址：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://github.com/icarusliu/learn"  target="_blank" rel="nofollow">https://github.com/icarusliu/learn</a></p> <h2 id="11-interceptor定义">1.1 Interceptor定义</h2> <p>第一步我们先来定义一个Interceptor；<br /> 拦截器一般需要继承自HandlerInterceptor，并需要实现以下三个接口：</p> <table> <thead> <tr> <th>接口</th> <th>接口名称</th> <th>说明</th> </tr> </thead> <tbody> <tr> <td>preHandle</td> <td>前置处理</td> <td>在实际的Handle执行前执行；有Boolean类型的返回值，如果返回为False，则Handle本身及postHandle/afterCompletion以及后续的拦截器全部都不会再继续执行；为True则反之。</td> </tr> <tr> <td>postHandle</td> <td>后置处理</td> <td>Handle执行后视图渲染前执行</td> </tr> <tr> <td>afterCompletion</td> <td>完成后处理</td> <td>Handle执行且视图渲染完成后执行</td> </tr> </tbody> </table> <p>Spring为方便使用实现了HandlerInterceptorAdapter的抽象类；需要实现的方法都实现为空的方法，在使用时只需实现必要的方法即可。</p> <p>定义的测试拦截器见以下代码：</p> <pre class="prettyprint"><code class="language-java hljs">class TestInterceptor: HandlerInterceptorAdapter() {<span class="hljs-keyword">private</span> val logger = LoggerFactory.getLogger(HandlerInterceptorAdapter::class.java)<span class="hljs-javadoc">/**      * This implementation always returns `true`.      */</span><span class="hljs-annotation">@Throws</span>(Exception::class)     override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {<span class="hljs-keyword">if</span> (logger.isDebugEnabled) {             logger.debug(<span class="hljs-string">"TestInterceptor preHandle begin to execute!"</span>)         }<span class="hljs-keyword">return</span><span class="hljs-keyword">true</span>     }<span class="hljs-javadoc">/**      * This implementation is empty.      */</span><span class="hljs-annotation">@Throws</span>(Exception::class)     override fun postHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any,<span class="hljs-annotation">@Nullable</span> modelAndView: ModelAndView?) {<span class="hljs-keyword">if</span> (logger.isDebugEnabled) {             logger.debug(<span class="hljs-string">"TestInterceptor postHandle begin to execute!"</span>)         }     }<span class="hljs-javadoc">/**      * This implementation is empty.      */</span><span class="hljs-annotation">@Throws</span>(Exception::class)     override fun afterCompletion(request: HttpServletRequest, response: HttpServletResponse, handler: Any,<span class="hljs-annotation">@Nullable</span> ex: Exception?) {<span class="hljs-keyword">if</span> (logger.isDebugEnabled) {             logger.debug(<span class="hljs-string">"TestInterceptor afterCompletion begin to execute!"</span>)         }     }<span class="hljs-javadoc">/**      * This implementation is empty.      */</span><span class="hljs-annotation">@Throws</span>(Exception::class)     override fun afterConcurrentHandlingStarted(request: HttpServletRequest, response: HttpServletResponse,                                                 handler: Any) {<span class="hljs-keyword">if</span> (logger.isDebugEnabled) {             logger.debug(<span class="hljs-string">"TestInterceptor afterConcurrentHandlingStarted begin to execute!"</span>)         }     } }</code></pre> <h2 id="12-拦截器配置">1.2 拦截器配置</h2> <p>拦截器定义完成后，还需要将拦截器引入，并指定该拦截器所拦截的场景。<br /> 在SpringBoot中，一般通过使用EnableWebMvc及Configuration两个注解，并实现WebMvcConfigurer接口来添加拦截器，实现代码如下：</p> <pre class="prettyprint"><code class="language-java hljs"><span class="hljs-annotation">@EnableWebMvc</span><span class="hljs-annotation">@Configuration</span> class WebConfig: WebMvcConfigurer {     override fun addInterceptors(registry: InterceptorRegistry) {         registry.addInterceptor(TestInterceptor()).addPathPatterns(<span class="hljs-string">"/**"</span>)     } }</code></pre> <p>注解一定要通过addPathPatterns来指定该拦截器所拦截的URL，如果不指定将不会拦截任何请求。.</p> <h2 id="13-定义controller">1.3 定义Controller</h2> <p>Controller的定义比较简单，在此不细说，代码如下：</p> <pre class="prettyprint"><code class="language-java hljs"><span class="hljs-annotation">@RestController</span><span class="hljs-annotation">@RequestMapping</span>(<span class="hljs-string">"/test"</span>) class TestController {<span class="hljs-keyword">private</span> val logger = LoggerFactory.getLogger(TestController::class.java)<span class="hljs-annotation">@RequestMapping</span>(<span class="hljs-string">"/test"</span>)     fun test(): String {<span class="hljs-keyword">if</span> (logger.isDebugEnabled) {             logger.debug(<span class="hljs-string">"Test controller begin to execute!"</span>)         }          logger.info(<span class="hljs-string">"Test!"</span>)<span class="hljs-keyword">if</span> (logger.isDebugEnabled) {             logger.debug(<span class="hljs-string">"Test controller execution has been completed!"</span>)         }<span class="hljs-keyword">return</span><span class="hljs-string">"test"</span>;     } }</code></pre> <h2 id="14-测试类定义">1.4 测试类定义</h2> <pre class="prettyprint"><code class="language-java hljs"><span class="hljs-annotation">@RunWith</span>(SpringRunner::class)<span class="hljs-annotation">@WebMvcTest</span>(TestController::class) class LearninterceptorApplicationTests {<span class="hljs-keyword">private</span> val logger = LoggerFactory.getLogger(LearninterceptorApplicationTests::class.java)<span class="hljs-annotation">@Autowired</span><span class="hljs-keyword">private</span> lateinit var mvc: MockMvc      @Test     fun<span class="hljs-title">testTestController</span>() {         mvc.perform(get(<span class="hljs-string">"/test/test"</span>)).andExpect(status().isOk)                 .andExpect(content().string(<span class="hljs-string">"test"</span>));     }  }</code></pre> <p>在此，一个测试的Interceptor及其测试的Controller及单元测试类即定义完成。<br /> 可以通过执行测试类看到测试结果，在此不细述。</p> </h1> <p>在1.2章节中我们通过@EnableWebMvc注解来进行拦截器的自定义配置，通过分析该类及相关类，各个类的作用如下</p> </h1> <p>与Configuration注解结合，可从WebMvcConfigurationSupport中引入SpringMVC的相关配置；如果需要修改引入的配置，需要通过实现WebMvcConfigurer接口提供的方法来进行。<br /> 注解EnableWebMvc在一个工程中只能注解在一个类上； 但实现WebMvcConfigurer的类可以有多个。<br /> EnableWebMvc是如何引入WebMvcConfigurationSupport中的相关配置的呢？<br /> 我们来看下其本身实现：</p> <pre class="prettyprint"><code class="language-java hljs"><span class="hljs-annotation">@Retention</span>(RetentionPolicy.RUNTIME)<span class="hljs-annotation">@Target</span>(ElementType.TYPE)<span class="hljs-annotation">@Documented</span><span class="hljs-annotation">@Import</span>(DelegatingWebMvcConfiguration.class)<span class="hljs-keyword">public</span> @<span class="hljs-class"><span class="hljs-keyword">interface</span><span class="hljs-title">EnableWebMvc</span> {<!-- --></span> }</code></pre> <p>可以看到其通过Import引入了DelegatingWebMvcConfiguration配置类， 而这个类又继承了WebMvcConfigurationSupport类。<br /> 关于这部分如何生效的后文将会进行详解。</p> </h1> <p>WebMvcConfigurer主要是提供接口来实现SpringMVC的自定义配置，其中它与Interceptor相关的就是addInterceptors方法，通过覆盖该方法，可以添加自定义Interceptor。</p> <p>addInterceptors返回类型为InterceptorRegistration对象，通过查看该类实现，看到其提供的主要方法是： addPathPatterns/excludePathPatterns/pathMatcher/order，主要完成两个功能：一是提供配置所添加的Interceptor的映射路径的方法；二是提供配置所添加的Interceptor的Order的方法，通过Order可控制所添加的Interceptor在所有Interceptors中的执行顺序。<br /> 其使用代码如下：</p> <pre class="prettyprint"><code class="language-java hljs">override fun addInterceptors(registry: InterceptorRegistry) {     registry.addInterceptor(TestInterceptor())             .addPathPatterns(<span class="hljs-string">"/**"</span>)             .order(<span class="hljs-number">1000</span>) }</code></pre> </h1> <p>在<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://blog.csdn.net/icarusliu/article/details/78809790"  target="_blank" rel="nofollow">SpringMVC源码分析</a>一文的2.2.2.1章节中，已经分析过DiapatcherServlet中的Service方法的执行过程；跟拦截器相关的执行流程如下：</p> <div class="flow-chart"></div> <p>其关键就在Handle及拦截器的查找中；至于执行过程较为简单不再详细说明。</p> <p>接下来我们分析拦截器的查找过程。<br /> 在<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://blog.csdn.net/icarusliu/article/details/78809790"  target="_blank" rel="nofollow">SpringMVC源码分析</a>一文中，已经分析过查找过程在AbstractHandlerMapping中实现，实际查找拦截器在方法getHandlerExecutionChain中：</p> <pre class="prettyprint"><code class="language-java hljs"><span class="hljs-keyword">protected</span> HandlerExecutionChain<span class="hljs-title">getHandlerExecutionChain</span>(Object handler, HttpServletRequest request) {     HandlerExecutionChain chain = (handler<span class="hljs-keyword">instanceof</span> HandlerExecutionChain ?             (HandlerExecutionChain) handler :<span class="hljs-keyword">new</span> HandlerExecutionChain(handler));      String lookupPath =<span class="hljs-keyword">this</span>.urlPathHelper.getLookupPathForRequest(request);<span class="hljs-keyword">for</span> (HandlerInterceptor interceptor :<span class="hljs-keyword">this</span>.adaptedInterceptors) {<span class="hljs-keyword">if</span> (interceptor<span class="hljs-keyword">instanceof</span> MappedInterceptor) {             MappedInterceptor mappedInterceptor = (MappedInterceptor) interceptor;<span class="hljs-keyword">if</span> (mappedInterceptor.matches(lookupPath,<span class="hljs-keyword">this</span>.pathMatcher)) {                 chain.addInterceptor(mappedInterceptor.getInterceptor());             }         }<span class="hljs-keyword">else</span> {             chain.addInterceptor(interceptor);         }     }<span class="hljs-keyword">return</span> chain; }</code></pre> <p>该方法就是从adaptedInterceptors属性中，根据URL查找添加条件的Interceptor并组装成HandlerExecutionChain并返回。<br /> 结合1.5.2中的分析，可以知道此处是否满足条件的判断是根据添加拦截器配置时调用的addPathPatterns方法决定的。具体判定过程不再赘述。</p> <p>那么，现在的问题就是adaptedInterceptors属性是如何初始化的。<br /> 通过分析AbstractHandlerMapping类，其adaptedInterceptors属性实际是在initInterceptors方法中根据interceptors来进行初始化的。现在的问题转变成interceptors这个属性是如何初始化的了。 实际上这个属性是通过setInterceptors方法来设置的，但通过Alt+F7的搜索并未搜索到该方法是在哪个地方调用的。</p> <p>我们换个思路，通过@EnableWebMvc来分析看通过addInterceptors方法配置的Interceptor在到底添加到哪去了。<br /> 前言已经分析，通过@EnableWebMvc注解实际上引入了DelegatingWebMvcConfiguration这个类；查看这个类，在其中有一方法被Autowired注解：</p> <pre class="prettyprint"><code class="language-java hljs"><span class="hljs-annotation">@Autowired</span>(required =<span class="hljs-keyword">false</span>)<span class="hljs-keyword">public</span><span class="hljs-keyword">void</span><span class="hljs-title">setConfigurers</span>(List&lt;WebMvcConfigurer&gt; configurers) {<span class="hljs-keyword">if</span> (!CollectionUtils.isEmpty(configurers)) {<span class="hljs-keyword">this</span>.configurers.addWebMvcConfigurers(configurers);     } }</code></pre> <p>通过查看Autowired注解定义，了解到当它使用在List参数的方法上时，会查找List所包含的对象类型的所有Bean然后进行注入。这也意味着，此处会将所有实现WebMvcConfigurer接口的类进行注入，然后添加到configurers属性中去；在此处，我们自定义的继承自WebMvcConfigurer的类会被注入。<br /> 再查看 DelegatingWebMvcConfiguration 这个类，它继承了 WebMvcConfigurationSupport 类。分析WebMvcConfigurationSupport，可以看到以下方法：</p> <pre class="prettyprint"><code class="language-java hljs"><span class="hljs-annotation">@Bean</span><span class="hljs-keyword">public</span> RequestMappingHandlerMapping<span class="hljs-title">requestMappingHandlerMapping</span>() {     RequestMappingHandlerMapping mapping = createRequestMappingHandlerMapping();     mapping.setOrder(<span class="hljs-number">0</span>);     mapping.setInterceptors(getInterceptors());     mapping.setContentNegotiationManager(mvcContentNegotiationManager());     mapping.setCorsConfigurations(getCorsConfigurations());      PathMatchConfigurer configurer = getPathMatchConfigurer();     Boolean useSuffixPatternMatch = configurer.isUseSuffixPatternMatch();     Boolean useRegisteredSuffixPatternMatch = configurer.isUseRegisteredSuffixPatternMatch();     Boolean useTrailingSlashMatch = configurer.isUseTrailingSlashMatch();<span class="hljs-keyword">if</span> (useSuffixPatternMatch !=<span class="hljs-keyword">null</span>) {         mapping.setUseSuffixPatternMatch(useSuffixPatternMatch);     }<span class="hljs-keyword">if</span> (useRegisteredSuffixPatternMatch !=<span class="hljs-keyword">null</span>) {         mapping.setUseRegisteredSuffixPatternMatch(useRegisteredSuffixPatternMatch);     }<span class="hljs-keyword">if</span> (useTrailingSlashMatch !=<span class="hljs-keyword">null</span>) {         mapping.setUseTrailingSlashMatch(useTrailingSlashMatch);     }      UrlPathHelper pathHelper = configurer.getUrlPathHelper();<span class="hljs-keyword">if</span> (pathHelper !=<span class="hljs-keyword">null</span>) {         mapping.setUrlPathHelper(pathHelper);     }      PathMatcher pathMatcher = configurer.getPathMatcher();<span class="hljs-keyword">if</span> (pathMatcher !=<span class="hljs-keyword">null</span>) {         mapping.setPathMatcher(pathMatcher);     }<span class="hljs-keyword">return</span> mapping; }</code></pre> <p>可以看到RequestMappingHandlerMapping类被注入Spring容器。<br /> 同时通过mapping.setInterceptors(getInterceptors())将所有的Interceptors设置到HandperMapping对象中 。<br /> 这样就找到了ReuqestMappingHandlerMapping的setInterceptors方法调用处了。<br /> 接下来的问题就是此处调用的getInterceptors方法的实现：</p> <pre class="prettyprint"><code class="language-java hljs"><span class="hljs-keyword">protected</span><span class="hljs-keyword">final</span> Object[]<span class="hljs-title">getInterceptors</span>() {<span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.interceptors ==<span class="hljs-keyword">null</span>) {         InterceptorRegistry registry =<span class="hljs-keyword">new</span> InterceptorRegistry();         addInterceptors(registry);         registry.addInterceptor(<span class="hljs-keyword">new</span> ConversionServiceExposingInterceptor(mvcConversionService()));         registry.addInterceptor(<span class="hljs-keyword">new</span> ResourceUrlProviderExposingInterceptor(mvcResourceUrlProvider()));<span class="hljs-keyword">this</span>.interceptors = registry.getInterceptors();     }<span class="hljs-keyword">return</span><span class="hljs-keyword">this</span>.interceptors.toArray(); }</code></pre> <p>此处如果interceptors对象为空时，会调用addInterceptors方法；其实现在DelegatingWebMvcConfiguration类中：</p> <pre class="prettyprint"><code class="language-java hljs"><span class="hljs-annotation">@Override</span><span class="hljs-keyword">protected</span><span class="hljs-keyword">void</span><span class="hljs-title">addInterceptors</span>(InterceptorRegistry registry) {<span class="hljs-keyword">this</span>.configurers.addInterceptors(registry); }</code></pre> <p>在前文已经描述到，DelegatingWebMvcConfiguration类中的configurers属性会将所有继承了WebMvcConfigurer的配置类全部添加进去。如我们自定义的配置类；在此处调用DelegatingWebMvcConfiguration的addInterceptors方法时，实际就是调用各个WebMvcConfigurer对象的addInterceptors方法来完成自定义的Interceptor注册过程。<br /> 通过这一系列过程，RequestMappingHandlerMapping的getInterceptors方法就可以获取到所有自定义的Interceptor了。</p> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-75840.htm">宠物领养协议书模板图片高清 宠物领养协议书模板图片高清版</a></p>
+                                        <p>下一个：<a href="/news/article-76519.htm">百莲凯美容院加盟需要多少钱（附近整形美容医院有哪些）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-58289.htm" title="做猫粮狗粮的机器 做猫粮狗粮的机器叫什么">做猫粮狗粮的机器 做猫粮狗粮的机器叫什么</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-16-linux-nekoray.htm" title="「3月16日」最高速度18.8M/S，2025年NekoRay每天更新免费节点订阅链接">「3月16日」最高速度18.8M/S，2025年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-60573.htm" title="SpringAOP的源码解析">SpringAOP的源码解析</a></li>
+                        <li class="py-2"><a href="/news/article-35960.htm" title="天津天照集团是什么产业（天照实业）">天津天照集团是什么产业（天照实业）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-19-free-node-subscribe.htm" title="「3月19日」最高速度22.4M/S，2025年NekoRay每天更新免费节点订阅链接">「3月19日」最高速度22.4M/S，2025年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-45622.htm" title="动物医院诊室如何管理 动物医院诊室如何管理好">动物医院诊室如何管理 动物医院诊室如何管理好</a></li>
+                        <li class="py-2"><a href="/news/article-44638.htm" title="领养协议书模板图片大全（领养协议范本）">领养协议书模板图片大全（领养协议范本）</a></li>
+                        <li class="py-2"><a href="/news/article-47112.htm" title="昆明领养宠物的地方在哪里（昆明市领养宠物）">昆明领养宠物的地方在哪里（昆明市领养宠物）</a></li>
+                        <li class="py-2"><a href="/news/article-57719.htm" title="养猫最忌讳的一个生肖是蛇吗（不宜养猫的生肖）">养猫最忌讳的一个生肖是蛇吗（不宜养猫的生肖）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-10-free-nekoray.htm" title="「3月10日」最高速度21.7M/S，2025年NekoRay每天更新免费节点订阅链接">「3月10日」最高速度21.7M/S，2025年NekoRay每天更新免费节点订阅链接</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">60</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+        <!-- Copyright Start -->
+    <div class="container-fluid copyright py-4">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-md-0">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                    <span class="text-white">NekoRayNode节点订阅站 版权所有 Powered by WordPress</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright End -->
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary btn-lg-square back-to-top"><i class="fa fa-arrow-up"></i></a>
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/easing/easing.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/lightbox/js/lightbox.min.js"></script>
+    <!-- Template Javascript -->
+    <script src="/assets/website/js/frontend/nekoraynode/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

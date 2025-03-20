@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://nekoraynode.github.io/news/article-77197.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Asp.Net Core使用Ocelot结合Consul实现服务注册和发现_实用技巧</title>
+        <meta name="description" content="目录  1.服务注册与发现（Service Discovery） 2.Consul 3.Asp.Net Core向Consul注册服务实例 4.项目演示  4.1APIGateway项目 4.2Com" />
+        <link rel="icon" href="/assets/website/img/nekoraynode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="NekoRayNode节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://nekoraynode.github.io/news/article-77197.htm" />
+    <meta property="og:site_name" content="NekoRayNode节点订阅站" />
+    <meta property="og:title" content="Asp.Net Core使用Ocelot结合Consul实现服务注册和发现_实用技巧" />
+    <meta property="og:image" content="https://nekoraynode.github.io/uploads/20240626/3532e616193518d5df190334e27698e9.webp" />
+        <meta property="og:release_date" content="2025-03-19T09:11:22" />
+    <meta property="og:updated_time" content="2025-03-19T09:11:22" />
+        <meta property="og:description" content="目录  1.服务注册与发现（Service Discovery） 2.Consul 3.Asp.Net Core向Consul注册服务实例 4.项目演示  4.1APIGateway项目 4.2Com" />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Asp.Net Core使用Ocelot结合Consul实现服务注册和发现_实用技巧">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <!-- Libraries Stylesheet -->
+    <link href="/assets/website/js/frontend/nekoraynode/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6TD6QHWW6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6TD6QHWW6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid p-0">
+                <nav class="navbar navbar-expand-lg fixed-top navbar-light px-4 px-lg-5 py-3 py-lg-0">
+            <a href="/" class="navbar-brand p-0">
+                <a href="/">
+                                <span class="display-6 text-primary m-0">
+                    <i class="fas fa-envelope me-3"></i>NekoRay Node                </span>
+                                </a>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                                        <a href="/" class="nav-item nav-link">首页</a>
+                                        <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                        <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                        <a href="/client.htm" class="nav-item nav-link">客户端</a>
+                                        <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                    </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar & Hero End -->
+    <!-- Header Start -->
+    <div class="container-fluid bg-breadcrumb">
+        <ul class="breadcrumb-animation">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="container text-center py-5" style="max-width: 900px;">
+            <h3 class="display-3 mb-4 wow fadeInDown" data-wow-delay="0.1s">Asp.Net Core使用Ocelot结合Consul实现服务注册和发现_实用技巧</h1>
+                <ol class="breadcrumb justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+                    <li class="breadcrumb-item"><a href="/">首页</a></li>
+                    <li class="breadcrumb-item"><a href="/news/">新闻资讯</a></li>
+                    <li class="breadcrumb-item active text-primary">正文</li>
+                </ol>
+        </div>
+    </div>
+    <!-- Header End -->
+    <!-- About Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="navCategory"> <h5 class="catalogue">目录</h5> <ul class="first_class_ul"> <li><a href="#_label0" rel="nofollow">1.服务注册与发现（Service Discovery）</a></li> <li><a href="#_label1" rel="nofollow">2.Consul</a></li> <li><a href="#_label2" rel="nofollow">3.Asp.Net Core向Consul注册服务实例</a></li> <li><a href="#_label3" rel="nofollow">4.项目演示</a></li> <ul class="second_class_ul"> <li><a href="#_lab2_3_0" rel="nofollow">4.1APIGateway项目</a></li> <li><a href="#_lab2_3_1" rel="nofollow">4.2Common项目</a></li> <li><a href="#_lab2_3_2" rel="nofollow">4.3APIServiceA项目</a></li> <li><a href="#_lab2_3_3" rel="nofollow">4.4APIServiceB项目</a></li> <li><a href="#_lab2_3_4" rel="nofollow">4.5项目运行</a></li> </ul> </ul> </div> <p class="maodian"><a name="_label0" rel="nofollow"></a></p> <h2>1.服务注册与发现（Service Discovery）</h2> <ul> <li>服务注册：我们通过在每个服务实例写入注册代码，实例在启动的时候会先去注册中心（例如Consul、ZooKeeper、etcd、Eureka）注册一下，那么客户端通过注册中心可以知道每个服务实例的地址，端口号，健康状态等等信息，也可以通过注册中心删除服务实例。这里注册中心相当于是负责维护服务实例的管控中心。</li> <li>服务发现：服务实例在注册中心注册之后，客户端通过注册中心可以了解这些服务实例运行状况。</li> </ul> <p class="maodian"><a name="_label1" rel="nofollow"></a></p> <h2>2.Consul</h2> <p>如果要实现服务注册与发现，需要一个注册中心，这里主要介绍是Consul。</p> <p>Consul官网：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.consul.io/"   target="_blank" rel="nofollow">https://www.consul.io/</a>，它主要功能有：服务注册与发现、健康检查、Key/Value、多数据中心。</p> <p>如果在Windows上部署Consul，在consul.exe目录下执行<code>consul.exe agent -dev</code>命令行即可。</p> <p class="maodian"><a name="_label2" rel="nofollow"></a></p> <h2>3.Asp.Net Core向Consul注册服务实例</h2> <p>Asp.Net Core向Consul注册服务实例调用过程如下图所示：</p> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220420/cd33db0e1666bd4167264b39959defbc.jpg"></p> <p>Asp.Net Core向Consul注册服务实例需要在Gateway项目中引用Consul支持的NuGet软件包，安装命令如下：</p> <div class="ay1code"> <pre class="brush:ps;">Install-Package Ocelot.Provider.Consul</pre> </div> <p>然后将以下内容添加到您的ConfigureServices方法中：</p> <div class="ay1code"> <pre class="brush:csharp;">services.AddOcelot().AddConsul();</pre> </div> <p>在Ocelot服务发现项目示例中，通过APIGateway项目GlobalConfiguration选项可以配置服务注册与发现，文件配置具体代码如下：</p> <div class="ay1code"> <pre class="brush:js;">{    "Routes": [      {        "UseServiceDiscovery": true,        "DownstreamPathTemplate": "/{url}",        "DownstreamScheme": "http",        "ServiceName": "MyService",        "LoadBalancerOptions": {          "Type": "RoundRobin"        },        "UpstreamPathTemplate": "/{url}",        "UpstreamHttpMethod": [ "Get" ],        "ReRoutesCaseSensitive": false      }    ],    "GlobalConfiguration": {      //服务发现配置      "ServiceDiscoveryProvider": {        //注册中心Consul地址        "Host": "192.168.113.128",        //注册中心Consul端口号        "Port": 8500,        "Type": "Consul",        //以毫秒为单位，告诉Ocelot多久调用一次Consul来更改服务配置。        "PollingInterval": 100,        //如果你有在Consul上配置key/value，则在这里输入配置key。        "ConfigurationKey": "MyService_AB"      }    }  }</pre> </div> <p>ServiceDiscoveryProvider选项说明：</p> <ul> <li>Host：注册中心Consul地址。</li> <li>Port：注册中心Consul端口号。</li> <li>Type：注册中心类型。</li> <li>PollingInterval：以毫秒为单位，告诉Ocelot多久调用一次Consul来更改服务配置。</li> <li>ConfigurationKey：如果你有在Consul上配置key/value，则在这里输入配置key。</li> </ul> <p class="maodian"><a name="_label3" rel="nofollow"></a></p> <h2>4.项目演示</h2> <p class="maodian"><a name="_lab2_3_0" rel="nofollow"></a></p> <h3>4.1APIGateway项目</h3> <p>ConfigureServices添加Ocelot、Consul注入：</p> <div class="ay1code"> <pre class="brush:csharp;">services.AddOcelot().AddConsul();</pre> </div> <p>Configure添加使用Ocelot：</p> <div class="ay1code"> <pre class="brush:csharp;">app.UseOcelot().Wait();</pre> </div> <p>服务发现配置如Ocelot服务发现项目示例一样。</p> <p class="maodian"><a name="_lab2_3_1" rel="nofollow"></a></p> <h3>4.2Common项目</h3> <p>先安装Consul的NuGet软件包，安装命令如下：</p> <div class="ay1code"> <pre class="brush:ps;">Install-Package Consul</pre> </div> <p>在该项目添加一个AppExtensions扩展类，用来对服务APIServiceA、APIServiceB项目在Consul注册实例，为了展示效果，具体代码稍作修改如下：</p> <div class="ay1code"> <pre class="brush:csharp;">public static class AppExtensions  {      public static IServiceCollection AddConsulConfig(this IServiceCollection services, IConfiguration configuration)      {          services.AddSingleton&lt;IConsulClient, ConsulClient&gt;(p =&gt; new ConsulClient(consulConfig =&gt;          {              var address = configuration.GetValue&lt;string&gt;("Consul:Host");              consulConfig.Address = new Uri(address);          }));          return services;      }      public static IApplicationBuilder UseConsul(this IApplicationBuilder app, string host = null, string port = null)      {          //获取consul客户端实例          var consulClient = app.ApplicationServices.GetRequiredService&lt;IConsulClient&gt;();          var logger = app.ApplicationServices.GetRequiredService&lt;ILoggerFactory&gt;().CreateLogger("AppExtensions");          var lifetime = app.ApplicationServices.GetRequiredService&lt;IApplicationLifetime&gt;();            if (!(app.Properties["server.Features"] is FeatureCollection features)) return app;            //var addresses = features.Get&lt;IServerAddressesFeature&gt;();          //var address = addresses.Addresses.FirstOrDefault();          //if (address == null)          //{          //    return app;          //}            var address = host + ":" + port;          if (string.IsNullOrWhiteSpace(host) || string.IsNullOrWhiteSpace(port))          {              Console.WriteLine($"host或者port为空！");              return app;          }            Console.WriteLine($"address={address}");          var uri = new Uri(address);          Console.WriteLine($"host={uri.Host},port={uri.Port}");            var registration = new AgentServiceRegistration()          {              ID = $"MyService-{uri.Port}",              Name = "MyService",              Address = $"{uri.Host}",              Port = uri.Port,              Check = new AgentServiceCheck()              {                  DeregisterCriticalServiceAfter = TimeSpan.FromSeconds(5),//服务启动多久后注册                  Interval = TimeSpan.FromSeconds(10),//健康检查时间间隔                  HTTP = $"{address}/HealthCheck",//健康检查地址                  Timeout = TimeSpan.FromSeconds(5)//超时时间              }          };          logger.LogInformation("Registering with Consul");          logger.LogInformation($"Consul RegistrationID:{registration.ID}");          //注销          consulClient.Agent.ServiceDeregister(registration.ID).ConfigureAwait(true);          //注册          consulClient.Agent.ServiceRegister(registration).ConfigureAwait(true);          //应用程序关闭时候          lifetime.ApplicationStopping.Register(() =&gt;          {              //正在注销              logger.LogInformation("Unregistering from Consul");              consulClient.Agent.ServiceDeregister(registration.ID).ConfigureAwait(true);          });          //每个服务都需要提供一个用于健康检查的接口，该接口不具备业务功能。服务注册时把这个接口的地址也告诉注册中心，注册中心会定时调用这个接口来检测服务是否正常，如果不正常，则将它移除，这样就保证了服务的可用性。          app.Map("/HealthCheck", s =&gt;          {              s.Run(async context =&gt;              {                  await context.Response.WriteAsync("ok");              });          });          return app;      }  }</pre> </div> <p class="maodian"><a name="_lab2_3_2" rel="nofollow"></a></p> <h3>4.3APIServiceA项目</h3> <p>项目添加一个Get方法，对应APIGateway项目的路由上下游配置，具体代码如下：</p> <div class="ay1code"> <pre class="brush:csharp;">[Route("api/[controller]")]  [ApiController]  public class ValuesController : ControllerBase  {      // GET api/values      [HttpGet]      public ActionResult&lt;IEnumerable&lt;string&gt;&gt; Get()      {          var port = Request.Host.Port;          return new string[] { "value1", "value2", port.Value.ToString() };      }  }</pre> </div> <p>appsettings.json配置加入Consul地址：</p> <div class="ay1code"> <pre class="brush:js;">"Consul": {    "Host": "http://192.168.113.128:8500"  }</pre> </div> <p class="maodian"><a name="_lab2_3_3" rel="nofollow"></a></p> <h3>4.4APIServiceB项目</h3> <p>项目添加一个Get方法，对应APIGateway项目的路由上下游配置，具体代码如下：</p> <div class="ay1code"> <pre class="brush:csharp;">[Route("api/[controller]")]  [ApiController]  public class ValuesController : ControllerBase  {      // GET api/values      [HttpGet]      public ActionResult&lt;IEnumerable&lt;string&gt;&gt; Get()      {          var port = Request.Host.Port;          return new string[] { "value3", "value4", port.Value.ToString() };      }  }</pre> </div> <p>appsettings.json配置加入Consul地址：</p> <div class="ay1code"> <pre class="brush:js;">"Consul": {    "Host": "http://192.168.113.128:8500"  }</pre> </div> <p class="maodian"><a name="_lab2_3_4" rel="nofollow"></a></p> <h3>4.5项目运行</h3> <p>在APIServiceA、APIServiceB项目的ConfigureServices添加Consul配置：</p> <div class="ay1code"> <pre class="brush:csharp;">services.AddConsulConfig(Configuration);</pre> </div> <p>在Configure添加Consul服务注册：</p> <div class="ay1code"> <pre class="brush:csharp;">APIServiceA：app.UseConsul("http://172.168.18.73", "9999");  APIServiceB：app.UseConsul("http://172.168.18.73", "9998");</pre> </div> <p>把APIGateway、APIServiceA、APIServiceB三个项目部署到IIS上：</p> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220420/b8bbac2bccce86366dd2e6ed31980fe3.jpg"></p> <p>三个项目运行起来后，通过浏览器Consul客户端可以看到MyService节点服务情况：</p> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220420/2715455cb450327a95c11f091fb86dbf.jpg"></p> <p>点击打开MyService节点可以看到注册到Consul的APIServiceA、APIServiceB服务状况：</p> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220420/8d1012407eb4cc91061f8621245a09b5.jpg"></p> <p>如果把APIServiceB服务实例站点停掉：</p> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220420/a0caac9e4ac511d75e4999d9d7056fc4.jpg"></p> <p>通过Consul客户端会看到APIServiceB服务实例已经被剔除了：</p> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220420/6610e549024b66da2e72fd75dff9bd3d.jpg"></p> <p>如果输入CTRL+C把集群中某一个Consul服务关闭，那么集群会重新选举一个新的leader，负责处理所有服务实例的查询和事务：</p> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220420/833b582a71a0deacfc48838310204c33.jpg"></p> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220420/6cfb2d7b07a7dfa5b3914e3b0c4333d7.jpg"></p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-77196.htm">Vue组件之间传值/调用方法的几种方式</a></p>
+                                        <p>下一个：<a href="/news/article-77882.htm">宠物粮龙头股 宠物粮龙头股票有哪些</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-63556.htm" title="python向hive中写入数据">python向hive中写入数据</a></li>
+                        <li class="py-2"><a href="/news/article-46626.htm" title="JavaScript如何将字符串转换为分层对象">JavaScript如何将字符串转换为分层对象</a></li>
+                        <li class="py-2"><a href="/news/article-64755.htm" title="南京宠物狗领养中心电话是多少号码（南京宠物领养南京宠物赠送）">南京宠物狗领养中心电话是多少号码（南京宠物领养南京宠物赠送）</a></li>
+                        <li class="py-2"><a href="/news/article-50629.htm" title="宠物粮品牌排行前十名有哪些呢图片（宠物粮品牌排行前十名有哪些呢图片视频）">宠物粮品牌排行前十名有哪些呢图片（宠物粮品牌排行前十名有哪些呢图片视频）</a></li>
+                        <li class="py-2"><a href="/news/article-68520.htm" title="宠物医院美团好评50字通用评论 宠物医院美团好评50字通用评论怎么写">宠物医院美团好评50字通用评论 宠物医院美团好评50字通用评论怎么写</a></li>
+                        <li class="py-2"><a href="/news/article-77196.htm" title="Vue组件之间传值/调用方法的几种方式">Vue组件之间传值/调用方法的几种方式</a></li>
+                        <li class="py-2"><a href="/news/article-43637.htm" title="南宫玉耀（七侠五义南宫世家）">南宫玉耀（七侠五义南宫世家）</a></li>
+                        <li class="py-2"><a href="/news/article-65994.htm" title="宠物狗粮网店名字怎么起（宠物狗粮厂）">宠物狗粮网店名字怎么起（宠物狗粮厂）</a></li>
+                        <li class="py-2"><a href="/news/article-50632.htm" title="动物防疫站工作时间 动物防疫站工作时间表">动物防疫站工作时间 动物防疫站工作时间表</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-27-windows-nekoray.htm" title="「1月27日」最高速度21.5M/S，2025年NekoRay每天更新免费节点订阅链接">「1月27日」最高速度21.5M/S，2025年NekoRay每天更新免费节点订阅链接</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">60</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+        <!-- Copyright Start -->
+    <div class="container-fluid copyright py-4">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-md-0">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                    <span class="text-white">NekoRayNode节点订阅站 版权所有 Powered by WordPress</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright End -->
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary btn-lg-square back-to-top"><i class="fa fa-arrow-up"></i></a>
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/easing/easing.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/lightbox/js/lightbox.min.js"></script>
+    <!-- Template Javascript -->
+    <script src="/assets/website/js/frontend/nekoraynode/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
