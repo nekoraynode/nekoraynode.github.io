@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://nekoraynode.github.io/news/article-78565.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>SpringBoot的Spring Security注销以及权限控制</title>
+        <meta name="description" content="目录 &nbsp; 1、在之前的基础上，导入thymeleaf-security整合的包 2、在index.html页面添加是否登录的判断，以此决定导航栏显示什么内容 2.1、判断用户是否登录，如果没" />
+        <link rel="icon" href="/assets/website/img/nekoraynode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="NekoRayNode节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://nekoraynode.github.io/news/article-78565.htm" />
+    <meta property="og:site_name" content="NekoRayNode节点订阅站" />
+    <meta property="og:title" content="SpringBoot的Spring Security注销以及权限控制" />
+    <meta property="og:image" content="https://nekoraynode.github.io/uploads/20240626/ca719b1f2ca41ded6b134d1457169de9.webp" />
+        <meta property="og:release_date" content="2025-03-21T10:31:55" />
+    <meta property="og:updated_time" content="2025-03-21T10:31:55" />
+        <meta property="og:description" content="目录 &nbsp; 1、在之前的基础上，导入thymeleaf-security整合的包 2、在index.html页面添加是否登录的判断，以此决定导航栏显示什么内容 2.1、判断用户是否登录，如果没" />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="SpringBoot的Spring Security注销以及权限控制">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <!-- Libraries Stylesheet -->
+    <link href="/assets/website/js/frontend/nekoraynode/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6TD6QHWW6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6TD6QHWW6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid p-0">
+                <nav class="navbar navbar-expand-lg fixed-top navbar-light px-4 px-lg-5 py-3 py-lg-0">
+            <a href="/" class="navbar-brand p-0">
+                <a href="/">
+                                <span class="display-6 text-primary m-0">
+                    <i class="fas fa-envelope me-3"></i>NekoRay Node                </span>
+                                </a>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                                        <a href="/" class="nav-item nav-link">首页</a>
+                                        <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                        <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                        <a href="/client.htm" class="nav-item nav-link">客户端</a>
+                                        <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                    </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar & Hero End -->
+    <!-- Header Start -->
+    <div class="container-fluid bg-breadcrumb">
+        <ul class="breadcrumb-animation">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="container text-center py-5" style="max-width: 900px;">
+            <h3 class="display-3 mb-4 wow fadeInDown" data-wow-delay="0.1s">SpringBoot的Spring Security注销以及权限控制</h1>
+                <ol class="breadcrumb justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+                    <li class="breadcrumb-item"><a href="/">首页</a></li>
+                    <li class="breadcrumb-item"><a href="/news/">新闻资讯</a></li>
+                    <li class="breadcrumb-item active text-primary">正文</li>
+                </ol>
+        </div>
+    </div>
+    <!-- Header End -->
+    <!-- About Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="htmledit_views"> <p id="main-toc"><strong>目录</strong></p> <p>&nbsp;</p> <p id="1%E3%80%81%E5%9C%A8%E4%B9%8B%E5%89%8D%E7%9A%84%E5%9F%BA%E7%A1%80%E4%B8%8A%EF%BC%8C%E5%AF%BC%E5%85%A5thymeleaf-security%E6%95%B4%E5%90%88%E7%9A%84%E5%8C%85-toc" style="margin-left:0px;"><a href="#1%E3%80%81%E5%9C%A8%E4%B9%8B%E5%89%8D%E7%9A%84%E5%9F%BA%E7%A1%80%E4%B8%8A%EF%BC%8C%E5%AF%BC%E5%85%A5thymeleaf-security%E6%95%B4%E5%90%88%E7%9A%84%E5%8C%85" rel="nofollow">1、在之前的基础上，导入thymeleaf-security整合的包</a></p> <p id="2%E3%80%81%E5%9C%A8index.html%E9%A1%B5%E9%9D%A2%E6%B7%BB%E5%8A%A0%E6%98%AF%E5%90%A6%E7%99%BB%E5%BD%95%E7%9A%84%E5%88%A4%E6%96%AD%EF%BC%8C%E4%BB%A5%E6%AD%A4%E5%86%B3%E5%AE%9A%E5%AF%BC%E8%88%AA%E6%A0%8F%E6%98%BE%E7%A4%BA%E4%BB%80%E4%B9%88%E5%86%85%E5%AE%B9-toc" style="margin-left:0px;"><a href="#2%E3%80%81%E5%9C%A8index.html%E9%A1%B5%E9%9D%A2%E6%B7%BB%E5%8A%A0%E6%98%AF%E5%90%A6%E7%99%BB%E5%BD%95%E7%9A%84%E5%88%A4%E6%96%AD%EF%BC%8C%E4%BB%A5%E6%AD%A4%E5%86%B3%E5%AE%9A%E5%AF%BC%E8%88%AA%E6%A0%8F%E6%98%BE%E7%A4%BA%E4%BB%80%E4%B9%88%E5%86%85%E5%AE%B9" rel="nofollow">2、在index.html页面添加是否登录的判断，以此决定导航栏显示什么内容</a></p> <p id="2.1%E3%80%81%E5%88%A4%E6%96%AD%E7%94%A8%E6%88%B7%E6%98%AF%E5%90%A6%E7%99%BB%E5%BD%95%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%B2%A1%E6%9C%89%E7%99%BB%E5%BD%95%EF%BC%8C%E5%AF%BC%E8%88%AA%E6%A0%8F%E5%8F%B3%E4%BE%A7%E5%B0%B1%E6%98%BE%E7%A4%BA%E7%99%BB%E5%BD%95%E6%8C%89%E9%92%AE%EF%BC%8C%E7%82%B9%E5%87%BB%E4%B9%8B%E5%90%8E%E5%B0%B1%E8%B7%B3%E8%BD%AC%E5%88%B0%E7%99%BB%E5%BD%95%E9%A1%B5%E9%9D%A2-toc" style="margin-left:40px;"><a href="#2.1%E3%80%81%E5%88%A4%E6%96%AD%E7%94%A8%E6%88%B7%E6%98%AF%E5%90%A6%E7%99%BB%E5%BD%95%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%B2%A1%E6%9C%89%E7%99%BB%E5%BD%95%EF%BC%8C%E5%AF%BC%E8%88%AA%E6%A0%8F%E5%8F%B3%E4%BE%A7%E5%B0%B1%E6%98%BE%E7%A4%BA%E7%99%BB%E5%BD%95%E6%8C%89%E9%92%AE%EF%BC%8C%E7%82%B9%E5%87%BB%E4%B9%8B%E5%90%8E%E5%B0%B1%E8%B7%B3%E8%BD%AC%E5%88%B0%E7%99%BB%E5%BD%95%E9%A1%B5%E9%9D%A2" rel="nofollow">2.1、判断用户是否登录，如果没有登录，导航栏右侧就显示登录按钮，点击之后就跳转到登录页面</a></p> <p id="2.2%E3%80%81%E7%94%A8%E6%88%B7%E5%A6%82%E6%9E%9C%E7%99%BB%E5%BD%95%E4%BA%86%EF%BC%8C%E9%82%A3%E5%B0%B1%E5%9C%A8%E5%AF%BC%E8%88%AA%E6%A0%8F%E5%8F%B3%E4%BE%A7%E6%98%BE%E7%A4%BA%E7%94%A8%E6%88%B7%E5%A7%93%E5%90%8D%E3%80%81%E8%A7%92%E8%89%B2%E5%92%8C%E6%B3%A8%E9%94%80%E6%8C%89%E9%92%AE%EF%BC%8C%E7%82%B9%E5%87%BB%E6%B3%A8%E9%94%80%E6%8C%89%E9%92%AE%E5%B0%B1%E6%B8%85%E9%99%A4session%EF%BC%8C%E8%BF%94%E5%9B%9E%E9%A6%96%E9%A1%B5-toc" style="margin-left:40px;"><a href="#2.2%E3%80%81%E7%94%A8%E6%88%B7%E5%A6%82%E6%9E%9C%E7%99%BB%E5%BD%95%E4%BA%86%EF%BC%8C%E9%82%A3%E5%B0%B1%E5%9C%A8%E5%AF%BC%E8%88%AA%E6%A0%8F%E5%8F%B3%E4%BE%A7%E6%98%BE%E7%A4%BA%E7%94%A8%E6%88%B7%E5%A7%93%E5%90%8D%E3%80%81%E8%A7%92%E8%89%B2%E5%92%8C%E6%B3%A8%E9%94%80%E6%8C%89%E9%92%AE%EF%BC%8C%E7%82%B9%E5%87%BB%E6%B3%A8%E9%94%80%E6%8C%89%E9%92%AE%E5%B0%B1%E6%B8%85%E9%99%A4session%EF%BC%8C%E8%BF%94%E5%9B%9E%E9%A6%96%E9%A1%B5" rel="nofollow">2.2、用户如果登录了，那就在导航栏右侧显示用户姓名、角色和注销按钮，点击注销按钮就清除session，返回首页</a></p> <p id="2.2.1%E3%80%81%E6%B3%A8%E9%94%80-toc" style="margin-left:80px;"><a href="#2.2.1%E3%80%81%E6%B3%A8%E9%94%80" rel="nofollow">2.2.1、注销</a></p> <p id="3%E3%80%81%E9%A6%96%E9%A1%B5%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6-toc" style="margin-left:0px;"><a href="#3%E3%80%81%E9%A6%96%E9%A1%B5%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6" rel="nofollow">3、首页权限控制</a></p> <p id="3.1%E3%80%81index.html%E9%A1%B5%E9%9D%A2%E9%85%8D%E7%BD%AE-toc" style="margin-left:40px;"><a href="#3.1%E3%80%81index.html%E9%A1%B5%E9%9D%A2%E9%85%8D%E7%BD%AE" rel="nofollow">3.1、index.html页面配置</a></p> <p id="4%E3%80%81%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA-toc" style="margin-left:0px;"><a href="#4%E3%80%81%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA" rel="nofollow">4、效果展示</a></p> <p id="%E6%B3%A8%E6%84%8F%EF%BC%9A-toc" style="margin-left:0px;"><a href="#%E6%B3%A8%E6%84%8F%EF%BC%9A" rel="nofollow">注意：</a></p> <hr id="hr-toc"/> </h1> <p><img fetchpriority="high" decoding="async" alt="" height="484" src="http://img.555519.xyz/uploads/20230112/2d31e80badbdf045029cd09105a59bdb.jpg"></p> </h1> <h2 id="2.1%E3%80%81%E5%88%A4%E6%96%AD%E7%94%A8%E6%88%B7%E6%98%AF%E5%90%A6%E7%99%BB%E5%BD%95%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%B2%A1%E6%9C%89%E7%99%BB%E5%BD%95%EF%BC%8C%E5%AF%BC%E8%88%AA%E6%A0%8F%E5%8F%B3%E4%BE%A7%E5%B0%B1%E6%98%BE%E7%A4%BA%E7%99%BB%E5%BD%95%E6%8C%89%E9%92%AE%EF%BC%8C%E7%82%B9%E5%87%BB%E4%B9%8B%E5%90%8E%E5%B0%B1%E8%B7%B3%E8%BD%AC%E5%88%B0%E7%99%BB%E5%BD%95%E9%A1%B5%E9%9D%A2">2.1、判断用户是否登录，如果没有登录，导航栏右侧就显示登录按钮，点击之后就跳转到登录页面</h2> <p><img decoding="async" alt="" height="749" src="http://img.555519.xyz/uploads/20230112/f6cc09c0f5e196028eaf18f46cad616c.jpg"></p> <p>使用这种代码需要在页面导入以下命名空间</p> <p><img decoding="async" alt="" height="134" src="http://img.555519.xyz/uploads/20230112/0292f981db0c795221a65e29aaba41ca.jpg"></p> <h2 id="2.2%E3%80%81%E7%94%A8%E6%88%B7%E5%A6%82%E6%9E%9C%E7%99%BB%E5%BD%95%E4%BA%86%EF%BC%8C%E9%82%A3%E5%B0%B1%E5%9C%A8%E5%AF%BC%E8%88%AA%E6%A0%8F%E5%8F%B3%E4%BE%A7%E6%98%BE%E7%A4%BA%E7%94%A8%E6%88%B7%E5%A7%93%E5%90%8D%E3%80%81%E8%A7%92%E8%89%B2%E5%92%8C%E6%B3%A8%E9%94%80%E6%8C%89%E9%92%AE%EF%BC%8C%E7%82%B9%E5%87%BB%E6%B3%A8%E9%94%80%E6%8C%89%E9%92%AE%E5%B0%B1%E6%B8%85%E9%99%A4session%EF%BC%8C%E8%BF%94%E5%9B%9E%E9%A6%96%E9%A1%B5" style="margin-left:.0001pt;text-align:justify;">2.2、用户如果登录了，那就在导航栏右侧显示用户姓名、角色和注销按钮，点击注销按钮就清除session，返回首页</h2> <p style="margin-left:.0001pt;text-align:justify;"><img loading="lazy" decoding="async" alt="" height="816" src="http://img.555519.xyz/uploads/20230112/3df50392054d061bcc6f50c8b8325fba.jpg"></p> <h3 id="2.2.1%E3%80%81%E6%B3%A8%E9%94%80" style="margin-left:.0001pt;text-align:justify;">2.2.1、注销</h3> <p style="margin-left:.0001pt;text-align:justify;">在页面写了注销按钮的地址为/logout之后，需要在SecurityConfig类里面开启注销功能</p> <p style="margin-left:.0001pt;text-align:justify;"><img loading="lazy" decoding="async" alt="" height="304" src="http://img.555519.xyz/uploads/20230112/b117dc72b3bb5dada90033ba98e182c1.jpg"></p> <p><img loading="lazy" decoding="async" alt="" height="531" src="http://img.555519.xyz/uploads/20230112/1dd118bb0593c0271e7c1887a9d4a0ab.jpg"></p> <p><img loading="lazy" decoding="async" alt="" height="440" src="http://img.555519.xyz/uploads/20230112/bde2e15a771c8be9171d72e066ac3c42.jpg"></p> <p>&nbsp;</p> </h1> <p style="margin-left:.0001pt;text-align:justify;">就是根据登录用户的权限，首页动态实现</p> <p style="margin-left:.0001pt;text-align:justify;">没有登录直接访问首页，没有选项</p> <p style="margin-left:.0001pt;text-align:justify;">有vip1权限的用户登录之后，显示vip1权限能够访问的东西</p> <p style="margin-left:.0001pt;text-align:justify;">这个就是之前配置的，访问leve1下的页面，就需要vip1权限，这边是有什么权限的用户进入首页就显示什么权限能访问的内容</p> <h2 id="3.1%E3%80%81index.html%E9%A1%B5%E9%9D%A2%E9%85%8D%E7%BD%AE" style="margin-left:.0001pt;text-align:justify;">3.1、index.html页面配置</h2> <p style="margin-left:.0001pt;text-align:justify;"><img loading="lazy" decoding="async" alt="" height="832" src="http://img.555519.xyz/uploads/20230112/e1016545ffa03b5a662b01a4961e6db5.jpg"></p> <p><img loading="lazy" decoding="async" alt="" height="646" src="http://img.555519.xyz/uploads/20230112/b20974774d0de309fdad5db277f89335.jpg"></p> </h1> <p><img loading="lazy" decoding="async" alt="" height="779" src="http://img.555519.xyz/uploads/20230112/5e0490b18730c84bdae9c0aedeb4db90.jpg"></p> </h1> <p><img loading="lazy" decoding="async" alt="" height="239" src="http://img.555519.xyz/uploads/20230112/fff0b6f6fa62d13f52e333d1e356ecd9.jpg"></p> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-77883.htm">人和动物的狂犬疫苗是一样的吗（人和动物的狂犬疫苗是一样的吗图片）</a></p>
+                                        <p>下一个：<a href="/news/article-78566.htm">在我的城市有一家宠物医院的英语 在我的城市有一家宠物医院的英语怎么说</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-54376.htm" title="精选！人气刑侦文，《神诡不言》《无间之罪》《年年有今日》精彩">精选！人气刑侦文，《神诡不言》《无间之罪》《年年有今日》精彩</a></li>
+                        <li class="py-2"><a href="/news/article-56032.htm" title="猫咪三针疫苗必须打么（猫咪三针疫苗大概多少钱）">猫咪三针疫苗必须打么（猫咪三针疫苗大概多少钱）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-9-free-subscribe-node.htm" title="「2月9日」最高速度21.2M/S，2025年NekoRay每天更新免费节点订阅链接">「2月9日」最高速度21.2M/S，2025年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-61753.htm" title="笔记：Linux命令（目录和文件管理）">笔记：Linux命令（目录和文件管理）</a></li>
+                        <li class="py-2"><a href="/news/article-48086.htm" title="Rancher上部署Redis部署">Rancher上部署Redis部署</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-4-free-nekoray.htm" title="「3月4日」最高速度21.7M/S，2025年NekoRay每天更新免费节点订阅链接">「3月4日」最高速度21.7M/S，2025年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-79929.htm" title="sequelize多条件_Sequelize操作MySQL基本用法">sequelize多条件_Sequelize操作MySQL基本用法</a></li>
+                        <li class="py-2"><a href="/news/article-55479.htm" title="宠物食品加工厂手续代办要多少钱（宠物食品加工需要办什么证?）">宠物食品加工厂手续代办要多少钱（宠物食品加工需要办什么证?）</a></li>
+                        <li class="py-2"><a href="/news/article-64141.htm" title="nginx+tomcat负载均衡集群">nginx+tomcat负载均衡集群</a></li>
+                        <li class="py-2"><a href="/news/article-65994.htm" title="宠物狗粮网店名字怎么起（宠物狗粮厂）">宠物狗粮网店名字怎么起（宠物狗粮厂）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">69</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+        <!-- Copyright Start -->
+    <div class="container-fluid copyright py-4">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-md-0">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                    <span class="text-white">NekoRayNode节点订阅站 版权所有 Powered by WordPress</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright End -->
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary btn-lg-square back-to-top"><i class="fa fa-arrow-up"></i></a>
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/easing/easing.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/lightbox/js/lightbox.min.js"></script>
+    <!-- Template Javascript -->
+    <script src="/assets/website/js/frontend/nekoraynode/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
