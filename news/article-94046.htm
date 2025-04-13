@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://nekoraynode.github.io/news/article-94046.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>面试题-kafka如何保证消息不丢失</title>
+        <meta name="description" content="今天我们来分析一下这个问题。 先来回忆一下kafka 中消息传输的整个过程  1、kafka 在producer 端产生消息，调用kafka producer client send方法发送消息 2、" />
+        <link rel="icon" href="/assets/website/img/nekoraynode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="NekoRayNode节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://nekoraynode.github.io/news/article-94046.htm" />
+    <meta property="og:site_name" content="NekoRayNode节点订阅站" />
+    <meta property="og:title" content="面试题-kafka如何保证消息不丢失" />
+    <meta property="og:image" content="https://nekoraynode.github.io/uploads/20240626/44c79f30293c86d9cba636fb52d6fec7.webp" />
+        <meta property="og:release_date" content="2025-04-12T08:54:11" />
+    <meta property="og:updated_time" content="2025-04-12T08:54:11" />
+        <meta property="og:description" content="今天我们来分析一下这个问题。 先来回忆一下kafka 中消息传输的整个过程  1、kafka 在producer 端产生消息，调用kafka producer client send方法发送消息 2、" />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="面试题-kafka如何保证消息不丢失">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <!-- Libraries Stylesheet -->
+    <link href="/assets/website/js/frontend/nekoraynode/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6TD6QHWW6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6TD6QHWW6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid p-0">
+                <nav class="navbar navbar-expand-lg fixed-top navbar-light px-4 px-lg-5 py-3 py-lg-0">
+            <a href="/" class="navbar-brand p-0">
+                <a href="/">
+                                <span class="display-6 text-primary m-0">
+                    <i class="fas fa-envelope me-3"></i>NekoRay Node                </span>
+                                </a>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                                        <a href="/" class="nav-item nav-link">首页</a>
+                                        <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                        <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                        <a href="/client.htm" class="nav-item nav-link">客户端</a>
+                                        <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                    </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar & Hero End -->
+    <!-- Header Start -->
+    <div class="container-fluid bg-breadcrumb">
+        <ul class="breadcrumb-animation">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="container text-center py-5" style="max-width: 900px;">
+            <h3 class="display-3 mb-4 wow fadeInDown" data-wow-delay="0.1s">面试题-kafka如何保证消息不丢失</h1>
+                <ol class="breadcrumb justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+                    <li class="breadcrumb-item"><a href="/">首页</a></li>
+                    <li class="breadcrumb-item"><a href="/news/">新闻资讯</a></li>
+                    <li class="breadcrumb-item active text-primary">正文</li>
+                </ol>
+        </div>
+    </div>
+    <!-- Header End -->
+    <!-- About Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="htmledit_views"> <p>今天我们来分析一下这个问题。</p> <p>先来回忆一下kafka 中消息传输的整个过程</p> <p><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220904/923a94d147e877fc367a466ed99412fc.jpg"></p> <p>1、kafka 在producer 端产生消息，调用kafka producer client send方法发送消息</p> <p>2、kafka producer client 使用一个单独的线程，异步的将消息发送给kafka server</p> <p>3、kafka server收到消息以后，保存数据，并同步至副本</p> <p>4、消息保存完成以后，返回给kafka producer client 端 【消息发送成功】</p> <p>5、kafka consumer client 调用poll 方法，循环 从kafka server 端获取消息列表</p> <p>6、kafka consumer 端 从kafka server获取到消息以后，开始消费消息</p> <p>7、kafka consumer 消费消息完毕以后，向kafka server（topic为 _offset_consumer的消息队列） 发送偏移量</p> <p>在上述的整个流程中，消息丢失的情况分为以几种可能性：</p> <p><strong>1、producer 端 发送消息给kafka server 端，中间网络出现问题，消息无法送达</strong></p> <p><strong>2、kafka server端 在收到消息以后，保存消息时发生异常,异常分为三种</strong></p> <p>（1）可重试错误，通过重试来解决</p> <p>（2） 网络连接错误</p> <p>（3）无主（no leader）错误</p> <p><strong>3、consumer 在消费消息时发生异常，导致consumer端消费失败</strong></p> <p>注：当然这里还可能发生另一种错误，就是在producer发送消息到kafka server端时，消息体过大，producer client 直接抛出异常，导致发送失败</p> <p>如何解决<br /><strong>1、producer 端的发送方式优化</strong><br /> 我们先来了解一下，producer端发送消息的方式：</p> <p><strong>1.1 &nbsp; &nbsp;简单发送，无需关心结果</strong></p> <pre><code class="language-java">ProducerRecord&lt;String,String&gt; record = new ProducerRecord&lt;&gt;( &nbsp; &nbsp; &nbsp;"topicName","key","value" &nbsp; ); try{ &nbsp; &nbsp; //这里只是把消息放进了一个缓冲区中，然后使用单独的线程将消息发送到服务端 &nbsp; &nbsp; producer.send(record); } catch(Exception){ &nbsp; &nbsp; e.printStackTrace(); }</code></pre> <p><strong>1.2 &nbsp; &nbsp;同步发送</strong></p> <pre><code class="language-java">ProducerRecord&lt;String,String&gt; record = new ProducerRecord&lt;&gt;( &nbsp; &nbsp; &nbsp;"topicName","key","value" &nbsp; ); try{ &nbsp; &nbsp; //send方法返回的是Future&lt;RecordMetaData&gt; 对象，然后我们可以调用get()方法等待响应 &nbsp; &nbsp; Future&lt;RecordMetaData&gt; future = producer.send(record);&nbsp; &nbsp; &nbsp; future.get(); } catch(Exception){ &nbsp; &nbsp; e.printStackTrace(); }</code></pre> <p><strong>1.3 &nbsp; &nbsp;异步发送</strong></p> <pre><code class="language-java">private class DemoProducerCallback implements Callback{ &nbsp; &nbsp; @override &nbsp; &nbsp; public void onCompletion(RecordMetadata recordMetadata,Exception e){ &nbsp; &nbsp; &nbsp; &nbsp; //发生错误的回调方法,可以写入日志，或写入DB通过其它线程重重试，保证最终的数据送达 &nbsp; &nbsp; } } ProducerRecord&lt;String,String&gt; record = new ProducerRecord&lt;&gt;( &nbsp; &nbsp; &nbsp;"topicName","key","value" &nbsp; ); producer.send(record，new DemoProducerCallback()))</code></pre> <p> 总结：从以上的三种发送方式中，我们可以知道，采用第一种方式发送时，消息丢失时我们的应用程序是无感知的，如果需要保证消息的不丢失，那么必须要选择第二种或者第三种（需要配合下一节中讲到的acks 参数），当然这里更推荐第三方种方式。</p> <p><strong>2、producer端的配置优化</strong><br /> 在producer 端的配置项中有很多的配置项，我们摘出几种比较重要的来一一解读：</p> <p><strong>acks</strong>:该参数指定了，kafka server的多少个副本收到消息以后才算真的正消息发送成功。取值范围：</p> <p>acks = 0 表示producer 在将消息成功写入到 kafka server 之前不会收任消息<br /> acks = 1 表示只要kafka server 集群中的leader节点收到消息，producer 端就会收到kafka server的成功响应<br /> acks = all 表示只有当消息到leader节点，并且这条数据也同步到了所有副本中，producer 才会收到kafka server的成功响应。<br /><strong>buffer.memory</strong>:生产端 缓冲区的大小设置</p> <p><strong>compression type</strong>:生产端采用的数据压缩方式，取值 snappy,gzip,lz4,默认不会压缩。(启用压缩意味着，需要producer 和kafka server要占用更多的cpu资源)</p> <p><strong>retries</strong>:生产端发送消息到kafka server时，发生临时性错误以后，生产者发送消息到kafka server端重试的次数。如果重试超过该次数，则发生异常</p> <p><strong>batch.size</strong>: 当多个消息被发送至同一分区时，生产者会把它们发送到同一批。该参数指定了同一批次可以使用的内存大小，按字节数计算（而不是消息条数）。</p> <p><strong>linger.ms</strong>:该参数指定了生产者在发送批次之前等待更多消息加入批次的时间，producer client 会在批次填满（batch.size） 或linger.ms 到上限时，将消息发送至kafka server.</p> <p><strong>max.in.flight.requests.per.connection</strong>：该参数指定了生产者在收到kafka server 的成功响应之前，可以发送多少消息。（可以利用该配置让kafka server中的消息变得有序）</p> <p><strong>max.request.size</strong>:该参数用来控制生产者发送单个请求的数据大小。对于消费端也有相同的配置（message.max.bytes）,建议两边设置相同。</p> <p>总结：我们的问题，可以通过设置配置项 acks 、retries 来保证数据的不丢失。acks=1时，lead节点只要收到消息就会告诉producer消息接收成功，假如此时lead 挂掉了开始重新选主，选主成功后之前lead收到的那条消息就会丢失，如果需要保证消息的绝对不丢失，建议设置 acks =all</p> <p><strong>3、kafka server</strong><br /> 这里需要补充一个知识点，kafka的server端同一个topic下有多个分区，单个分区会有不同的副本。如果producer 发送消息么kafka server端，leader收到了消息以后，告诉producer 发送成功，此时再同步消息到多个副本，但由于某一个副本同步较慢，此时leader挂了，需要选主，选主的过程中，一旦那个较慢的副本成为新的leader，那么新的leader中就不包含了原leader收到的那条最新数据，导致消息丢失。</p> <p>broker中的配置项,unclean.leader.election.enable = false，表示不允许非ISR中的副本被选举为首领，以免数据丢失。</p> <blockquote> <p>ISR：是指与leader保持一定程度（这种范围是可通过参数进行配置的）同步的副本和 leader 共同被称为ISR</p> <p>OSR：与leader同步时，滞后很多的副本（不包括leader）被称为OSR</p> <p>AR，分区中所有的副本统称为AR。AR = ISR + OSR</p> </blockquote> <p><strong>4、kafka consumer端的优化</strong><br /> kafka consumer的配置中，默认的enable.auto.commit = true,表示在kafka consumer 通过poll方法 获取到消息以后，每过5秒（通过配置项可修改）会自动获取poll中得到的最大的offset, 提交给kafka server 中的_offset_consumer(存储 offset 的特定topic )</p> <p>如果enable.auto.commit = false时，则关闭了自动提交，你可以手动的通过应用程序代码进行提交，这里我来梳理一下，consumer 消费消息的整个流程</p> <p><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220904/597190d04cce8c18da4c9ae7ffa88db1.jpg"></p> <p>&nbsp;consumer端循环向kafka server请求获取信息<br /> 如果kafka server中的分区中没有消息，则阻塞指定秒数(consumer端配置)后，返回给consumer端<br /> &nbsp;如果 kafka server中有消息 或是在阻塞等待的过程中有消息写入，则立即返回给consumer端<br /> consumer开始消费消息<br /> consumer消费消息完毕以后，提交偏移量到topic为 _offset_consumer（kafka server端） 的消息队列<br /> 我们来看一下，enale.auto.commit = false时，如何手动提交的</p> <pre><code class="language-java">public void consumerMsg(){ &nbsp; &nbsp; while(true){ &nbsp; &nbsp; &nbsp; &nbsp; //这里的poll(100)指的是kafka server端没有消息时，连接等待的时间，超过该时间立即返回空给consumer &nbsp; &nbsp; &nbsp; &nbsp; ConsumerRecords&lt;String,String&gt; records = consomer.poll(100); &nbsp; &nbsp; &nbsp; &nbsp; for(ConsumerRecord&lt;String,String&gt; record : records){ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // 这里是消费消息的逻辑（简单逻辑输入到控制台） &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; System.out.printIn(record.value)); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //提交偏移量 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; try{ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; consumer.commitSync(); &nbsp;//同步提交 如果异步的话，可以使用 consumer.commitAsync(); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; catch(CommitFailedException ex){ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; log.error("commit fail"); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } &nbsp; &nbsp; &nbsp; &nbsp; } &nbsp; &nbsp; } }</code></pre> <p>consumer端消息丢失的情况分为两种：</p> <p>consumer 端启用了 enable.auto.commit= true,在消费消息时发生了异常<br /> consumer 端 enable.auto.commit= false，但是在消息消费之前，提交了offset<br /> 针对这两种丢失的情况，我们做以下处理：</p> <p>1、设置 enable.auto.commit = false</p> <p>2、在consumer端消费消息操作完成以后 再提交 offset,类似于上文中的代码示例</p> <p>写在最后：<br /> 以上的我们从producer 、 kafka server、 consumer 端出发，通过相关的优化手段保证消息的不丢失，当然业界还有一些其它的办法，比如在三种 send 的 调用方式中，callback时将消息写入到mysql 或日志中，当consumer 消费消息成功以后，我们从mysql 或 日志中删除消息，未成功消费的消息，可以启动一个线程，将消息重新入队让consumer收到消息以后重新消费（rabbit mq中 可以 利用死信队列和备用交换机来完成）</p> <p>参考资料：《kafka 权威指南》第四章<br /> ————————————————<br /> 版权声明：本文为CSDN博主「长风dad」的原创文章</p> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-93656.htm">动物疫苗的作用意义是什么意思啊（动物疫苗的重要性）</a></p>
+                                        <p>下一个：<a href="/news/article-94047.htm">HyBird App(混合应用)核心原理JSBridge</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-95073.htm" title="常州宠颐生动物医院招聘（常州宠颐生动物医院怎么样）">常州宠颐生动物医院招聘（常州宠颐生动物医院怎么样）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-17-free-nekoray-node.htm" title="「3月17日」最高速度19.7M/S，2025年NekoRay每天更新免费节点订阅链接">「3月17日」最高速度19.7M/S，2025年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-65994.htm" title="宠物狗粮网店名字怎么起（宠物狗粮厂）">宠物狗粮网店名字怎么起（宠物狗粮厂）</a></li>
+                        <li class="py-2"><a href="/news/article-79252.htm" title="Gin增删改查demo">Gin增删改查demo</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-8-free-v2ray-subscribe.htm" title="「4月8日」最高速度19.3M/S，2025年NekoRay每天更新免费节点订阅链接">「4月8日」最高速度19.3M/S，2025年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-84145.htm" title="宠物店领养狗狗可靠吗（宠物店领养宠物）">宠物店领养狗狗可靠吗（宠物店领养宠物）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-3-shadowrocket-node.htm" title="「3月3日」最高速度22.1M/S，2025年NekoRay每天更新免费节点订阅链接">「3月3日」最高速度22.1M/S，2025年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-87751.htm" title="济南哪里有领养猫的地方 济南哪里有领养猫的地方啊">济南哪里有领养猫的地方 济南哪里有领养猫的地方啊</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-23-shadowrocket-node.htm" title="「3月23日」最高速度22.3M/S，2025年NekoRay每天更新免费节点订阅链接">「3月23日」最高速度22.3M/S，2025年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-66629.htm" title="springboot项目部署好之后第一次启动慢的解决办法">springboot项目部署好之后第一次启动慢的解决办法</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">39</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">89</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+        <!-- Copyright Start -->
+    <div class="container-fluid copyright py-4">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-md-0">
+                                        <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                    <span class="text-white">NekoRayNode节点订阅站 版权所有 Powered by WordPress</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright End -->
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary btn-lg-square back-to-top"><i class="fa fa-arrow-up"></i></a>
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/easing/easing.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/lightbox/js/lightbox.min.js"></script>
+    <!-- Template Javascript -->
+    <script src="/assets/website/js/frontend/nekoraynode/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

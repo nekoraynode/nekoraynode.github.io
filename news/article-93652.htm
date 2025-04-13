@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://nekoraynode.github.io/news/article-93652.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>java数据类型（8个基本数据类型+3个引用数据类型）与数据类型转换知识点</title>
+        <meta name="description" content="&nbsp;读者手册（必读）_云边的快乐猫的博客-CSDN博客  java数据类型分为基本数据类型和引用数据类型 一、八大基本数据类型（变量名指向具体的数值）：  boolean bl = true;" />
+        <link rel="icon" href="/assets/website/img/nekoraynode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="NekoRayNode节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://nekoraynode.github.io/news/article-93652.htm" />
+    <meta property="og:site_name" content="NekoRayNode节点订阅站" />
+    <meta property="og:title" content="java数据类型（8个基本数据类型+3个引用数据类型）与数据类型转换知识点" />
+    <meta property="og:image" content="https://nekoraynode.github.io/uploads/20240626/1cca95b7cd0314f0b1a22e4655a074ec.webp" />
+        <meta property="og:release_date" content="2025-04-11T08:58:27" />
+    <meta property="og:updated_time" content="2025-04-11T08:58:27" />
+        <meta property="og:description" content="&nbsp;读者手册（必读）_云边的快乐猫的博客-CSDN博客  java数据类型分为基本数据类型和引用数据类型 一、八大基本数据类型（变量名指向具体的数值）：  boolean bl = true;" />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="java数据类型（8个基本数据类型+3个引用数据类型）与数据类型转换知识点">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <!-- Libraries Stylesheet -->
+    <link href="/assets/website/js/frontend/nekoraynode/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/nekoraynode/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6TD6QHWW6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E6TD6QHWW6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid p-0">
+                <nav class="navbar navbar-expand-lg fixed-top navbar-light px-4 px-lg-5 py-3 py-lg-0">
+            <a href="/" class="navbar-brand p-0">
+                <a href="/">
+                                <span class="display-6 text-primary m-0">
+                    <i class="fas fa-envelope me-3"></i>NekoRay Node                </span>
+                                </a>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                                        <a href="/" class="nav-item nav-link">首页</a>
+                                        <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                        <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                        <a href="/client.htm" class="nav-item nav-link">客户端</a>
+                                        <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                    </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar & Hero End -->
+    <!-- Header Start -->
+    <div class="container-fluid bg-breadcrumb">
+        <ul class="breadcrumb-animation">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="container text-center py-5" style="max-width: 900px;">
+            <h3 class="display-3 mb-4 wow fadeInDown" data-wow-delay="0.1s">java数据类型（8个基本数据类型+3个引用数据类型）与数据类型转换知识点</h1>
+                <ol class="breadcrumb justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+                    <li class="breadcrumb-item"><a href="/">首页</a></li>
+                    <li class="breadcrumb-item"><a href="/news/">新闻资讯</a></li>
+                    <li class="breadcrumb-item active text-primary">正文</li>
+                </ol>
+        </div>
+    </div>
+    <!-- Header End -->
+    <!-- About Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="htmledit_views"> </h1> <blockquote> <p>&nbsp;<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://blog.csdn.net/m0_52861000/article/details/128148568?spm=1001.2014.3001.5502"  title="读者手册（必读）_云边的快乐猫的博客-CSDN博客" rel="nofollow">读者手册（必读）_云边的快乐猫的博客-CSDN博客</a></p> </blockquote> <p>java数据类型分为<span style="color:#0d0016;"><strong>基本数据类型</strong></span>和<span style="color:#0d0016;"><strong>引用数据类型</strong></span></p> <p><strong><span style="color:#fe2c24;">一、八大基本数据类型</span><span style="color:#0d0016;">（变量名指向具体的数值）：</span></strong></p> <blockquote> <pre>boolean bl = true;//1字节 byte b = 1;//1字节 char c = '2';//2字节,不可转 short s =3;//2字节 int i = 4;//4字节 float f =5;//4字节 double d = 6;//8字节 long l = 7;//8字节</pre> </blockquote> <p><span style="color:#ff9900;"><strong>1.数值型</strong></span></p> <p><strong><span style="color:#0d0016;">（整数）</span>：byte、short、int、long</strong></p> <p><strong>byte（字节型）</strong></p> <p>默认值：0</p> <p><img fetchpriority="high" decoding="async" alt="" height="72" src="http://img.555519.xyz/uploads/20230109/d0eb30f719ad87d2dac8168c750bbcbb.jpg"></p> <p>&nbsp;<strong>short（短整型）</strong></p> <p>默认值：0</p> <p><img decoding="async" alt="" height="71" src="http://img.555519.xyz/uploads/20230109/f3734c3c13e2104e4ef0f37588fd7c37.jpg"></p> <p>&nbsp;<strong>int（整形）</strong></p> <p>默认值：0</p> <p><img decoding="async" alt="" height="66" src="http://img.555519.xyz/uploads/20230109/60e5e0292a109e51465e51738323aacc.jpg"></p> <p><strong>long（长整型）</strong></p> <p>默认值：0L</p> <p><img loading="lazy" decoding="async" alt="" height="76" src="http://img.555519.xyz/uploads/20230109/b096fb3dd2b49b5207e05e26cb9e048c.jpg"></p> <p><strong>&nbsp;（浮点）：float、double</strong></p> <p><strong>float（单精度浮点型）</strong></p> <p>默认值：0.0F</p> <p><img loading="lazy" decoding="async" alt="" height="69" src="http://img.555519.xyz/uploads/20230109/c00bd9667ed0177624aaad7f63eddac1.jpg"></p> <p>&nbsp;<strong>double（双精度浮点型）</strong></p> <p>默认值：0.0</p> <p><img loading="lazy" decoding="async" alt="" height="68" src="http://img.555519.xyz/uploads/20230109/2e805f880d4e1d075eef4ddeb1d54e17.jpg"></p> <p><span style="color:#ff9900;"><strong>&nbsp;2.字符型</strong></span></p> <p><strong><span style="color:#0d0016;">char(字符型)</span></strong></p> <p>默认值：‘\u0’</p> <p><img loading="lazy" decoding="async" alt="" height="70" src="http://img.555519.xyz/uploads/20230109/2fc71eaa2e2ddacda1bf5d910b879182.jpg"></p> <p><span style="color:#ff9900;"><strong>&nbsp;3.布尔类型(boolean)：</strong></span></p> <p><strong>&nbsp;booolean(布尔型)</strong></p> <p>默认值：false</p> <p>具体占用多少字节视情况而定，true和false占1位</p> <p><img loading="lazy" decoding="async" alt="" height="69" src="http://img.555519.xyz/uploads/20230109/850497104a6d56008e27d5d714756856.jpg"></p> <p>或者</p> <p><img loading="lazy" decoding="async" alt="" height="73" src="http://img.555519.xyz/uploads/20230109/1e1be4156d5e2656bb2b2efba7a86a0a.jpg"></p> <p><strong><span style="color:#38d8f0;">数据类型转换</span></strong></p> <p>1.转化从低级到高级：byte,short,char（三者同级）—&gt; int —&gt; long—&gt; float —&gt; double</p> <p>&nbsp; 小数优先于整数<br /> 2.低级—&gt; 高级：自动类型转换&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 高级—&gt; 低级：强制类型转换</p> <p>3.强制类型转换可能找出数据丢失,内存溢出，精度问题，不能对布尔进行转换</p> <p>4.整形转换为字符型char，都要强制类型转换。</p> <p>5.整数之间进行转换，不管什么类型，最后都默认为int。除了有long在，就为long</p> <p><strong>直白解释强制转换：本来就是高级的，想要转成低级的</strong></p> <p><span style="color:#ff9900;"><strong>强制数据转换例子：</strong></span>（高—&gt;低）</p> <p>强制转换<span style="color:#ff9900;">方法</span>：在要转换的字符前<strong>要加上</strong>（要转换的类型）</p> <p><img loading="lazy" decoding="async" alt="" height="61" src="http://img.555519.xyz/uploads/20230109/de7f8c952e8f3676311feebc2827d07a.jpg"></p> <p>&nbsp;运行结果</p> <p><img loading="lazy" decoding="async" alt="" height="51" src="http://img.555519.xyz/uploads/20230109/4883fed67899eb2aa7ec15a1543ac16c.jpg"></p> <p>超过值范围：导致<span style="color:#ed7976;"><strong>内存溢出</strong></span>就会发生补码</p> <p><img loading="lazy" decoding="async" alt="" height="94" src="http://img.555519.xyz/uploads/20230109/a449b65a6fbdfdf961f73153744a06a9.jpg"></p> <p>&nbsp;运行结果</p> <p><img loading="lazy" decoding="async" alt="" height="55" src="http://img.555519.xyz/uploads/20230109/df6f9b3be0976c9901b367a920f80741.jpg"></p> <p><span style="color:#ff9900;"><strong>&nbsp;自动类型转换例子：</strong></span><span style="color:#0d0016;">（低</span>—&gt;<span style="color:#0d0016;">高）</span></p> <p><span style="color:#0d0016;">自动转换</span><span style="color:#ff9900;">方法</span><span style="color:#0d0016;">：</span>转换<strong>不用加</strong>（要转换的数据类型）</p> <p>自己本身低级，想要变成高级的</p> <p><img loading="lazy" decoding="async" alt="" height="91" src="http://img.555519.xyz/uploads/20230109/3fd89ad6e63c98d60e4b2f4a4632804c.jpg"></p> <p>&nbsp;运行结果</p> <p><img loading="lazy" decoding="async" alt="" height="58" src="http://img.555519.xyz/uploads/20230109/8c7e7760853d4888a1fd7b66cd197899.jpg"></p> <p><strong>默认转换大全</strong></p> <pre><code class="language-java">package learn; public class WrongCode {     public static void main(String[] args) {         byte b = 1;//1字节         short s = 2;//2字节         int i = 3;//4字节         long l =4;//8字节         float f = 5F;//4字节         double d = 6;//8字节          //byte转其他类型          short s1 =b;         int i1 = b;         long l1 =b;         float f1 =b;         double d1 =b;          //short转其他类型         int i2=s;         long l2=s;         float f2=s;         double d2=s;          //int转其他类型         long l3 = i;         float f3 = i;         double d3 = i;          //long转其他类型          float f4 =l;         double d4 =l;         //float转其他类型         double d5 = f;          //double转其他类型     } }</code></pre> <p><strong>强制转换大全</strong></p> <pre><code class="language-java">package learn; public class WrongCode {     public static void main(String[] args) {         byte b = 1;//1字节         short s = 2;//2字节         int i = 3;//4字节         long l =4;//8字节         float f = 5F;//4字节         double d = 6;//8字节          //byte转其他类型          //short转其他类型         byte s2 =(byte)s;          //int转其他类型         byte b3 = (byte) i;         short s3 = (short) i;          //long转其他类型          byte b4 = (byte) l;         short s4 = (short) l;         int i4= (int) l;          //float转其他类型         byte b5 = (byte) f;         short s5= (short) f;         int i5 = (int) f;         long l5 = (long) f;          //double转其他类型         byte b6 = (byte) d;         short s6 = (short) d;         int i6 = (int) d;         long l6 = (long) d;         float f6 = (float) d;     } }</code></pre> <p><strong><span style="color:#fe2c24;">二、 引用数据类型</span><span style="color:#0d0016;">（指向存数据的内存地址）：</span></strong></p> <p><span style="color:#0d0016;">默认值都为null</span></p> <p><span style="color:#ff9900;">1.数组</span></p> <p><span style="color:#ff9900;">2.接口</span></p> <p><span style="color:#ff9900;">3.类</span></p> <p>注意：String类型也属于类（引用数据类型）</p> <p>String</p> <p><img loading="lazy" decoding="async" alt="" height="64" src="http://img.555519.xyz/uploads/20230109/b1f48fc0d68ade4590446f9ef6272b54.jpg"></p> <p><strong>如果你觉得本篇文章对你有所帮助的，给个<span style="color:#ff9900;">一键三连</span>吧！！！</strong></p> <p><strong>点赞关注收藏，抱拳了！</strong></p> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-92881.htm">宠物免费领养平台下载手机版大全的简单介绍</a></p>
+                                        <p>下一个：<a href="/news/article-93656.htm">动物疫苗的作用意义是什么意思啊（动物疫苗的重要性）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-77883.htm" title="人和动物的狂犬疫苗是一样的吗（人和动物的狂犬疫苗是一样的吗图片）">人和动物的狂犬疫苗是一样的吗（人和动物的狂犬疫苗是一样的吗图片）</a></li>
+                        <li class="py-2"><a href="/news/article-69843.htm" title="开宠物店亏本怎么办理（开宠物店亏本怎么办理营业执照）">开宠物店亏本怎么办理（开宠物店亏本怎么办理营业执照）</a></li>
+                        <li class="py-2"><a href="/news/article-77197.htm" title="Asp.Net Core使用Ocelot结合Consul实现服务注册和发现_实用技巧">Asp.Net Core使用Ocelot结合Consul实现服务注册和发现_实用技巧</a></li>
+                        <li class="py-2"><a href="/news/article-67921.htm" title="哈尔滨农大动物医院地址电话是多少（哈尔滨农大兽医院）">哈尔滨农大动物医院地址电话是多少（哈尔滨农大兽医院）</a></li>
+                        <li class="py-2"><a href="/news/article-91290.htm" title="吉泰实业（吉泰置业）">吉泰实业（吉泰置业）</a></li>
+                        <li class="py-2"><a href="/news/article-83455.htm" title="linux系统改ip地址 永久生效,Linux修改IP永久生效">linux系统改ip地址 永久生效,Linux修改IP永久生效</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-2-node-share.htm" title="「4月2日」最高速度22.3M/S，2025年NekoRay每天更新免费节点订阅链接">「4月2日」最高速度22.3M/S，2025年NekoRay每天更新免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-78566.htm" title="在我的城市有一家宠物医院的英语 在我的城市有一家宠物医院的英语怎么说">在我的城市有一家宠物医院的英语 在我的城市有一家宠物医院的英语怎么说</a></li>
+                        <li class="py-2"><a href="/news/article-78565.htm" title="SpringBoot的Spring Security注销以及权限控制">SpringBoot的Spring Security注销以及权限控制</a></li>
+                        <li class="py-2"><a href="/news/article-87018.htm" title="EFCore 的 DbFirst 模式">EFCore 的 DbFirst 模式</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">39</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">89</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+        <!-- Copyright Start -->
+    <div class="container-fluid copyright py-4">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-md-0">
+                                        <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                    <span class="text-white">NekoRayNode节点订阅站 版权所有 Powered by WordPress</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright End -->
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary btn-lg-square back-to-top"><i class="fa fa-arrow-up"></i></a>
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/easing/easing.min.js"></script>
+    <script src="/assets/website/js/frontend/nekoraynode/lightbox/js/lightbox.min.js"></script>
+    <!-- Template Javascript -->
+    <script src="/assets/website/js/frontend/nekoraynode/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
