@@ -1,4 +1,4 @@
-# Nekoray Node - 10月19日20.9M/S|免费Singbox节点/Shadowrocket节点/SSR节点/V2ray节点/Clash节点节点推荐，V2rayC梯子购买推荐  更新时间 2025-10-19 08:23:15
+# Nekoray Node - 10月25日21.4M/S|免费Singbox节点/SSR节点/Shadowrocket节点/Clash节点/V2ray节点节点推荐，V2rayC梯子购买推荐  更新时间 2025-10-25 09:05:30
 所有免费clash节点都爬取自网络，请勿用于非法用途 。节点地址：<a href="https://nekoraynode.github.io" target="_blank">点击跳转</a>
 
 ## clash使用教程：
@@ -9,23 +9,23 @@
 
 ### 免费Clash节点订阅链接
 
-- https://nekoraynode.github.io/uploads/2025/10/0-20251019.yaml
-- https://nekoraynode.github.io/uploads/2025/10/1-20251019.yaml
-- https://nekoraynode.github.io/uploads/2025/10/2-20251019.yaml
-- https://nekoraynode.github.io/uploads/2025/10/3-20251019.yaml
-- https://nekoraynode.github.io/uploads/2025/10/4-20251019.yaml
+- https://nekoraynode.github.io/uploads/2025/10/0-20251025.yaml
+- https://nekoraynode.github.io/uploads/2025/10/1-20251025.yaml
+- https://nekoraynode.github.io/uploads/2025/10/2-20251025.yaml
+- https://nekoraynode.github.io/uploads/2025/10/3-20251025.yaml
+- https://nekoraynode.github.io/uploads/2025/10/4-20251025.yaml
 
 ### 免费V2ray节点订阅链接
 
-- https://nekoraynode.github.io/uploads/2025/10/0-20251019.txt
-- https://nekoraynode.github.io/uploads/2025/10/1-20251019.txt
-- https://nekoraynode.github.io/uploads/2025/10/2-20251019.txt
-- https://nekoraynode.github.io/uploads/2025/10/3-20251019.txt
-- https://nekoraynode.github.io/uploads/2025/10/4-20251019.txt
+- https://nekoraynode.github.io/uploads/2025/10/0-20251025.txt
+- https://nekoraynode.github.io/uploads/2025/10/1-20251025.txt
+- https://nekoraynode.github.io/uploads/2025/10/2-20251025.txt
+- https://nekoraynode.github.io/uploads/2025/10/3-20251025.txt
+- https://nekoraynode.github.io/uploads/2025/10/4-20251025.txt
 
 ### 免费Sing-box节点订阅链接
 
-- https://nekoraynode.github.io/uploads/2025/10/20251019.json
+- https://nekoraynode.github.io/uploads/2025/10/20251025.json
 
 ## 更多Clash节点订阅 ：
 
