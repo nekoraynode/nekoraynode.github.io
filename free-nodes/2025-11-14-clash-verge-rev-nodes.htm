@@ -350,24 +350,14 @@ sudo systemctl restart caddy
     </div>
 <h4>FAQ</h4>
 <div class="panel panel-default">
+    <div class="panel-heading"><h5>WinXray 的日志记录如何帮助排错？</h5></div>
+    <div class="panel-body">
+        WinXray 提供详细的连接日志，包括入站、出站流量信息及错误提示。通过查看日志，用户可以快速定位连接失败、节点不可达或配置错误的原因，提高问题解决效率。<hr />    </div>
+</div>
+<div class="panel panel-default">
     <div class="panel-heading"><h5>Nekoray 如何实现节点订阅自动更新？</h5></div>
     <div class="panel-body">
         用户可添加订阅 URL，Nekoray 定期自动下载并更新节点。这样可保持节点列表最新，有效减少手动维护，提高使用效率，同时保证网络连接稳定和可靠。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Nekoray 节点订阅自动更新如何配置？</h5></div>
-    <div class="panel-body">
-        用户可添加订阅 URL，Nekoray 会定期下载并替换旧节点。这样可保证节点列表始终最新，减少手动维护，提高使用效率，同时保证网络访问稳定可靠。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>PassWall2 如何实现智能分流？</h5></div>
-    <div class="panel-body">
-        PassWall2 通过自定义规则文件控制流量走向。可根据目标域名、国家或 IP 范围自动判断走代理或直连。用户还能加载社区规则，实现类似 Clash 的高效路由分流。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>SSR 的协议和混淆组合如何选择？</h5></div>
-    <div class="panel-body">
-        根据网络封锁情况选择合适协议和混淆组合，例如 tls1.2_ticket_auth 模拟 HTTPS 流量。选择最佳组合可提高抗封锁能力和稳定性，保证节点长期可用。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>Clash 如何通过规则文件优化流量分配？</h5></div>
@@ -375,9 +365,9 @@ sudo systemctl restart caddy
         Clash 支持自定义规则文件，可根据域名、IP 或应用类型分流流量。结合策略组使用，可自动将视频、游戏、浏览器等流量分配到最优节点，提高访问速度和网络稳定性。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>PassWall2 的节点测速结果会自动更新吗？</h5></div>
+    <div class="panel-heading"><h5>PassWall2 如何实现智能分流？</h5></div>
     <div class="panel-body">
-        PassWall2 可设置定期自动测速节点，更新延迟和可用性。结合策略组自动选择最优节点，可确保用户使用网络时始终连接到速度最快、最稳定的节点。<hr />    </div>
+        PassWall2 通过自定义规则文件控制流量走向。可根据目标域名、国家或 IP 范围自动判断走代理或直连。用户还能加载社区规则，实现类似 Clash 的高效路由分流。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>SSR 的 UDP 转发功能如何启用？</h5></div>
@@ -385,14 +375,24 @@ sudo systemctl restart caddy
         SSR 支持 UDP 转发，可通过客户端设置开启。启用后，游戏和语音等 UDP 流量可通过节点代理，降低丢包率和延迟，提高实时网络应用体验。<hr />    </div>
 </div>
 <div class="panel panel-default">
+    <div class="panel-heading"><h5>SSR 的协议和混淆组合如何选择？</h5></div>
+    <div class="panel-body">
+        根据网络封锁情况选择合适协议和混淆组合，例如 tls1.2_ticket_auth 模拟 HTTPS 流量。选择最佳组合可提高抗封锁能力和稳定性，保证节点长期可用。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>PassWall2 的节点测速结果会自动更新吗？</h5></div>
+    <div class="panel-body">
+        PassWall2 可设置定期自动测速节点，更新延迟和可用性。结合策略组自动选择最优节点，可确保用户使用网络时始终连接到速度最快、最稳定的节点。<hr />    </div>
+</div>
+<div class="panel panel-default">
     <div class="panel-heading"><h5>如何为 Vmess 节点生成安全的 UUID？</h5></div>
     <div class="panel-body">
         UUID 应使用标准的 128 位格式，可使用系统命令如 `uuidgen` 或在线 UUID 生成器生成随机、唯一的 ID；不要使用默认或弱随机值，定期更换以降低被滥用或泄露的风险。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>WinXray 的日志记录如何帮助排错？</h5></div>
+    <div class="panel-heading"><h5>Nekoray 节点订阅自动更新如何配置？</h5></div>
     <div class="panel-body">
-        WinXray 提供详细的连接日志，包括入站、出站流量信息及错误提示。通过查看日志，用户可以快速定位连接失败、节点不可达或配置错误的原因，提高问题解决效率。<hr />    </div>
+        用户可添加订阅 URL，Nekoray 会定期下载并替换旧节点。这样可保证节点列表始终最新，减少手动维护，提高使用效率，同时保证网络访问稳定可靠。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>Hiddify Next 是否兼容 Clash 或 V2Ray 配置文件？</h5></div>
@@ -426,16 +426,16 @@ sudo systemctl restart caddy
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2025-11-10-node-share.htm" title="Nekoray Node - 11月10日22.3M/S|免费Shadowrocket节点/Singbox节点/Clash节点/SSR节点/V2ray节点节点推荐，V2rayC梯子购买推荐">Nekoray Node - 11月10日22.3M/S|免费Shadowrocket节点/Singbox节点/Clash节点/SSR节点/V2ray节点节点推荐，V2rayC梯子购买推荐</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-10-21-clash-node-github.htm" title="Nekoray Node - 10月21日20.8M/S|免费V2ray节点/Shadowrocket节点/Clash节点/SSR节点/Singbox节点节点推荐，V2rayC梯子购买推荐">Nekoray Node - 10月21日20.8M/S|免费V2ray节点/Shadowrocket节点/Clash节点/SSR节点/Singbox节点节点推荐，V2rayC梯子购买推荐</a></li>
                         <li class="py-2"><a href="/free-nodes/2025-11-17-clash-stash-node.htm" title="Nekoray Node - 11月17日18.6M/S|免费V2ray节点/Shadowrocket节点/Singbox节点/SSR节点/Clash节点节点推荐，V2rayC梯子购买推荐">Nekoray Node - 11月17日18.6M/S|免费V2ray节点/Shadowrocket节点/Singbox节点/SSR节点/Clash节点节点推荐，V2rayC梯子购买推荐</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-1-clash-verge-rev-windows.htm" title="Nekoray Node - 11月1日19.9M/S|免费Clash节点/V2ray节点/Shadowrocket节点/SSR节点/Singbox节点节点推荐，V2rayC梯子购买推荐">Nekoray Node - 11月1日19.9M/S|免费Clash节点/V2ray节点/Shadowrocket节点/SSR节点/Singbox节点节点推荐，V2rayC梯子购买推荐</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-22-clash-stash.htm" title="Nekoray Node - 11月22日22.3M/S|免费Shadowrocket节点/SSR节点/Clash节点/V2ray节点/Singbox节点节点推荐，V2rayC梯子购买推荐">Nekoray Node - 11月22日22.3M/S|免费Shadowrocket节点/SSR节点/Clash节点/V2ray节点/Singbox节点节点推荐，V2rayC梯子购买推荐</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-10-31-clash-meta-github.htm" title="Nekoray Node - 10月31日21.5M/S|免费Clash节点/SSR节点/V2ray节点/Singbox节点/Shadowrocket节点节点推荐，V2rayC梯子购买推荐">Nekoray Node - 10月31日21.5M/S|免费Clash节点/SSR节点/V2ray节点/Singbox节点/Shadowrocket节点节点推荐，V2rayC梯子购买推荐</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-2-clash-stash-node.htm" title="Nekoray Node - 11月2日20.9M/S|免费Shadowrocket节点/V2ray节点/Singbox节点/Clash节点/SSR节点节点推荐，V2rayC梯子购买推荐">Nekoray Node - 11月2日20.9M/S|免费Shadowrocket节点/V2ray节点/Singbox节点/Clash节点/SSR节点节点推荐，V2rayC梯子购买推荐</a></li>
                         <li class="py-2"><a href="/free-nodes/2025-11-13-clash-meta-github.htm" title="Nekoray Node - 11月13日21.6M/S|免费Shadowrocket节点/SSR节点/V2ray节点/Clash节点/Singbox节点节点推荐，V2rayC梯子购买推荐">Nekoray Node - 11月13日21.6M/S|免费Shadowrocket节点/SSR节点/V2ray节点/Clash节点/Singbox节点节点推荐，V2rayC梯子购买推荐</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-11-11-clash-node-daily-updates.htm" title="Nekoray Node - 11月11日21.6M/S|免费Singbox节点/SSR节点/Shadowrocket节点/V2ray节点/Clash节点节点推荐，V2rayC梯子购买推荐">Nekoray Node - 11月11日21.6M/S|免费Singbox节点/SSR节点/Shadowrocket节点/V2ray节点/Clash节点节点推荐，V2rayC梯子购买推荐</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-10-15-clash-stash-node.htm" title="Nekoray Node - 10月15日22.7M/S|免费Shadowrocket节点/V2ray节点/Clash节点/Singbox节点/SSR节点节点推荐，V2rayC梯子购买推荐">Nekoray Node - 10月15日22.7M/S|免费Shadowrocket节点/V2ray节点/Clash节点/Singbox节点/SSR节点节点推荐，V2rayC梯子购买推荐</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-11-5-clash-verge-rev-node.htm" title="Nekoray Node - 11月5日20.7M/S|免费Singbox节点/SSR节点/Shadowrocket节点/Clash节点/V2ray节点节点推荐，V2rayC梯子购买推荐">Nekoray Node - 11月5日20.7M/S|免费Singbox节点/SSR节点/Shadowrocket节点/Clash节点/V2ray节点节点推荐，V2rayC梯子购买推荐</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-11-4-clash-verge-rev-node.htm" title="Nekoray Node - 11月4日19.6M/S|免费V2ray节点/Singbox节点/SSR节点/Shadowrocket节点/Clash节点节点推荐，V2rayC梯子购买推荐">Nekoray Node - 11月4日19.6M/S|免费V2ray节点/Singbox节点/SSR节点/Shadowrocket节点/Clash节点节点推荐，V2rayC梯子购买推荐</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-10-24-clash-node-daily-updates.htm" title="Nekoray Node - 10月24日23M/S|免费V2ray节点/Shadowrocket节点/Clash节点/Singbox节点/SSR节点节点推荐，V2rayC梯子购买推荐">Nekoray Node - 10月24日23M/S|免费V2ray节点/Shadowrocket节点/Clash节点/Singbox节点/SSR节点节点推荐，V2rayC梯子购买推荐</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-11-3-clash-verge-rev-node.htm" title="Nekoray Node - 11月3日20.4M/S|免费Singbox节点/Clash节点/Shadowrocket节点/V2ray节点/SSR节点节点推荐，V2rayC梯子购买推荐">Nekoray Node - 11月3日20.4M/S|免费Singbox节点/Clash节点/Shadowrocket节点/V2ray节点/SSR节点节点推荐，V2rayC梯子购买推荐</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-10-17-clash-verge-rev-nodes.htm" title="Nekoray Node - 10月17日21.3M/S|免费SSR节点/Singbox节点/V2ray节点/Clash节点/Shadowrocket节点节点推荐，V2rayC梯子购买推荐">Nekoray Node - 10月17日21.3M/S|免费SSR节点/Singbox节点/V2ray节点/Clash节点/Shadowrocket节点节点推荐，V2rayC梯子购买推荐</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-10-8-clash-verge-rev-github.htm" title="Nekoray Node - 10月8日19.1M/S|免费SSR节点/V2ray节点/Clash节点/Shadowrocket节点/Singbox节点节点推荐，V2rayC梯子购买推荐">Nekoray Node - 10月8日19.1M/S|免费SSR节点/V2ray节点/Clash节点/Shadowrocket节点/Singbox节点节点推荐，V2rayC梯子购买推荐</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-21-clash-verge-rev-windows.htm" title="Nekoray Node - 11月21日21.1M/S|免费Shadowrocket节点/SSR节点/Singbox节点/Clash节点/V2ray节点节点推荐，V2rayC梯子购买推荐">Nekoray Node - 11月21日21.1M/S|免费Shadowrocket节点/SSR节点/Singbox节点/Clash节点/V2ray节点节点推荐，V2rayC梯子购买推荐</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-10-19-clash-verge-rev-windows.htm" title="Nekoray Node - 10月19日19.8M/S|免费SSR节点/V2ray节点/Clash节点/Shadowrocket节点/Singbox节点节点推荐，V2rayC梯子购买推荐">Nekoray Node - 10月19日19.8M/S|免费SSR节点/V2ray节点/Clash节点/Shadowrocket节点/Singbox节点节点推荐，V2rayC梯子购买推荐</a></li>
                     </ul>
     </div>
 </div>
@@ -447,7 +447,7 @@ sudo systemctl restart caddy
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">16</span> <a href="/date/2025-11/" title="2025-11 归档">2025-11</a></h4>
+                <h4><span class="badge" style="float: right;">23</span> <a href="/date/2025-11/" title="2025-11 归档">2025-11</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">26</span> <a href="/date/2025-10/" title="2025-10 归档">2025-10</a></h4>
